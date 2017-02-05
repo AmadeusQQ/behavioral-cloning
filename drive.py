@@ -39,11 +39,18 @@ def telemetry(sid, data):
     image_array = image_array[y_start:y_end, x_start:x_end]
     image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
     image_array = image_array / 255
-    # transformed_image_array = image_array[None, :, :, :]
-    transformed_image_array = image_array.reshape(1, image_array.shape[0], image_array.shape[1], 1)
-    # This model currently assumes that the features of the model are just the images. Feel free to change this.
-    steering_angle = float(model.predict(transformed_image_array, batch_size=1))
-    # The driving model currently just outputs a constant throttle. Feel free to edit this.
+    transformed_image_array = image_array.reshape(
+        1,
+        image_array.shape[0],
+        image_array.shape[1],
+        1
+    )
+    steering_angle = float(
+        model.predict(
+            transformed_image_array,
+            batch_size=1
+        )
+    )
     throttle = 0.2
     print(steering_angle, throttle)
     send_control(steering_angle, throttle)
@@ -60,9 +67,12 @@ def send_control(steering_angle, throttle):
     }, skip_sid=True)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Remote Driving')
-    parser.add_argument('model', type=str,
-    help='Path to model definition json. Model weights should be on the same path.')
+    parser = argparse.ArgumentParser(description = 'Remote Driving')
+    parser.add_argument(
+        'model',
+        type = str,
+        help = 'Path to model definition json. Model weights should be on the same path.'
+    )
     args = parser.parse_args()
     with open(args.model, 'r') as jfile:
         model = model_from_json(jfile.read())
