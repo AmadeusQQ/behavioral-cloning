@@ -1,3 +1,4 @@
+# Import libraries
 import csv
 import cv2
 import fnmatch
@@ -12,9 +13,9 @@ import os
 import scipy
 from sklearn.utils import shuffle
 
+# Set parameters
 DRIVING_LOG_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
-
 IMAGE_PATH = './data/IMG'
 
 WIDTH = 66
@@ -25,25 +26,9 @@ SAMPLES_PER_EPOCH = 1024
 EPOCH = 4
 VALIDATION_SET_SIZE = 205
 
-def generate_training_sample():
-    file = open(os.path.join(DRIVING_LOG_PATH, DRIVING_LOG_FILE), 'r')
-    reader = csv.reader(file)
-    
-    reader.__next__()
-    
-    yield from generate_sample(reader)
-    
-    file.close()
+LEARNING_RATE = 0.000001
 
-def generate_validation_sample():
-    file = open(os.path.join(DRIVING_LOG_PATH, DRIVING_LOG_FILE), 'r')
-    reader = csv.reader(file)
-    reader = reversed(list(reader))
-    
-    yield from generate_sample(reader)
-    
-    file.close()
-
+# Get data
 def generate_sample(reader):
     while True:
         line = reader.__next__()
@@ -77,10 +62,29 @@ def generate_sample(reader):
         
         yield (image, steering_angle)
 
+def generate_training_sample():
+    file = open(os.path.join(DRIVING_LOG_PATH, DRIVING_LOG_FILE), 'r')
+    reader = csv.reader(file)
+    
+    reader.__next__()
+    
+    yield from generate_sample(reader)
+    
+    file.close()
+
+def generate_validation_sample():
+    file = open(os.path.join(DRIVING_LOG_PATH, DRIVING_LOG_FILE), 'r')
+    reader = csv.reader(file)
+    reader = reversed(list(reader))
+    
+    yield from generate_sample(reader)
+    
+    file.close()
+
+# Design model
 convolution_filter = 24
 kernel_size = 5
 stride_size = 2
-
 model = Sequential()
 model.add(Convolution2D(
     convolution_filter,
@@ -90,9 +94,7 @@ model.add(Convolution2D(
     subsample = (stride_size, stride_size),
     input_shape = (WIDTH, LENGTH, DEPTH)
 ))
-
 convolution_filter = 36
-
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
@@ -100,9 +102,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-
 convolution_filter = 48
-
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
@@ -110,10 +110,8 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-
 convolution_filter = 64
 kernel_size = 3
-
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
@@ -132,8 +130,8 @@ model.add(Dense(50))
 model.add(Dense(10))
 model.add(Dense(1))
 
-adam = Adam(lr = 0.000001)
-
+# Train model
+adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 history = model.fit_generator(
     generate_training_sample(),
@@ -144,9 +142,8 @@ history = model.fit_generator(
     nb_val_samples = VALIDATION_SET_SIZE
 )
 
+# Save model
 model_json = model.to_json()
-
 json_file = open('model.json', 'w')
 json_file.write(model_json)
-
 model.save_weights('model.h5')
