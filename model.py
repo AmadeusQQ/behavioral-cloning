@@ -12,15 +12,10 @@ import os
 import scipy
 from sklearn.utils import shuffle
 
-CAMERA_COUNT = 3
-
 DRIVING_LOG_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 
-CENTER_IMAGE_REGULAR_EXPRESSION = 'center*'
 IMAGE_PATH = './data/IMG'
-
-SET_SIZE = 8036
 
 WIDTH = 66
 LENGTH = 200
@@ -29,13 +24,6 @@ DEPTH = 1
 SAMPLES_PER_EPOCH = 2
 EPOCH = 4
 VALIDATION_SET_SIZE = 2
-
-center_camera_file = 'center_2016_12_01_13_37_16_570.jpg'
-left_camera_file = 'left_2016_12_01_13_37_16_570.jpg'
-right_camera_file = 'right_2016_12_01_13_37_16_570.jpg'
-
-hard_left_file = 'center_2016_12_01_13_39_28_024.jpg'
-hard_right_file = 'center_2016_12_01_13_38_46_752.jpg'
 
 def generate_training_sample():
     file = open(os.path.join(DRIVING_LOG_PATH, DRIVING_LOG_FILE), 'r')
