@@ -1,24 +1,21 @@
-import argparse
-import base64
-import json
-
-import numpy as np
-import socketio
-import eventlet
-import eventlet.wsgi
-import time
-from PIL import Image
-from PIL import ImageOps
 from flask import Flask, render_template
 from io import BytesIO
-
 from keras.models import model_from_json
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array
+from PIL import Image
+from PIL import ImageOps
+import argparse
+import base64
+import eventlet
+import eventlet.wsgi
+import json
+import numpy as np
+import socketio
+import time
 
 # Fix error with Keras and TensorFlow
 import tensorflow as tf
 tf.python.control_flow_ops = tf
-
 
 sio = socketio.Server()
 app = Flask(__name__)
@@ -45,19 +42,16 @@ def telemetry(sid, data):
     print(steering_angle, throttle)
     send_control(steering_angle, throttle)
 
-
 @sio.on('connect')
 def connect(sid, environ):
     print("connect ", sid)
     send_control(0, 0)
-
 
 def send_control(steering_angle, throttle):
     sio.emit("steer", data={
     'steering_angle': steering_angle.__str__(),
     'throttle': throttle.__str__()
     }, skip_sid=True)
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Remote Driving')
@@ -72,7 +66,6 @@ if __name__ == '__main__':
         #
         # instead.
         model = model_from_json(jfile.read())
-
 
     model.compile("adam", "mse")
     weights_file = args.model.replace('json', 'h5')
