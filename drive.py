@@ -37,14 +37,15 @@ def telemetry(sid, data):
     # x_start = 60
     # x_end = image_array.shape[1] - 60
     # image_array = image_array[y_start:y_end, x_start:x_end]
-    grayscale = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
+    image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
     image_array = image_array / 255
-    transformed_image_array = image_array[None, :, :, :]
+    # transformed_image_array = image_array[None, :, :, :]
+    transformed_image_array = image_array.reshape(1, image_array.shape[0], image_array.shape[1], 1)
     # This model currently assumes that the features of the model are just the images. Feel free to change this.
     steering_angle = float(model.predict(transformed_image_array, batch_size=1))
     # The driving model currently just outputs a constant throttle. Feel free to edit this.
     throttle = 0.2
-    print(grayscale.shape, steering_angle, throttle)
+    print(steering_angle, throttle)
     send_control(steering_angle, throttle)
 
 @sio.on('connect')
