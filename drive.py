@@ -1,3 +1,4 @@
+# Import libraries
 from flask import Flask, render_template
 from io import BytesIO
 from keras.models import model_from_json

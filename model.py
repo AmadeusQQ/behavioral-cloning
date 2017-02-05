@@ -137,7 +137,7 @@ history = model.fit_generator(
     generate_training_sample(),
     samples_per_epoch = SAMPLES_PER_EPOCH,
     nb_epoch = EPOCH,
-    verbose = 1,
+    verbose = 2,
     validation_data = generate_validation_sample(),
     nb_val_samples = VALIDATION_SET_SIZE
 )
