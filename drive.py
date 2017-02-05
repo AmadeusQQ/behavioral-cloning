@@ -24,11 +24,8 @@ prev_image_array = None
 
 @sio.on('telemetry')
 def telemetry(sid, data):
-    # The current steering angle of the car
     steering_angle = data["steering_angle"]
-    # The current throttle of the car
     throttle = data["throttle"]
-    # The current speed of the car
     speed = data["speed"]
     # The current image from the center camera of the car
     imgString = data["image"]
@@ -59,20 +56,14 @@ if __name__ == '__main__':
     help='Path to model definition json. Model weights should be on the same path.')
     args = parser.parse_args()
     with open(args.model, 'r') as jfile:
-        # NOTE: if you saved the file by calling json.dump(model.to_json(), ...)
-        # then you will have to call:
-        #
-        #   model = model_from_json(json.loads(jfile.read()))\
-        #
-        # instead.
         model = model_from_json(jfile.read())
 
     model.compile("adam", "mse")
     weights_file = args.model.replace('json', 'h5')
     model.load_weights(weights_file)
 
-    # wrap Flask application with engineio's middleware
+    # Wrap Flask application with engineio's middleware
     app = socketio.Middleware(sio, app)
 
-    # deploy as an eventlet WSGI server
+    # Deploy as an eventlet WSGI server
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
