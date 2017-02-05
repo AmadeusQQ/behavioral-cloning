@@ -1,12 +1,12 @@
 # behavioral-cloning
 Drive a car using deep learning
 
-### design-solution
+# design-solution
 
-### get-data
+# get-data
 
-### design-model
+# design-model
 
-### train-model
+# train-model
 
-### reflect
+# reflect
