@@ -148,6 +148,7 @@ json_file = open('model.json', 'w')
 json_file.write(model_json)
 model.save_weights('model.h5')
 
+# Save chart
 chart = pyplot.gcf()
 pyplot.plot(history.history['loss'])
 pyplot.plot(history.history['val_loss'])

@@ -29,7 +29,7 @@ def telemetry(sid, data):
     steering_angle = data["steering_angle"]
     throttle = data["throttle"]
     speed = data["speed"]
-    # The current image from the center camera of the car
+    # Current center image
     imgString = data["image"]
     image = Image.open(BytesIO(base64.b64decode(imgString)))
     image_array = np.asarray(image)
@@ -49,7 +49,7 @@ def telemetry(sid, data):
     steering_angle = float(
         model.predict(
             transformed_image_array,
-            batch_size=1
+            batch_size = 1
         )
     )
     if (float(speed) > 10.0):
@@ -65,10 +65,14 @@ def connect(sid, environ):
     send_control(0, 0)
 
 def send_control(steering_angle, throttle):
-    sio.emit("steer", data={
-    'steering_angle': steering_angle.__str__(),
-    'throttle': throttle.__str__()
-    }, skip_sid=True)
+    sio.emit(
+        "steer",
+        data = {
+            'steering_angle': steering_angle.__str__(),
+            'throttle': throttle.__str__()
+        },
+        skip_sid = True
+    )
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'Remote Driving')
