@@ -51,7 +51,10 @@ def telemetry(sid, data):
             batch_size=1
         )
     )
-    throttle = 0.2
+    if (float(speed) > 10.0):
+        throttle = 0.0
+    else:
+        throttle = 0.2
     print(steering_angle, throttle)
     send_control(steering_angle, throttle)
 
