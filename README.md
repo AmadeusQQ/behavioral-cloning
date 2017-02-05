@@ -2,6 +2,9 @@
 Drive a car using deep learning
 
 # design-solution
+Hardware
+- Central processing unit: Intel Core 2 Duo 2.66 GHz
+- Random access memory: 4 GB
 
 # get-data
 
@@ -10,6 +13,8 @@ Drive a car using deep learning
 # train-model
 
 # evaluate-model
+Rubric: https://review.udacity.com/#!/rubrics/432/view
+
 Number|Image|Set size|Learning rate|Epoch|Training time|Samples per second|Loss|Notes
 ------|-----|--------|-------------|-----|-------------|------------------|----|-----
 1|Center, normalized|256|0.01|4|1 min 7 s|15.3|0.0194|Model may be overfitting as difference between training and validation loss increases per epoch. Loss becomes not a number when training model again.
