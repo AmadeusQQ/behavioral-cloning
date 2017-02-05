@@ -21,9 +21,9 @@ WIDTH = 66
 LENGTH = 200
 DEPTH = 1
 
-SAMPLES_PER_EPOCH = 512
+SAMPLES_PER_EPOCH = 4096
 EPOCH = 4
-VALIDATION_SET_SIZE = 102
+VALIDATION_SET_SIZE = 819
 
 def generate_training_sample():
     file = open(os.path.join(DRIVING_LOG_PATH, DRIVING_LOG_FILE), 'r')
