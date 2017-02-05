@@ -162,18 +162,3 @@ json_file = open('model.json', 'w')
 json_file.write(model_json)
 
 model.save_weights('model.h5')
-
-del model
-
-json_file = open('model.json', 'r')
-loaded_model_json = json_file.read()
-model = model_from_json(loaded_model_json)
-
-model.load_weights('model.h5')
-
-pyplot.plot(history.history['loss'])
-pyplot.plot(history.history['val_loss'])
-pyplot.legend(['Training', 'Validation'])
-pyplot.ylabel('Loss')
-pyplot.xlabel('Epoch')
-pyplot.show()
