@@ -16,19 +16,15 @@ from sklearn.utils import shuffle
 # Set parameters
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
-
-WIDTH = 66
-LENGTH = 320
-DEPTH = 1
-
-STEERING_ANGLE_MODIFIER = 0.2
-
-LEARNING_RATE = 0.000001
-
-SAMPLES_PER_EPOCH = 19284
 EPOCH = 2
-VERBOSITY = 2
+IMAGE_DEPTH = 1
+IMAGE_LENGTH = 320
+IMAGE_WIDTH = 66
+LEARNING_RATE = 0.000001
+SAMPLES_PER_EPOCH = 19284
+STEERING_ANGLE_MODIFIER = 0.2
 VALIDATION_SET_SIZE = 4821
+VERBOSITY = 2
 
 # Get data
 def generate_sample(reader):
@@ -43,7 +39,6 @@ def generate_sample(reader):
         flipped_center_image = cv2.flip(center_image, 1)
         center_image = transform_image(center_image)
         flipped_center_image = transform_image(flipped_center_image)
-
         path = os.path.join(
             DATA_PATH,
             line[1].strip()
@@ -52,7 +47,6 @@ def generate_sample(reader):
         flipped_left_image = cv2.flip(left_image, 1)
         left_image = transform_image(left_image)
         flipped_left_image = transform_image(flipped_left_image)
-
         path = os.path.join(
             DATA_PATH,
             line[2].strip()
@@ -61,7 +55,6 @@ def generate_sample(reader):
         flipped_right_image = cv2.flip(right_image, 1)
         right_image = transform_image(right_image)
         flipped_right_image = transform_image(flipped_right_image)
-
         image = np.concatenate((
             center_image,
             flipped_center_image,
@@ -109,20 +102,15 @@ def generate_sample(reader):
 def generate_training_sample():
     file = open(os.path.join(DATA_PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
-    
     reader.__next__()
-    
     yield from generate_sample(reader)
-    
     file.close()
 
 def generate_validation_sample():
     file = open(os.path.join(DATA_PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
     reader = reversed(list(reader))
-    
     yield from generate_sample(reader)
-    
     file.close()
 
 # Transform data
@@ -141,9 +129,9 @@ def transform_image(image):
     
     return image.reshape(
         1,
-        WIDTH,
-        LENGTH,
-        DEPTH
+        IMAGE_WIDTH,
+        IMAGE_LENGTH,
+        IMAGE_DEPTH
     )
 
 def transform_steering_angle(steering_angle, modifier = 0.0):
@@ -161,9 +149,8 @@ model.add(Convolution2D(
     kernel_size,
     border_mode = 'valid',
     subsample = (stride_size, stride_size),
-    input_shape = (WIDTH, LENGTH, DEPTH)
+    input_shape = (IMAGE_WIDTH, IMAGE_LENGTH, IMAGE_DEPTH)
 ))
-model.add(Dropout(0.2))
 convolution_filter = 36
 model.add(Convolution2D(
     convolution_filter,
@@ -172,7 +159,6 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-model.add(Dropout(0.2))
 convolution_filter = 48
 model.add(Convolution2D(
     convolution_filter,
@@ -181,7 +167,6 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-model.add(Dropout(0.2))
 convolution_filter = 64
 kernel_size = 3
 model.add(Convolution2D(
@@ -190,14 +175,12 @@ model.add(Convolution2D(
     kernel_size,
     border_mode = 'valid'
 ))
-model.add(Dropout(0.2))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
     border_mode = 'valid'
 ))
-model.add(Dropout(0.2))
 model.add(Flatten())
 model.add(Dense(100))
 model.add(Dense(50))
