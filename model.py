@@ -18,7 +18,6 @@ DRIVING_LOG_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 IMAGE_PATH = './data/IMG'
 
-CAMERA_COUNT = 1
 WIDTH = 66
 LENGTH = 200
 DEPTH = 1
@@ -35,14 +34,13 @@ def generate_sample(reader):
         line = reader.__next__()
         image = []
         
-        for count in range(CAMERA_COUNT):
-            path = os.path.join(
-                IMAGE_PATH,
-                line[count].strip('IMG/')
-            )
-            image = cv2.imread(path)
-            image = transform_image(image)
-
+        path = os.path.join(
+            IMAGE_PATH,
+            line[0].strip('IMG/')
+        )
+        image = cv2.imread(path)
+        image = transform_image(image)
+        
         steering_angle = np.array(
             line[3], 
             dtype = 'float32')
