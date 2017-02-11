@@ -22,22 +22,16 @@ tf.python.control_flow_ops = tf
 sio = socketio.Server()
 app = Flask(__name__)
 model = None
+prev_image_array = None
 
 def transform_image(image):
     image_array = np.asarray(image)
-    y_start = 50
+    y_start = 64
     y_end = image_array.shape[0] - 30
     x_start = 0
     x_end = image_array.shape[1]
     image_array = image_array[y_start:y_end, x_start:x_end]
     image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
-    image_array = cv2.resize(
-        image_array,
-        (
-            int(image_array.shape[1] / 2),
-            int(image_array.shape[0] / 2)
-        )
-    )
     image_array = image_array / 255
 
     return image_array.reshape(
@@ -52,7 +46,7 @@ def telemetry(sid, data):
     steering_angle = data["steering_angle"]
     throttle = data["throttle"]
     speed = data["speed"]
-    # Center image
+    # Current center image
     imgString = data["image"]
     image = Image.open(BytesIO(base64.b64decode(imgString)))
     transformed_image_array = transform_image(image)
@@ -89,8 +83,7 @@ if __name__ == '__main__':
     parser.add_argument(
         'model',
         type = str,
-        help = 'Path to model definition json. ' +
-            'Model weights should be on the same path.'
+        help = 'Path to model definition json. Model weights should be on the same path.'
     )
     args = parser.parse_args()
     with open(args.model, 'r') as jfile:
@@ -100,9 +93,8 @@ if __name__ == '__main__':
     weights_file = args.model.replace('json', 'h5')
     model.load_weights(weights_file)
 
+    # Wrap Flask application with engineio's middleware
     app = socketio.Middleware(sio, app)
-<<<<<<< 0a013fc8f206579c33aebbbe4ca6236a8b854c21
 
-=======
->>>>>>> Refactor
+    # Deploy as an eventlet WSGI server
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)

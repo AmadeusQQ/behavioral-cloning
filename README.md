@@ -7,10 +7,8 @@ Hardware
 - Random access memory: 4 GB
 
 # get-data
-Source: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
 
 # design-model
-Source: https://arxiv.org/pdf/1604.07316v1.pdf
 
 # train-model
 
@@ -41,8 +39,6 @@ Number|Image|Samples per epoch|Learning rate|Epoch|Training time|Samples per sec
 15|Center, left, right, crop, grayscale, normalized|3069|0.000001|2|1 min 43 s|59.6|0.0372|Validation loss is greater than training loss. Car goes straight. Car drifts to the right. Car drives in between the right lane line and kerb. Car goes over the kerb.
 15|Center, left, right, crop, grayscale, normalized|9642|0.000001|2|5 min 40 s|56.7|0.0517|Validation loss is greater than training loss. Car drifts to the left. Car goes over the kerb.
 16|Center, left, right, vertical crop, grayscale, normalized|9642|0.000001|2|8 min 45 s|36.7|0.0362|Training loss is greater than validation loss. Car goes straight. Car drifts to the left. Car turns left when lane markers change to red and white rumble strips. Car drifts left. Car goes over kerb.
-17|Center, left, right, flipped, vertical crop, grayscale, normalized|19284|0.000001|2|7 min 13 s|89.1|0.0370|Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall at the start of the bridge that goes over the water.
-18|Center, left, right, flipped, vertical crop, grayscale, resized, normalized|19284|0.000001|2|15 min 14 s|42.2|0.0304|Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car goes straight after red and white rumble strips. Car goes over kerb.
-19|Center, left, right, flipped, vertical crop, grayscale, resized, normalized|9642|0.000001|4|5 min 10 s|124|0.0192|Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car goes straight after red and white rumble strips. Car goes over kerb.
+17|Center, left, right, flipped, vertical crop, grayscale, normalized|19284|0.000001|2|15 min 14 s|42.2|0.0304|Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall at the start of the bridge that goes over the water.
 
 # reflect
