@@ -12,6 +12,11 @@ Udacity
 - Image count = 8036 * 3 (center, left, right) = 24108
 - Size: 323 MB
 
+Simulator
+- Image count = 4353 * 3 (center, left, right) = 13059
+
+Total image count = 12389 * 3 (center, left, right) * 2 (flip) = 74334
+
 # design-model
 NVIDIA
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf

@@ -17,9 +17,9 @@ import scipy
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 
-WIDTH = 160
-LENGTH = 320
-DEPTH = 1
+IMAGE_WIDTH = 160
+IMAGE_LENGTH = 320
+IMAGE_DEPTH = 1
 
 STEERING_ANGLE_MODIFIER = 0.2
 
@@ -115,9 +115,9 @@ def transform_image(image):
 
     return image.reshape(
         1,
-        WIDTH,
-        LENGTH,
-        DEPTH
+        IMAGE_WIDTH,
+        IMAGE_LENGTH,
+        IMAGE_DEPTH
     )
 
 def transform_steering_angle(steering_angle, modifier = 0.0):
@@ -132,7 +132,7 @@ model = Sequential()
 model.add(
     Cropping2D(
         cropping = ((CROP_TOP, CROP_BOTTOM), (0, 0)),
-        input_shape = (WIDTH, LENGTH, DEPTH)
+        input_shape = (IMAGE_WIDTH, IMAGE_LENGTH, IMAGE_DEPTH)
     )
 )
 model.add(Lambda(lambda x: x / 255.0 - 0.5))
