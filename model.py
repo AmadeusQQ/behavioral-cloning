@@ -3,7 +3,7 @@ import csv
 import cv2
 import fnmatch
 from keras.layers.convolutional import Convolution2D
-from keras.layers.core import Dense, Flatten
+from keras.layers.core import Dense, Dropout, Flatten
 from keras.models import model_from_json, Sequential
 from keras.optimizers import Adam
 import math
@@ -14,7 +14,7 @@ import scipy
 from sklearn.utils import shuffle
 
 # Set parameters
-PATH = './data'
+DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 
 WIDTH = 66
@@ -36,7 +36,7 @@ def generate_sample(reader):
         line = reader.__next__()
         
         path = os.path.join(
-            PATH,
+            DATA_PATH,
             line[0].strip()
         )
         center_image = cv2.imread(path)
@@ -45,7 +45,7 @@ def generate_sample(reader):
         flipped_center_image = transform_image(flipped_center_image)
 
         path = os.path.join(
-            PATH,
+            DATA_PATH,
             line[1].strip()
         )
         left_image = cv2.imread(path)
@@ -54,7 +54,7 @@ def generate_sample(reader):
         flipped_left_image = transform_image(flipped_left_image)
 
         path = os.path.join(
-            PATH,
+            DATA_PATH,
             line[2].strip()
         )
         right_image = cv2.imread(path)
@@ -107,7 +107,7 @@ def generate_sample(reader):
         yield (image, steering_angle)
 
 def generate_training_sample():
-    file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
+    file = open(os.path.join(DATA_PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
     
     reader.__next__()
@@ -117,7 +117,7 @@ def generate_training_sample():
     file.close()
 
 def generate_validation_sample():
-    file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
+    file = open(os.path.join(DATA_PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
     reader = reversed(list(reader))
     
