@@ -135,8 +135,8 @@ def transform_image(image):
     image = image / 255
     return image.reshape(
         1,
-        image_array.shape[0],
-        image_array.shape[1],
+        image.shape[0],
+        image.shape[1],
         IMAGE_DEPTH
     )
 
