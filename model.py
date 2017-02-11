@@ -78,20 +78,32 @@ def generate_sample(reader):
         center_steering_angle = transform_steering_angle(
             center_steering_angle
         )
+        flipped_center_steering_angle = transform_steering_angle(
+            center_steering_angle[0][0] * -1.0
+        )
         left_steering_angle = transform_steering_angle(
             center_steering_angle,
             STEERING_ANGLE_MODIFIER
+        )
+        flipped_left_steering_angle = transform_steering_angle(
+            left_steering_angle[0][0] * -1.0
         )
         right_steering_angle = transform_steering_angle(
             center_steering_angle,
             -STEERING_ANGLE_MODIFIER
         )
+        flipped_right_steering_angle = transform_steering_angle(
+            right_steering_angle[0][0] * -1.0
+        )
         steering_angle = np.concatenate((
             center_steering_angle,
+            flipped_center_steering_angle,
             left_steering_angle,
-            right_steering_angle
+            flipped_left_steering_angle,
+            right_steering_angle,
+            flipped_right_steering_angle
         ))
-        
+
         yield (image, steering_angle)
 
 def generate_training_sample():
