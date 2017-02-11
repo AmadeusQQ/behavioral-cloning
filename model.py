@@ -32,15 +32,30 @@ LEARNING_RATE = 0.000001
 def generate_sample(reader):
     while True:
         line = reader.__next__()
-        image = []
         
         path = os.path.join(
             IMAGE_PATH,
             line[0].strip('IMG/')
         )
-        image = cv2.imread(path)
-        image = transform_image(image)
-        
+        center_image = cv2.imread(path)
+        center_image = transform_image(center_image)
+
+        path = os.path.join(
+            IMAGE_PATH,
+            line[1].strip(' IMG/')
+        )
+        left_image = cv2.imread(path)
+        left_image = transform_image(left_image)
+
+        path = os.path.join(
+            IMAGE_PATH,
+            line[2].strip(' IMG/')
+        )
+        right_image = cv2.imread(path)
+        right_image = transform_image(right_image)
+
+        image = np.concatenate((center_image, left_image, right_image))
+
         steering_angle = np.array(
             line[3], 
             dtype = 'float32')
