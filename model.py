@@ -18,6 +18,7 @@ DRIVING_LOG_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 IMAGE_PATH = './data/IMG'
 
+CAMERA_COUNT = 1
 WIDTH = 66
 LENGTH = 200
 DEPTH = 1
@@ -32,29 +33,32 @@ LEARNING_RATE = 0.000001
 def generate_sample(reader):
     while True:
         line = reader.__next__()
+        image = []
         
-        path = os.path.join(
-            IMAGE_PATH,
-            line[0].strip('IMG/')
-        )
-        image = cv2.imread(path)
-        y_start = 64
-        y_end = image.shape[0] - 30
-        x_start = 60
-        x_end = image.shape[1] - 60
-        image = image[y_start:y_end, x_start:x_end]
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        image = np.array(
-            image,
-            dtype = 'float32'
-        )
-        image = image / 255
-        image = image.reshape(
-            1,
-            image.shape[0],
-            image.shape[1],
-            DEPTH
-        )
+        for count in range(CAMERA_COUNT):
+            path = os.path.join(
+                IMAGE_PATH,
+                line[count].strip('IMG/')
+            )
+            image = cv2.imread(path)
+            y_start = 64
+            y_end = image.shape[0] - 30
+            x_start = 60
+            x_end = image.shape[1] - 60
+            image = image[y_start:y_end, x_start:x_end]
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            image = np.array(
+                image,
+                dtype = 'float32'
+            )
+            image = image / 255
+            image = image.reshape(
+                1,
+                image.shape[0],
+                image.shape[1],
+                DEPTH
+            )
+
         steering_angle = np.array(
             line[3], 
             dtype = 'float32')
