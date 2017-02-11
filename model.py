@@ -1,7 +1,6 @@
 # Import libraries
-from keras.layers import Cropping2D
-from keras.layers.convolutional import Convolution2D
-from keras.layers.core import Dense, Flatten
+from keras.layers.convolutional import Convolution2D, Cropping2D
+from keras.layers.core import Dense, Flatten, Lambda
 from keras.models import model_from_json, Sequential
 from keras.optimizers import Adam
 from matplotlib import pyplot
@@ -113,7 +112,6 @@ def generate_validation_sample():
 def transform_image(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = np.array(image, dtype = 'float32')
-    image = image / 255
 
     return image.reshape(
         1,
@@ -137,6 +135,7 @@ model.add(
         input_shape = (WIDTH, LENGTH, DEPTH)
     )
 )
+model.add(Lambda(lambda x: x / 255.0 - 0.5))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
