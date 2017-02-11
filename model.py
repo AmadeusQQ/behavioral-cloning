@@ -1,17 +1,17 @@
 # Import libraries
-import csv
-import cv2
-import fnmatch
 from keras.layers.convolutional import Convolution2D
 from keras.layers.core import Dense, Dropout, Flatten
 from keras.models import model_from_json, Sequential
 from keras.optimizers import Adam
-import math
 from matplotlib import pyplot
+from sklearn.utils import shuffle
+import csv
+import cv2
+import fnmatch
+import math
 import numpy as np
 import os
 import scipy
-from sklearn.utils import shuffle
 
 # Set parameters
 DATA_PATH = './data'
@@ -30,14 +30,29 @@ VERBOSITY = 2
 def generate_sample(reader):
     while True:
         line = reader.__next__()
+<<<<<<< 0a013fc8f206579c33aebbbe4ca6236a8b854c21
         
         path = os.path.join(DATA_PATH, line[0].strip())
+=======
+
+        path = os.path.join(PATH, line[0].strip())
+>>>>>>> Refactor
         center_image = cv2.imread(path)
         center_image = transform_image(center_image)
+<<<<<<< 0a013fc8f206579c33aebbbe4ca6236a8b854c21
         path = os.path.join(DATA_PATH, line[1].strip())
+=======
+        flipped_center_image = transform_image(flipped_center_image)
+        path = os.path.join(PATH, line[1].strip())
+>>>>>>> Refactor
         left_image = cv2.imread(path)
         left_image = transform_image(left_image)
+<<<<<<< 0a013fc8f206579c33aebbbe4ca6236a8b854c21
         path = os.path.join(DATA_PATH, line[2].strip())
+=======
+        flipped_left_image = transform_image(flipped_left_image)
+        path = os.path.join(PATH, line[2].strip())
+>>>>>>> Refactor
         right_image = cv2.imread(path)
         right_image = transform_image(right_image)
         flipped_center_image = cv2.flip(center_image, 1)
@@ -109,6 +124,7 @@ def transform_image(image):
     x_end = image.shape[1]
     image = image[y_start:y_end, x_start:x_end]
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+<<<<<<< 0a013fc8f206579c33aebbbe4ca6236a8b854c21
     image = cv2.resize(
         image,
         (
@@ -116,6 +132,8 @@ def transform_image(image):
             int(image.shape[0] / 2)
         )
     )
+=======
+>>>>>>> Refactor
     image = np.array(image, dtype = 'float32')
     image = image / 255
     return image.reshape(

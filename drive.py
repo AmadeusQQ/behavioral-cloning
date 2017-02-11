@@ -89,7 +89,8 @@ if __name__ == '__main__':
     parser.add_argument(
         'model',
         type = str,
-        help = 'Path to model definition json. Model weights should be on the same path.'
+        help = 'Path to model definition json. ' +
+            'Model weights should be on the same path.'
     )
     args = parser.parse_args()
     with open(args.model, 'r') as jfile:
@@ -100,5 +101,8 @@ if __name__ == '__main__':
     model.load_weights(weights_file)
 
     app = socketio.Middleware(sio, app)
+<<<<<<< 0a013fc8f206579c33aebbbe4ca6236a8b854c21
 
+=======
+>>>>>>> Refactor
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
