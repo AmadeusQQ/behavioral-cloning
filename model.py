@@ -146,7 +146,7 @@ def transform_steering_angle(steering_angle, modifier = 0.0):
 
 # Design model
 convolution_filter = 24
-kernel_size = 5
+kernel_size = 2
 stride_size = 2
 model = Sequential()
 model.add(Convolution2D(
@@ -174,7 +174,7 @@ model.add(Convolution2D(
     subsample = (stride_size, stride_size)
 ))
 convolution_filter = 64
-kernel_size = 3
+kernel_size = 2
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
