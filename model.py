@@ -31,22 +31,13 @@ def generate_sample(reader):
     while True:
         line = reader.__next__()
         
-        path = os.path.join(
-            DATA_PATH,
-            line[0].strip()
-        )
+        path = os.path.join(DATA_PATH, line[0].strip())
         center_image = cv2.imread(path)
         center_image = transform_image(center_image)
-        path = os.path.join(
-            DATA_PATH,
-            line[1].strip()
-        )
+        path = os.path.join(DATA_PATH, line[1].strip())
         left_image = cv2.imread(path)
         left_image = transform_image(left_image)
-        path = os.path.join(
-            DATA_PATH,
-            line[2].strip()
-        )
+        path = os.path.join(DATA_PATH, line[2].strip())
         right_image = cv2.imread(path)
         right_image = transform_image(right_image)
         flipped_center_image = cv2.flip(center_image, 1)
@@ -64,10 +55,7 @@ def generate_sample(reader):
             flipped_right_image
         ))
 
-        center_steering_angle = np.array(
-            line[3], 
-            dtype = 'float32'
-        )
+        center_steering_angle = np.array(line[3], dtype = 'float32')
         center_steering_angle = transform_steering_angle(
             center_steering_angle
         )
@@ -128,10 +116,7 @@ def transform_image(image):
             int(image.shape[0] / 2)
         )
     )
-    image = np.array(
-        image,
-        dtype = 'float32'
-    )
+    image = np.array(image, dtype = 'float32')
     image = image / 255
     return image.reshape(
         1,

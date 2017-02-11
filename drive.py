@@ -22,7 +22,6 @@ tf.python.control_flow_ops = tf
 sio = socketio.Server()
 app = Flask(__name__)
 model = None
-prev_image_array = None
 
 def transform_image(image):
     image_array = np.asarray(image)
@@ -53,7 +52,7 @@ def telemetry(sid, data):
     steering_angle = data["steering_angle"]
     throttle = data["throttle"]
     speed = data["speed"]
-    # Current center image
+    # Center image
     imgString = data["image"]
     image = Image.open(BytesIO(base64.b64decode(imgString)))
     transformed_image_array = transform_image(image)
@@ -100,8 +99,6 @@ if __name__ == '__main__':
     weights_file = args.model.replace('json', 'h5')
     model.load_weights(weights_file)
 
-    # Wrap Flask application with engineio's middleware
     app = socketio.Middleware(sio, app)
 
-    # Deploy as an eventlet WSGI server
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
