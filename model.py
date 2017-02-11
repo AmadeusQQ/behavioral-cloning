@@ -23,17 +23,15 @@ IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320
 IMAGE_DEPTH = 1
 
-STEERING_ANGLE_MODIFIER = 0.2
+ANGLE_MODIFIER = 0.2
 
 CROP_TOP = 64
 CROP_BOTTOM = 30
 
 LEARNING_RATE = 0.000001
 
-SAMPLES_PER_EPOCH = 12#19284
 EPOCH = 2
 VERBOSITY = 2
-VALIDATION_SET_SIZE = 3#4821
 
 # Get data
 samples = []
@@ -43,9 +41,9 @@ with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
     for line in reader:
         samples.append(line)
 
-training_set, validation_set = train_test_split(samples, test_size = 0.2)
+train_set, validation_set = train_test_split(samples, test_size = 0.2)
 
-def generate_sample(reader, samples, batch_size = BATCH_SIZE):
+def generate_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
 
     while True:
@@ -60,89 +58,65 @@ def generate_sample(reader, samples, batch_size = BATCH_SIZE):
             for batch_sample in batch_samples:
                 path = os.path.join(PATH, batch_sample[0].strip())
                 center_image = cv2.imread(path)
+                flipped_center_image = cv2.flip(center_image, 1)
                 center_image = transform_image(center_image)
-                center_angle = np.array(
-                    batch_sample[3],
-                    dtype = 'float32'
+                flipped_center_image = transform_image(flipped_center_image)
+                path = os.path.join(PATH, line[1].strip())
+                left_image = cv2.imread(path)
+                flipped_left_image = cv2.flip(left_image, 1)
+                left_image = transform_image(left_image)
+                flipped_left_image = transform_image(flipped_left_image)
+                path = os.path.join(PATH, line[2].strip())
+                right_image = cv2.imread(path)
+                flipped_right_image = cv2.flip(right_image, 1)
+                right_image = transform_image(right_image)
+                flipped_right_image = transform_image(flipped_right_image)
+                images.extend([
+                    center_image,
+                    flipped_center_image,
+                    left_image,
+                    flipped_left_image,
+                    right_image,
+                    flipped_right_image
+                ])
+
+                center_angle = np.array(line[3], dtype = 'float32')
+                center_angle = transform_angle(
+                    center_angle
                 )
-                center_angle = transform_steering_angle(center_angle)
-                images.extend(center_image)
-                angles.extend(center_angle)
+                flipped_center_angle = transform_angle(
+                    center_angle * -1.0
+                )
+                left_angle = transform_angle(
+                    center_angle,
+                    ANGLE_MODIFIER
+                )
+                flipped_left_angle = transform_angle(
+                    left_angle * -1.0
+                )
+                right_angle = transform_angle(
+                    center_angle,
+                    -ANGLE_MODIFIER
+                )
+                flipped_right_angle = transform_angle(
+                    right_angle * -1.0
+                )
+                angles.extend([
+                    center_angle,
+                    flipped_center_angle,
+                    left_angle,
+                    flipped_left_angle,
+                    right_angle,
+                    flipped_right_angle
+                ])
 
-            print(np.array(images).shape, np.array(angles).shape)
-            exit()
+            images = np.array(images, dtype = 'float32')
+            angles = np.array(angles, dtype = 'float32')
 
-        line = reader.__next__()
-        
-        path = os.path.join(PATH, line[0].strip())
-        center_image = cv2.imread(path)
-        flipped_center_image = cv2.flip(center_image, 1)
-        center_image = transform_image(center_image)
-        flipped_center_image = transform_image(flipped_center_image)
-        path = os.path.join(PATH, line[1].strip())
-        left_image = cv2.imread(path)
-        flipped_left_image = cv2.flip(left_image, 1)
-        left_image = transform_image(left_image)
-        flipped_left_image = transform_image(flipped_left_image)
-        path = os.path.join(PATH, line[2].strip())
-        right_image = cv2.imread(path)
-        flipped_right_image = cv2.flip(right_image, 1)
-        right_image = transform_image(right_image)
-        flipped_right_image = transform_image(flipped_right_image)
-        image = np.concatenate((
-            center_image,
-            flipped_center_image,
-            left_image,
-            flipped_left_image,
-            right_image,
-            flipped_right_image
-        ))
+            yield shuffle(images, angles)
 
-        center_steering_angle = np.array(line[3], dtype = 'float32')
-        center_steering_angle = transform_steering_angle(
-            center_steering_angle
-        )
-        flipped_center_steering_angle = transform_steering_angle(
-            center_steering_angle[0][0] * -1.0
-        )
-        left_steering_angle = transform_steering_angle(
-            center_steering_angle,
-            STEERING_ANGLE_MODIFIER
-        )
-        flipped_left_steering_angle = transform_steering_angle(
-            left_steering_angle[0][0] * -1.0
-        )
-        right_steering_angle = transform_steering_angle(
-            center_steering_angle,
-            -STEERING_ANGLE_MODIFIER
-        )
-        flipped_right_steering_angle = transform_steering_angle(
-            right_steering_angle[0][0] * -1.0
-        )
-        steering_angle = np.concatenate((
-            center_steering_angle,
-            flipped_center_steering_angle,
-            left_steering_angle,
-            flipped_left_steering_angle,
-            right_steering_angle,
-            flipped_right_steering_angle
-        ))
-
-        yield (image, steering_angle)
-
-def generate_training_sample():
-    file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
-    reader = csv.reader(file)
-    reader.__next__()
-    yield from generate_sample(reader, samples)
-    file.close()
-
-def generate_validation_sample():
-    file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
-    reader = csv.reader(file)
-    reader = reversed(list(reader))
-    yield from generate_sample(reader, samples)
-    file.close()
+train_generator = generate_sample(train_set)
+validation_generator = generate_sample(validation_set)
 
 # Transform data
 def transform_image(image):
@@ -150,15 +124,15 @@ def transform_image(image):
     image = np.array(image, dtype = 'float32')
 
     return image.reshape(
-        1,
         IMAGE_WIDTH,
         IMAGE_LENGTH,
         IMAGE_DEPTH
     )
 
-def transform_steering_angle(steering_angle, modifier = 0.0):
+def transform_angle(steering_angle, modifier = 0.0):
     steering_angle = steering_angle + modifier
-    return steering_angle.reshape(1, 1)
+    steering_angle = np.array(steering_angle, dtype = 'float32')
+    return steering_angle.reshape(1)
 
 # Design model
 convolution_filter = 24
@@ -219,12 +193,12 @@ model.add(Dense(1))
 adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 history = model.fit_generator(
-    generate_training_sample(),
-    samples_per_epoch = SAMPLES_PER_EPOCH,
+    train_generator,
+    samples_per_epoch = len(train_set),
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
-    validation_data = generate_validation_sample(),
-    nb_val_samples = VALIDATION_SET_SIZE
+    validation_data = validation_generator,
+    nb_val_samples = len(validation_set)
 )
 
 # Save model
