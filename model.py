@@ -34,6 +34,13 @@ VERBOSITY = 2
 VALIDATION_SET_SIZE = 4821
 
 # Get data
+samples = []
+with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
+    reader = csv.reader(file)
+    reader.__next__()
+    for line in reader:
+        samples.append(line)
+
 def generate_sample(reader):
     while True:
         line = reader.__next__()
