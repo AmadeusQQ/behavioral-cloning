@@ -24,14 +24,7 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
-@sio.on('telemetry')
-def telemetry(sid, data):
-    steering_angle = data["steering_angle"]
-    throttle = data["throttle"]
-    speed = data["speed"]
-    # Current center image
-    imgString = data["image"]
-    image = Image.open(BytesIO(base64.b64decode(imgString)))
+def transform_image(image):
     image_array = np.asarray(image)
     y_start = 64
     y_end = image_array.shape[0] - 30
@@ -40,12 +33,23 @@ def telemetry(sid, data):
     image_array = image_array[y_start:y_end, x_start:x_end]
     image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
     image_array = image_array / 255
-    transformed_image_array = image_array.reshape(
+
+    return image_array.reshape(
         1,
         image_array.shape[0],
         image_array.shape[1],
         1
     )
+
+@sio.on('telemetry')
+def telemetry(sid, data):
+    steering_angle = data["steering_angle"]
+    throttle = data["throttle"]
+    speed = data["speed"]
+    # Current center image
+    imgString = data["image"]
+    image = Image.open(BytesIO(base64.b64decode(imgString)))
+    transformed_image_array = transform_image(image)
     steering_angle = float(
         model.predict(
             transformed_image_array,
