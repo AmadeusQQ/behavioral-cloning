@@ -1,17 +1,17 @@
 # Import libraries
-import csv
-import cv2
-import fnmatch
 from keras.layers.convolutional import Convolution2D
 from keras.layers.core import Dense, Flatten
 from keras.models import model_from_json, Sequential
 from keras.optimizers import Adam
-import math
 from matplotlib import pyplot
+from sklearn.utils import shuffle
+import csv
+import cv2
+import fnmatch
+import math
 import numpy as np
 import os
 import scipy
-from sklearn.utils import shuffle
 
 # Set parameters
 PATH = './data'
@@ -35,33 +35,21 @@ def generate_sample(reader):
     while True:
         line = reader.__next__()
         
-        path = os.path.join(
-            PATH,
-            line[0].strip()
-        )
+        path = os.path.join(PATH, line[0].strip())
         center_image = cv2.imread(path)
         flipped_center_image = cv2.flip(center_image, 1)
         center_image = transform_image(center_image)
         flipped_center_image = transform_image(flipped_center_image)
-
-        path = os.path.join(
-            PATH,
-            line[1].strip()
-        )
+        path = os.path.join(PATH, line[1].strip())
         left_image = cv2.imread(path)
         flipped_left_image = cv2.flip(left_image, 1)
         left_image = transform_image(left_image)
         flipped_left_image = transform_image(flipped_left_image)
-
-        path = os.path.join(
-            PATH,
-            line[2].strip()
-        )
+        path = os.path.join(PATH, line[2].strip())
         right_image = cv2.imread(path)
         flipped_right_image = cv2.flip(right_image, 1)
         right_image = transform_image(right_image)
         flipped_right_image = transform_image(flipped_right_image)
-
         image = np.concatenate((
             center_image,
             flipped_center_image,
@@ -71,10 +59,7 @@ def generate_sample(reader):
             flipped_right_image
         ))
 
-        center_steering_angle = np.array(
-            line[3], 
-            dtype = 'float32'
-        )
+        center_steering_angle = np.array(line[3], dtype = 'float32')
         center_steering_angle = transform_steering_angle(
             center_steering_angle
         )
@@ -109,20 +94,15 @@ def generate_sample(reader):
 def generate_training_sample():
     file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
-    
     reader.__next__()
-    
     yield from generate_sample(reader)
-    
     file.close()
 
 def generate_validation_sample():
     file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
     reader = reversed(list(reader))
-    
     yield from generate_sample(reader)
-    
     file.close()
 
 # Transform data
@@ -133,12 +113,9 @@ def transform_image(image):
     x_end = image.shape[1]
     image = image[y_start:y_end, x_start:x_end]
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = np.array(
-        image,
-        dtype = 'float32'
-    )
+    image = np.array(image, dtype = 'float32')
     image = image / 255
-    
+
     return image.reshape(
         1,
         WIDTH,
