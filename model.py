@@ -56,10 +56,22 @@ def generate_sample(reader):
 
         image = np.concatenate((center_image, left_image, right_image))
 
-        steering_angle = np.array(
+        center_steering_angle = np.array(
             line[3], 
-            dtype = 'float32')
-        steering_angle = steering_angle.reshape(1, 1)
+            dtype = 'float32'
+        )
+        center_steering_angle = center_steering_angle.reshape(1, 1)
+        correction = 0.2
+        left_steering_angle = center_steering_angle + correction
+        left_steering_angle = left_steering_angle.reshape(1, 1)
+        right_steering_angle = center_steering_angle - correction
+        right_steering_angle = right_steering_angle.reshape(1, 1)
+
+        steering_angle = np.concatenate((
+            center_steering_angle,
+            left_steering_angle,
+            right_steering_angle
+        ))
         
         yield (image, steering_angle)
 
