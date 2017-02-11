@@ -18,7 +18,7 @@ PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 
 WIDTH = 66
-LENGTH = 200
+LENGTH = 320
 DEPTH = 1
 
 STEERING_ANGLE_MODIFIER = 0.2
@@ -104,8 +104,8 @@ def generate_validation_sample():
 def transform_image(image):
     y_start = 64
     y_end = image.shape[0] - 30
-    x_start = 60
-    x_end = image.shape[1] - 60
+    x_start = 0
+    x_end = image.shape[1]
     image = image[y_start:y_end, x_start:x_end]
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = np.array(
