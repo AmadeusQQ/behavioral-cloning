@@ -35,8 +35,8 @@ def telemetry(sid, data):
     image_array = np.asarray(image)
     y_start = 64
     y_end = image_array.shape[0] - 30
-    x_start = 60
-    x_end = image_array.shape[1] - 60
+    x_start = 0
+    x_end = image_array.shape[1]
     image_array = image_array[y_start:y_end, x_start:x_end]
     image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
     image_array = image_array / 255
