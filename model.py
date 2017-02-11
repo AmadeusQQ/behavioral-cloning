@@ -18,8 +18,8 @@ DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 EPOCH = 2
 IMAGE_DEPTH = 1
-IMAGE_LENGTH = 320
-IMAGE_WIDTH = 80
+IMAGE_LENGTH = 160
+IMAGE_WIDTH = 40
 LEARNING_RATE = 0.000001
 SAMPLES_PER_EPOCH = 19284
 STEERING_ANGLE_MODIFIER = 0.2
@@ -133,11 +133,10 @@ def transform_image(image):
         dtype = 'float32'
     )
     image = image / 255
-    
     return image.reshape(
         1,
-        IMAGE_WIDTH,
-        IMAGE_LENGTH,
+        image_array.shape[0],
+        image_array.shape[1],
         IMAGE_DEPTH
     )
 
