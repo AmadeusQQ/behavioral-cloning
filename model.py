@@ -4,6 +4,7 @@ from keras.layers.core import Dense, Flatten, Lambda
 from keras.models import model_from_json, Sequential
 from keras.optimizers import Adam
 from matplotlib import pyplot
+from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 import csv
 import cv2
@@ -40,6 +41,8 @@ with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
     reader.__next__()
     for line in reader:
         samples.append(line)
+
+training_set, validation_set = train_test_split(samples, test_size = 0.2)
 
 def generate_sample(reader):
     while True:
