@@ -16,7 +16,7 @@ from sklearn.utils import shuffle
 # Set parameters
 DRIVING_LOG_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
-IMAGE_PATH = './data/IMG'
+DATA_PATH = './data'
 
 WIDTH = 66
 LENGTH = 200
@@ -34,22 +34,22 @@ def generate_sample(reader):
         line = reader.__next__()
         
         path = os.path.join(
-            IMAGE_PATH,
-            line[0].strip('IMG/')
+            DATA_PATH,
+            line[0].strip()
         )
         center_image = cv2.imread(path)
         center_image = transform_image(center_image)
 
         path = os.path.join(
-            IMAGE_PATH,
-            line[1].strip(' IMG/')
+            DATA_PATH,
+            line[1].strip()
         )
         left_image = cv2.imread(path)
         left_image = transform_image(left_image)
 
         path = os.path.join(
-            IMAGE_PATH,
-            line[2].strip(' IMG/')
+            DATA_PATH,
+            line[2].strip()
         )
         right_image = cv2.imread(path)
         right_image = transform_image(right_image)
