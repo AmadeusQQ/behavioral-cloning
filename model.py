@@ -1,4 +1,5 @@
 # Import libraries
+from keras.layers import Cropping2D
 from keras.layers.convolutional import Convolution2D
 from keras.layers.core import Dense, Flatten
 from keras.models import model_from_json, Sequential
@@ -17,11 +18,14 @@ import scipy
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 
-WIDTH = 66
+WIDTH = 160
 LENGTH = 320
 DEPTH = 1
 
 STEERING_ANGLE_MODIFIER = 0.2
+
+CROP_TOP = 64
+CROP_BOTTOM = 30
 
 LEARNING_RATE = 0.000001
 
@@ -107,11 +111,6 @@ def generate_validation_sample():
 
 # Transform data
 def transform_image(image):
-    y_start = 64
-    y_end = image.shape[0] - 30
-    x_start = 0
-    x_end = image.shape[1]
-    image = image[y_start:y_end, x_start:x_end]
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = np.array(image, dtype = 'float32')
     image = image / 255
@@ -132,13 +131,18 @@ convolution_filter = 24
 kernel_size = 5
 stride_size = 2
 model = Sequential()
+model.add(
+    Cropping2D(
+        cropping = ((CROP_TOP, CROP_BOTTOM), (0, 0)),
+        input_shape = (WIDTH, LENGTH, DEPTH)
+    )
+)
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
     border_mode = 'valid',
-    subsample = (stride_size, stride_size),
-    input_shape = (WIDTH, LENGTH, DEPTH)
+    subsample = (stride_size, stride_size)
 ))
 convolution_filter = 36
 model.add(Convolution2D(
