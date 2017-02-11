@@ -45,6 +45,7 @@ train_set, validation_set = train_test_split(samples, test_size = 0.2)
 
 def generate_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
+    print('Samples:', sample_count)
 
     while True:
         shuffle(samples)
@@ -60,7 +61,9 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
                 center_image = cv2.imread(path)
                 flipped_center_image = cv2.flip(center_image, 1)
                 center_image = transform_image(center_image)
-                flipped_center_image = transform_image(flipped_center_image)
+                flipped_center_image = transform_image(
+                    flipped_center_image
+                )
                 path = os.path.join(PATH, line[1].strip())
                 left_image = cv2.imread(path)
                 flipped_left_image = cv2.flip(left_image, 1)
@@ -70,7 +73,9 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
                 right_image = cv2.imread(path)
                 flipped_right_image = cv2.flip(right_image, 1)
                 right_image = transform_image(right_image)
-                flipped_right_image = transform_image(flipped_right_image)
+                flipped_right_image = transform_image(
+                    flipped_right_image
+                )
                 images.extend([
                     center_image,
                     flipped_center_image,
@@ -132,6 +137,7 @@ def transform_image(image):
 def transform_angle(steering_angle, modifier = 0.0):
     steering_angle = steering_angle + modifier
     steering_angle = np.array(steering_angle, dtype = 'float32')
+
     return steering_angle.reshape(1)
 
 # Design model
