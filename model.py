@@ -21,11 +21,14 @@ WIDTH = 66
 LENGTH = 200
 DEPTH = 1
 
-SAMPLES_PER_EPOCH = 3069
-EPOCH = 4
-VALIDATION_SET_SIZE = 612
+STEERING_ANGLE_MODIFIER = 0.2
 
 LEARNING_RATE = 0.000001
+
+SAMPLES_PER_EPOCH = 3069
+EPOCH = 4
+VERBOSITY = 2
+VALIDATION_SET_SIZE = 612
 
 # Get data
 def generate_sample(reader):
@@ -59,13 +62,17 @@ def generate_sample(reader):
             line[3], 
             dtype = 'float32'
         )
-        center_steering_angle = center_steering_angle.reshape(1, 1)
-        correction = 0.2
-        left_steering_angle = center_steering_angle + correction
-        left_steering_angle = left_steering_angle.reshape(1, 1)
-        right_steering_angle = center_steering_angle - correction
-        right_steering_angle = right_steering_angle.reshape(1, 1)
-
+        center_steering_angle = transform_steering_angle(
+            center_steering_angle
+        )
+        left_steering_angle = transform_steering_angle(
+            center_steering_angle,
+            STEERING_ANGLE_MODIFIER
+        )
+        right_steering_angle = transform_steering_angle(
+            center_steering_angle,
+            -STEERING_ANGLE_MODIFIER
+        )
         steering_angle = np.concatenate((
             center_steering_angle,
             left_steering_angle,
@@ -113,6 +120,10 @@ def transform_image(image):
         LENGTH,
         DEPTH
     )
+
+def transform_steering_angle(steering_angle, modifier = 0.0):
+    steering_angle = steering_angle + modifier
+    return steering_angle.reshape(1, 1)
 
 # Design model
 convolution_filter = 24
@@ -170,7 +181,7 @@ history = model.fit_generator(
     generate_training_sample(),
     samples_per_epoch = SAMPLES_PER_EPOCH,
     nb_epoch = EPOCH,
-    verbose = 2,
+    verbose = VERBOSITY,
     validation_data = generate_validation_sample(),
     nb_val_samples = VALIDATION_SET_SIZE
 )
