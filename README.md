@@ -7,8 +7,10 @@ Hardware
 - Random access memory: 4 GB
 
 # get-data
+Source: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
 
 # design-model
+Source: https://arxiv.org/pdf/1604.07316v1.pdf
 
 # train-model
 
