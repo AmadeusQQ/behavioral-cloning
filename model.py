@@ -41,24 +41,8 @@ def generate_sample(reader):
                 line[count].strip('IMG/')
             )
             image = cv2.imread(path)
-            y_start = 64
-            y_end = image.shape[0] - 30
-            x_start = 60
-            x_end = image.shape[1] - 60
-            image = image[y_start:y_end, x_start:x_end]
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            image = np.array(
-                image,
-                dtype = 'float32'
-            )
-            image = image / 255
-            image = image.reshape(
-                1,
-                WIDTH,
-                LENGTH,
-                DEPTH
-            )
-        
+            image = transform_image(image)
+
         steering_angle = np.array(
             line[3], 
             dtype = 'float32')
@@ -84,6 +68,27 @@ def generate_validation_sample():
     yield from generate_sample(reader)
     
     file.close()
+
+# Transform data
+def transform_image(image):
+    y_start = 64
+    y_end = image.shape[0] - 30
+    x_start = 60
+    x_end = image.shape[1] - 60
+    image = image[y_start:y_end, x_start:x_end]
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = np.array(
+        image,
+        dtype = 'float32'
+    )
+    image = image / 255
+    
+    return image.reshape(
+        1,
+        WIDTH,
+        LENGTH,
+        DEPTH
+    )
 
 # Design model
 convolution_filter = 24
