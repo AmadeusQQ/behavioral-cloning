@@ -115,7 +115,7 @@ def generate_validation_sample():
 
 # Transform data
 def transform_image(image):
-    y_start = 64
+    y_start = 50
     y_end = image.shape[0] - 30
     x_start = 0
     x_end = image.shape[1]

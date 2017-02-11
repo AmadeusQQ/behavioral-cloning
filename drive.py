@@ -26,7 +26,7 @@ prev_image_array = None
 
 def transform_image(image):
     image_array = np.asarray(image)
-    y_start = 64
+    y_start = 50
     y_end = image_array.shape[0] - 30
     x_start = 0
     x_end = image_array.shape[1]
