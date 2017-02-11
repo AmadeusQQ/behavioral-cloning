@@ -17,6 +17,7 @@ import scipy
 # Set parameters
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
+BATCH_SIZE = 32
 
 IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320
@@ -29,10 +30,10 @@ CROP_BOTTOM = 30
 
 LEARNING_RATE = 0.000001
 
-SAMPLES_PER_EPOCH = 19284
+SAMPLES_PER_EPOCH = 12#19284
 EPOCH = 2
 VERBOSITY = 2
-VALIDATION_SET_SIZE = 4821
+VALIDATION_SET_SIZE = 3#4821
 
 # Get data
 samples = []
@@ -44,8 +45,33 @@ with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
 
 training_set, validation_set = train_test_split(samples, test_size = 0.2)
 
-def generate_sample(reader):
+def generate_sample(reader, samples, batch_size = BATCH_SIZE):
+    sample_count = len(samples)
+
     while True:
+        shuffle(samples)
+
+        for offset in range(0, sample_count, batch_size):
+            batch_samples = samples[offset : offset + batch_size]
+
+            images = []
+            angles = []
+
+            for batch_sample in batch_samples:
+                path = os.path.join(PATH, batch_sample[0].strip())
+                center_image = cv2.imread(path)
+                center_image = transform_image(center_image)
+                center_angle = np.array(
+                    batch_sample[3],
+                    dtype = 'float32'
+                )
+                center_angle = transform_steering_angle(center_angle)
+                images.extend(center_image)
+                angles.extend(center_angle)
+
+            print(np.array(images).shape, np.array(angles).shape)
+            exit()
+
         line = reader.__next__()
         
         path = os.path.join(PATH, line[0].strip())
@@ -108,14 +134,14 @@ def generate_training_sample():
     file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
     reader.__next__()
-    yield from generate_sample(reader)
+    yield from generate_sample(reader, samples)
     file.close()
 
 def generate_validation_sample():
     file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
     reader = reversed(list(reader))
-    yield from generate_sample(reader)
+    yield from generate_sample(reader, samples)
     file.close()
 
 # Transform data
