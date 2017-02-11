@@ -54,11 +54,11 @@ def generate_sample(reader):
             image = image / 255
             image = image.reshape(
                 1,
-                image.shape[0],
-                image.shape[1],
+                WIDTH,
+                LENGTH,
                 DEPTH
             )
-
+        
         steering_angle = np.array(
             line[3], 
             dtype = 'float32')
