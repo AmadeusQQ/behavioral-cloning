@@ -121,6 +121,13 @@ def transform_image(image):
     x_end = image.shape[1]
     image = image[y_start:y_end, x_start:x_end]
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = cv2.resize(
+        image,
+        (
+            int(image.shape[1] / 2),
+            int(image.shape[0] / 2)
+        )
+    )
     image = np.array(
         image,
         dtype = 'float32'

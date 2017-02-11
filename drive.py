@@ -32,6 +32,13 @@ def transform_image(image):
     x_end = image_array.shape[1]
     image_array = image_array[y_start:y_end, x_start:x_end]
     image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
+    image = cv2.resize(
+        image,
+        (
+            int(image.shape[1] / 2),
+            int(image.shape[0] / 2)
+        )
+    )
     image_array = image_array / 255
 
     return image_array.reshape(
