@@ -14,9 +14,8 @@ import scipy
 from sklearn.utils import shuffle
 
 # Set parameters
-DRIVING_LOG_PATH = './data'
+PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
-DATA_PATH = './data'
 
 WIDTH = 66
 LENGTH = 200
@@ -34,21 +33,21 @@ def generate_sample(reader):
         line = reader.__next__()
         
         path = os.path.join(
-            DATA_PATH,
+            PATH,
             line[0].strip()
         )
         center_image = cv2.imread(path)
         center_image = transform_image(center_image)
 
         path = os.path.join(
-            DATA_PATH,
+            PATH,
             line[1].strip()
         )
         left_image = cv2.imread(path)
         left_image = transform_image(left_image)
 
         path = os.path.join(
-            DATA_PATH,
+            PATH,
             line[2].strip()
         )
         right_image = cv2.imread(path)
@@ -76,7 +75,7 @@ def generate_sample(reader):
         yield (image, steering_angle)
 
 def generate_training_sample():
-    file = open(os.path.join(DRIVING_LOG_PATH, DRIVING_LOG_FILE), 'r')
+    file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
     
     reader.__next__()
@@ -86,7 +85,7 @@ def generate_training_sample():
     file.close()
 
 def generate_validation_sample():
-    file = open(os.path.join(DRIVING_LOG_PATH, DRIVING_LOG_FILE), 'r')
+    file = open(os.path.join(PATH, DRIVING_LOG_FILE), 'r')
     reader = csv.reader(file)
     reader = reversed(list(reader))
     
