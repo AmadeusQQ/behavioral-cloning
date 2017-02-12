@@ -39,7 +39,7 @@ with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
     for line in reader:
         samples.append(line)
 shuffle(samples)
-samples = samples[:160]
+samples = samples[:320]
 
 train_set, validation_set = train_test_split(samples, test_size = 0.2)
 print('Train set size:', len(train_set))

@@ -11,13 +11,12 @@ Hardware
 # get-data
 Udacity
 - Source: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
-- Image count = 8036 * 3 (center, left, right) = 24108
+- Images = 8036 * 3 (center, left, right) = 24108
 - Size: 323 MB
 
 Simulator
-- Image count = 4353 * 3 (center, left, right) = 13059
-
-Total image count = 12389 * 3 (center, left, right) * 2 (flip) = 74334
+- 2017_02_12_17_32 to 2017_02_12_17_36
+    - Images = 2377 * 3 (center, left, right) = 7131
 
 # design-model
 The base architecture is derived from the NVIDIA model.

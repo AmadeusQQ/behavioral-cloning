@@ -71,14 +71,16 @@ if __name__ == '__main__':
     parser.add_argument(
         'model',
         type = str,
-        help = 'Path to model h5 file. Model should be on the same path.'
+        help = 'Path to model h5 file. ' +
+            'Model should be on the same path.'
     )
     parser.add_argument(
         'image_folder',
         type = str,
         nargs = '?',
         default = '',
-        help = 'Path to image folder. This is where the images from the run will be saved.'
+        help = 'Path to image folder. ' +
+            'This is where the images from the run will be saved.'
     )
     args = parser.parse_args()
 
