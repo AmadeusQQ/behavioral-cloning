@@ -33,7 +33,7 @@ DROPOUT_PERCENTAGE = 0.4
 
 LEARNING_RATE = 0.000001
 
-EPOCH = 2
+EPOCH = 16
 VERBOSITY = 2
 
 # Get data
@@ -201,11 +201,11 @@ adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 history = model.fit_generator(
     train_generator,
-    samples_per_epoch = len(train_set),
+    samples_per_epoch = len(train_set) / EPOCH,
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
     validation_data = validation_generator,
-    nb_val_samples = len(validation_set)
+    nb_val_samples = len(validation_set) / EPOCH
 )
 
 # Save model

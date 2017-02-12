@@ -193,6 +193,24 @@ Experiment 32
 - Samples per second: 181
 - Track 1 performance: Drifts right, drives on right double yellow line, drives on red and white rumble strips, hits kerb
 
+Experiment 33
+- Image: Center, left, right, flip, color, vertical crop, normalized, centered
+- Train set size: 11375 * 6 = 68250
+- Learning rate: 0.00001
+- Epoch: 2
+- Training time: 752 s
+- Samples per second: 182
+- Track 1 performance: Drifts right, hits kerb
+
+Experiment 34
+- Image: Center, left, right, flip, color, vertical crop, normalized, centered
+- Train set size: 11375 * 6 = 68250
+- Learning rate: 0.000001
+- Epoch: 8
+- Training time: 375 s
+- Samples per second: 182
+- Track 1 performance: Drifts right, drives on red and white rumble strips, hits kerb
+
 Experiment
 - Image: 
 - Train set size: 
