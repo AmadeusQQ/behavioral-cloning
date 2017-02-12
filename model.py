@@ -218,10 +218,11 @@ history = model.fit_generator(
 )
 
 # Save model
-model_json = model.to_json()
-json_file = open('model.json', 'w')
-json_file.write(model_json)
-model.save_weights('model.h5')
+# model_json = model.to_json()
+# json_file = open('model.json', 'w')
+# json_file.write(model_json)
+# model.save_weights('model.h5')
+model.save('model.h5')
 
 # Save chart
 chart = pyplot.gcf()
