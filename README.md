@@ -2,13 +2,15 @@
 Drive a car using deep learning
 
 # design-solution
-As an engineer, I want to train a deep learning model, so as to drive a car around track 1. The solution should minimize data used and model complexity. The approach should take into account hardware and time constraints.
+As an engineer, I want to train a deep learning model, so as to drive a car around track 1. Design a solution that minimizes data used and model complexity. Adopt an approach that takes into account hardware and time constraints.
 
 Hardware
 - Central processing unit: Intel Core 2 Duo 2.66 GHz
 - Random access memory: 4 GB
 
 # get-data
+Use data provided by Udacity to minimize data collection time. Collect data while driving a car clockwise around track 1.
+
 Udacity
 - Source: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
 - Images = 8036 * 3 (center, left, right) = 24108
@@ -108,7 +110,7 @@ Number|Image|Samples per epoch|Learning rate|Epoch|Training time|Samples per sec
 
 Experiment 24
 - Image: Center, color, vertical crop, normalized, centered
-- Training set size: 6428
+- Train set size: 6428
 - Epoch: 2
 - Training time: 471 s
 - Samples per second: 27.3
@@ -116,15 +118,23 @@ Experiment 24
 
 Experiment 25
 - Image: Center, left, right, color, vertical crop, normalized, centered
-- Training set size: 19284
+- Train set size: 19284
 - Epoch: 2
 - Training time: 1590 s
 - Samples per second: 24.3
 - Track 1 performance: Car drifts right. Car hits kerb.
 
+Experiment 26
+- Image: Center, flip, color, vertical crop, normalized, centered
+- Train set size: 9925 * 2 = 19850
+- Epoch: 2
+- Training time: 745 s
+- Samples per second: 53.3
+- Track 1 performance: Car drifts right. Car hits kerb.
+
 Experiment
 - Image:
-- Training set size:
+- Train set size:
 - Epoch:
 - Training time:
 - Samples per second:

@@ -15,6 +15,8 @@ import os
 import scipy
 
 # Set parameters
+DEBUG = False
+
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 BATCH_SIZE = 32
@@ -38,8 +40,10 @@ with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
     reader.__next__()
     for line in reader:
         samples.append(line)
-shuffle(samples)
-samples = samples[:320]
+
+if DEBUG:
+    shuffle(samples)
+    samples = samples[:320]
 
 train_set, validation_set = train_test_split(samples, test_size = 0.2)
 print('Train set size:', len(train_set))
@@ -60,29 +64,29 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
             for batch_sample in batch_samples:
                 path = os.path.join(PATH, batch_sample[0].strip())
                 center_image = cv2.imread(path)
-                # flipped_center_image = cv2.flip(center_image, 1)
+                flipped_center_image = cv2.flip(center_image, 1)
                 center_image = transform_image(center_image)
-                # flipped_center_image = transform_image(
-                #     flipped_center_image
-                # )
+                flipped_center_image = transform_image(
+                    flipped_center_image
+                )
                 # path = os.path.join(PATH, line[1].strip())
-                left_image = cv2.imread(path)
+                # left_image = cv2.imread(path)
                 # flipped_left_image = cv2.flip(left_image, 1)
-                left_image = transform_image(left_image)
+                # left_image = transform_image(left_image)
                 # flipped_left_image = transform_image(flipped_left_image)
                 # path = os.path.join(PATH, line[2].strip())
-                right_image = cv2.imread(path)
+                # right_image = cv2.imread(path)
                 # flipped_right_image = cv2.flip(right_image, 1)
-                right_image = transform_image(right_image)
+                # right_image = transform_image(right_image)
                 # flipped_right_image = transform_image(
                 #     flipped_right_image
                 # )
                 images.extend([
                     center_image,
-                    # flipped_center_image,
-                    left_image,
+                    flipped_center_image,
+                    # left_image,
                     # flipped_left_image,
-                    right_image
+                    # right_image
                     # flipped_right_image
                 ])
 
@@ -90,9 +94,9 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
                 center_angle = transform_angle(
                     center_angle
                 )
-                # flipped_center_angle = transform_angle(
-                #     center_angle * -1.0
-                # )
+                flipped_center_angle = transform_angle(
+                    center_angle * -1.0
+                )
                 left_angle = transform_angle(
                     center_angle,
                     ANGLE_MODIFIER
@@ -100,19 +104,19 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
                 # flipped_left_angle = transform_angle(
                 #     left_angle * -1.0
                 # )
-                right_angle = transform_angle(
-                    center_angle,
-                    -ANGLE_MODIFIER
-                )
+                # right_angle = transform_angle(
+                #     center_angle,
+                #     -ANGLE_MODIFIER
+                # )
                 # flipped_right_angle = transform_angle(
                 #     right_angle * -1.0
                 # )
                 angles.extend([
                     center_angle,
-                    # flipped_center_angle,
-                    left_angle,
+                    flipped_center_angle,
+                    # left_angle,
                     # flipped_left_angle,
-                    right_angle
+                    # right_angle
                     # flipped_right_angle
                 ])
 
