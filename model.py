@@ -15,7 +15,7 @@ import os
 import scipy
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -29,6 +29,8 @@ ANGLE_MODIFIER = 0.2
 
 CROP_TOP = 64
 CROP_BOTTOM = 30
+
+LEARNING_RATE = 0.000001
 
 EPOCH = 2
 VERBOSITY = 2
@@ -64,60 +66,48 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
             for batch_sample in batch_samples:
                 path = os.path.join(PATH, batch_sample[0].strip())
                 center_image = cv2.imread(path)
-                flip_center_image = cv2.flip(center_image, 1)
+                # flip_center_image = cv2.flip(center_image, 1)
                 center_image = transform_image(center_image)
-                flip_center_image = transform_image(
-                    flip_center_image
-                )
+                # flip_center_image = transform_image(flip_center_image)
                 path = os.path.join(PATH, line[1].strip())
                 left_image = cv2.imread(path)
-                flip_left_image = cv2.flip(left_image, 1)
+                # flip_left_image = cv2.flip(left_image, 1)
                 left_image = transform_image(left_image)
-                flip_left_image = transform_image(flip_left_image)
+                # flip_left_image = transform_image(flip_left_image)
                 path = os.path.join(PATH, line[2].strip())
                 right_image = cv2.imread(path)
-                flip_right_image = cv2.flip(right_image, 1)
+                # flip_right_image = cv2.flip(right_image, 1)
                 right_image = transform_image(right_image)
-                flip_right_image = transform_image(
-                    flip_right_image
-                )
+                # flip_right_image = transform_image(flip_right_image)
                 images.extend([
                     center_image,
-                    flip_center_image,
+                    # flip_center_image,
                     left_image,
-                    flip_left_image,
-                    right_image,
-                    flip_right_image
+                    # flip_left_image,
+                    right_image
+                    # flip_right_image
                 ])
 
                 center_angle = np.array(line[3], dtype = 'float32')
-                center_angle = transform_angle(
-                    center_angle
-                )
-                flip_center_angle = transform_angle(
-                    center_angle * -1.0
-                )
+                center_angle = transform_angle(center_angle)
+                # flip_center_angle = transform_angle(center_angle * -1.0)
                 left_angle = transform_angle(
                     center_angle,
                     ANGLE_MODIFIER
                 )
-                flip_left_angle = transform_angle(
-                    left_angle * -1.0
-                )
+                # flip_left_angle = transform_angle(left_angle * -1.0)
                 right_angle = transform_angle(
                     center_angle,
                     -ANGLE_MODIFIER
                 )
-                flip_right_angle = transform_angle(
-                    right_angle * -1.0
-                )
+                # flip_right_angle = transform_angle(right_angle * -1.0)
                 angles.extend([
                     center_angle,
-                    flip_center_angle,
+                    # flip_center_angle,
                     left_angle,
-                    flip_left_angle,
-                    right_angle,
-                    flip_right_angle
+                    # flip_left_angle,
+                    right_angle
+                    # flip_right_angle
                 ])
 
             images = np.array(images, dtype = 'float32')
@@ -201,7 +191,7 @@ model.add(Dense(10))
 model.add(Dense(1))
 
 # Train model
-adam = Adam(lr = 0.000001)
+adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 history = model.fit_generator(
     train_generator,
