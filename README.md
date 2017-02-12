@@ -2,14 +2,14 @@
 Drive a car using deep learning
 
 # design-solution
-As an engineer, I want to train a deep learning model, so as to drive a car around track 1. Design a solution that minimizes data used and model complexity. Adopt an approach that takes into account hardware and time constraints.
+As an engineer, I want to train a deep learning model, so as to drive a car around track 1. Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments. Change 1 variable at a time to see whether the result confirms or rejects the hypothesis. Take into account hardware and time constraints.
 
 Hardware
 - Central processing unit: Intel Core 2 Duo 2.66 GHz
 - Random access memory: 4 GB
 
 # get-data
-Use data provided by Udacity to minimize data collection time. Collect data while driving a car clockwise around track 1.
+Use data provided by Udacity to minimize data collection time. Collect data while driving anti-clockwise around track 1, so as to mitigate right turn bias. Collect data while recovering from hitting a kerb.
 
 Udacity
 - Source: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
@@ -17,15 +17,15 @@ Udacity
 - Size: 323 MB
 
 Simulator
-- 2017_02_12_17_32 to 2017_02_12_17_36
-    - Images = 2377 * 3 (center, left, right) = 7131
-    - Track 1, clockwise, center
 - 2017_02_12_17_51 to 2017_02_12_18_08
     - Images = 1994 * 3 (center, left, right) = 5982
     - Track 1, anti-clockwise, right side recovery
+- 2017_02_12_18_52 to 2017_02_12_18_55
+    - Images = 2068 * 3 (center, left, right) = 6204
+    - Track 1, anti-clockwise, center
 
 # design-model
-The base architecture is derived from the NVIDIA model.
+Use the NVIDIA model as the base architecture.
 
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
@@ -72,6 +72,7 @@ Layers
     - Connections: 1
 
 # train-model
+Get all samples from the driving log. Split samples 80% / 20% into train and validation set.
 
 # evaluate-model
 Rubric: https://review.udacity.com/#!/rubrics/432/view
@@ -131,6 +132,14 @@ Experiment 26
 - Training time: 745 s
 - Samples per second: 53.3
 - Track 1 performance: Car drifts right. Car hits kerb.
+
+Experiment 27
+- Image: Center, flip, color, vertical crop, normalized, centered
+- Train set size:
+- Epoch:
+- Training time:
+- Samples per second:
+- Track 1 performance:
 
 Experiment
 - Image:
