@@ -17,6 +17,10 @@ Udacity
 Simulator
 - 2017_02_12_17_32 to 2017_02_12_17_36
     - Images = 2377 * 3 (center, left, right) = 7131
+    - Track 1, clockwise, center
+- 2017_02_12_17_51 to 2017_02_12_18_08
+    - Images = 1994 * 3 (center, left, right) = 5982
+    - Track 1, anti-clockwise, right side recovery
 
 # design-model
 The base architecture is derived from the NVIDIA model.
