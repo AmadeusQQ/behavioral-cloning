@@ -22,6 +22,9 @@ Total image count = 12389 * 3 (center, left, right) * 2 (flip) = 74334
 # design-model
 The base architecture is derived from the NVIDIA model.
 
+NVIDIA model
+- Source: https://arxiv.org/pdf/1604.07316v1.pdf
+
 Layers
 - Cropping2D: Crop sky and car
 - Lambda: Normalize and center data
@@ -54,7 +57,7 @@ Layers
 - Activation: Use rectified linear unit to introduce non-linearity
 - Dropout: Reduce over fitting
 - Flatten: Reduce dimensionality
-- Dense
+- Dense: Fully connect each node
     - Connections: 100
 - Dense
     - Connections: 50
@@ -62,9 +65,6 @@ Layers
     - Connections: 10
 - Dense
     - Connections: 1
-
-NVIDIA model
-- Source: https://arxiv.org/pdf/1604.07316v1.pdf
 
 # train-model
 

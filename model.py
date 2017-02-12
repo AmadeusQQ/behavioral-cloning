@@ -38,6 +38,8 @@ with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
     reader.__next__()
     for line in reader:
         samples.append(line)
+shuffle(samples)
+samples = samples[:160]
 
 train_set, validation_set = train_test_split(samples, test_size = 0.2)
 print('Train set size:', len(train_set))
@@ -204,18 +206,15 @@ model.add(Dense(50))
 model.add(Dense(10))
 model.add(Dense(1))
 
-def make_sample_size(a_set):
-    return int(len(a_set) / BATCH_SIZE) * BATCH_SIZE * 3
-
 # Train model
 model.compile(optimizer = 'adam', loss = 'mse')
 history = model.fit_generator(
     train_generator,
-    samples_per_epoch = make_sample_size(train_set),
+    samples_per_epoch = len(train_set) / EPOCH,
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
     validation_data = validation_generator,
-    nb_val_samples = make_sample_size(validation_set)
+    nb_val_samples = len(validation_set) / EPOCH
 )
 
 # Save model
