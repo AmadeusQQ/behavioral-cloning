@@ -2,6 +2,8 @@
 Drive a car using deep learning
 
 # design-solution
+As an engineer, I want to train a deep learning model, so as to drive a car around track 1. The solution should minimize data used and model complexity. The approach should take into account hardware and time constraints.
+
 Hardware
 - Central processing unit: Intel Core 2 Duo 2.66 GHz
 - Random access memory: 4 GB
@@ -18,7 +20,50 @@ Simulator
 Total image count = 12389 * 3 (center, left, right) * 2 (flip) = 74334
 
 # design-model
-NVIDIA
+The base architecture is derived from the NVIDIA model.
+
+Layers
+- Cropping2D: Crop sky and car
+- Lambda: Normalize and center data
+- Convolution2D: Extract features from image
+    - Filter: 24
+    - Kernel size: 5
+    - Stride size: 2
+- Activation: Use rectified linear unit to introduce non-linearity
+- Dropout: Reduce over fitting
+- Convolution2D: Extract features from image
+    - Filter: 36
+    - Kernel size: 5
+    - Stride size: 2
+- Activation: Use rectified linear unit to introduce non-linearity
+- Dropout: Reduce over fitting
+- Convolution2D: Extract features from image
+    - Filter: 48
+    - Kernel size: 5
+    - Stride size: 2
+- Activation: Use rectified linear unit to introduce non-linearity
+- Dropout: Reduce over fitting
+- Convolution2D: Extract features from image
+    - Filter: 64
+    - Kernel size: 3
+- Activation: Use rectified linear unit to introduce non-linearity
+- Dropout: Reduce over fitting
+- Convolution2D: Extract features from image
+    - Filter: 64
+    - Kernel size: 3
+- Activation: Use rectified linear unit to introduce non-linearity
+- Dropout: Reduce over fitting
+- Flatten: Reduce dimensionality
+- Dense
+    - Connections: 100
+- Dense
+    - Connections: 50
+- Dense
+    - Connections: 10
+- Dense
+    - Connections: 1
+
+NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
 
 # train-model
@@ -65,5 +110,21 @@ Experiment 24
 - Training time: 471 s
 - Samples per second: 27.3
 - Track 1 performance: Car drifts right. Car hits kerb.
+
+Experiment 25
+- Image: Center, left, right, color, vertical crop, normalized, centered
+- Training set size: 19284
+- Epoch: 2
+- Training time: 1590 s
+- Samples per second: 24.3
+- Track 1 performance: Car drifts right. Car hits kerb.
+
+Experiment
+- Image:
+- Training set size:
+- Epoch:
+- Training time:
+- Samples per second:
+- Track 1 performance:
 
 # reflect

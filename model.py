@@ -64,23 +64,23 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
                 #     flipped_center_image
                 # )
                 # path = os.path.join(PATH, line[1].strip())
-                # left_image = cv2.imread(path)
+                left_image = cv2.imread(path)
                 # flipped_left_image = cv2.flip(left_image, 1)
-                # left_image = transform_image(left_image)
+                left_image = transform_image(left_image)
                 # flipped_left_image = transform_image(flipped_left_image)
                 # path = os.path.join(PATH, line[2].strip())
-                # right_image = cv2.imread(path)
+                right_image = cv2.imread(path)
                 # flipped_right_image = cv2.flip(right_image, 1)
-                # right_image = transform_image(right_image)
+                right_image = transform_image(right_image)
                 # flipped_right_image = transform_image(
                 #     flipped_right_image
                 # )
                 images.extend([
-                    center_image
+                    center_image,
                     # flipped_center_image,
-                    # left_image,
+                    left_image,
                     # flipped_left_image,
-                    # right_image,
+                    right_image
                     # flipped_right_image
                 ])
 
@@ -91,26 +91,26 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
                 # flipped_center_angle = transform_angle(
                 #     center_angle * -1.0
                 # )
-                # left_angle = transform_angle(
-                #     center_angle,
-                #     ANGLE_MODIFIER
-                # )
+                left_angle = transform_angle(
+                    center_angle,
+                    ANGLE_MODIFIER
+                )
                 # flipped_left_angle = transform_angle(
                 #     left_angle * -1.0
                 # )
-                # right_angle = transform_angle(
-                #     center_angle,
-                #     -ANGLE_MODIFIER
-                # )
+                right_angle = transform_angle(
+                    center_angle,
+                    -ANGLE_MODIFIER
+                )
                 # flipped_right_angle = transform_angle(
                 #     right_angle * -1.0
                 # )
                 angles.extend([
-                    center_angle
+                    center_angle,
                     # flipped_center_angle,
-                    # left_angle,
+                    left_angle,
                     # flipped_left_angle,
-                    # right_angle,
+                    right_angle
                     # flipped_right_angle
                 ])
 
@@ -205,7 +205,7 @@ model.add(Dense(10))
 model.add(Dense(1))
 
 def make_sample_size(a_set):
-    return int(len(a_set) / BATCH_SIZE) * BATCH_SIZE * 1
+    return int(len(a_set) / BATCH_SIZE) * BATCH_SIZE * 3
 
 # Train model
 model.compile(optimizer = 'adam', loss = 'mse')
