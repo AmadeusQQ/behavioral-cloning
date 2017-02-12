@@ -72,7 +72,7 @@ Layers
     - Connections: 1
 
 # train-model
-Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip image to generate more samples and reduce left and right turn bias.
+Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip image to generate more samples and reduce left and right turn bias. Initial batch size of 32 is too large as images are unable to fit in memory. Use batch size of 2 to increase samples per second and fit images in memory.
 
 # evaluate-model
 Rubric: https://review.udacity.com/#!/rubrics/432/view
@@ -148,19 +148,37 @@ Experiment 27
 Experiment 28
 - Image: Center, flip, color, vertical crop, normalized, centered
 - Train set size: 9678 * 2 = 19356
-- Learning rate:
+- Learning rate: 0.000001
 - Epoch: 2
 - Training time: 556 s
 - Samples per second: 69.6
 - Track 1 performance: Goes straight, drifts right, hits kerb
 
+Experiment 29
+- Image: Center, left, right, flip, color, vertical crop, normalized, centered
+- Train set size: 9678 * 6 = 58068
+- Learning rate: 0.000001
+- Epoch: 2
+- Training time: 544 s
+- Samples per second: 213
+- Track 1 performance: Turns right, hits kerb
+
+Experiment 30
+- Image: Center, left, right, flip, color, vertical crop, normalized, centered
+- Train set size: 9678 * 6 = 58068
+- Learning rate: 0.000001
+- Epoch: 2
+- Training time: 544 s
+- Samples per second: 213
+- Track 1 performance: Turns right, hits kerb
+
 Experiment
-- Image:
-- Train set size:
-- Learning rate:
-- Epoch:
-- Training time:
-- Samples per second:
-- Track 1 performance:
+- Image: 
+- Train set size: 
+- Learning rate: 
+- Epoch: 
+- Training time:  s
+- Samples per second: 
+- Track 1 performance: 
 
 # reflect
