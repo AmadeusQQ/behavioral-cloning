@@ -1,6 +1,6 @@
 # Import libraries
 from keras.layers.convolutional import Convolution2D, Cropping2D
-from keras.layers.core import Dense, Flatten, Lambda
+from keras.layers.core import Dense, Dropout, Flatten, Lambda
 from keras.models import model_from_json, Sequential
 from keras.optimizers import Adam
 from matplotlib import pyplot
@@ -160,6 +160,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
+model.add(Dropout(0.2))
 convolution_filter = 36
 model.add(Convolution2D(
     convolution_filter,
@@ -168,6 +169,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
+model.add(Dropout(0.2))
 convolution_filter = 48
 model.add(Convolution2D(
     convolution_filter,
@@ -176,6 +178,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
+model.add(Dropout(0.2))
 convolution_filter = 64
 kernel_size = 3
 model.add(Convolution2D(
@@ -184,12 +187,14 @@ model.add(Convolution2D(
     kernel_size,
     border_mode = 'valid'
 ))
+model.add(Dropout(0.2))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
     border_mode = 'valid'
 ))
+model.add(Dropout(0.2))
 model.add(Flatten())
 model.add(Dense(100))
 model.add(Dense(50))
