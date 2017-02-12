@@ -9,7 +9,7 @@ Hardware
 - Random access memory: 4 GB
 
 # get-data
-Use data provided by Udacity to minimize data collection time. Collect data while driving anti-clockwise around track 1, so as to mitigate right turn bias. Collect data while recovering from hitting a kerb.
+Use data provided by Udacity to minimize data collection time. Collect data while driving anti-clockwise around track 1 to mitigate right turn bias. Collect data while recovering from hitting a kerb.
 
 Udacity
 - Source: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
@@ -72,7 +72,7 @@ Layers
     - Connections: 1
 
 # train-model
-Get all samples from the driving log. Split samples 80% / 20% into train and validation set.
+Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip image to generate more samples and reduce left and right turn bias.
 
 # evaluate-model
 Rubric: https://review.udacity.com/#!/rubrics/432/view
@@ -112,6 +112,7 @@ Number|Image|Samples per epoch|Learning rate|Epoch|Training time|Samples per sec
 Experiment 24
 - Image: Center, color, vertical crop, normalized, centered
 - Train set size: 6428
+- Learning rate: 0.001
 - Epoch: 2
 - Training time: 471 s
 - Samples per second: 27.3
@@ -120,6 +121,7 @@ Experiment 24
 Experiment 25
 - Image: Center, left, right, color, vertical crop, normalized, centered
 - Train set size: 19284
+- Learning rate: 0.001
 - Epoch: 2
 - Training time: 1590 s
 - Samples per second: 24.3
@@ -128,6 +130,7 @@ Experiment 25
 Experiment 26
 - Image: Center, flip, color, vertical crop, normalized, centered
 - Train set size: 9925 * 2 = 19850
+- Learning rate: 0.001
 - Epoch: 2
 - Training time: 745 s
 - Samples per second: 53.3
@@ -135,15 +138,26 @@ Experiment 26
 
 Experiment 27
 - Image: Center, flip, color, vertical crop, normalized, centered
-- Train set size:
-- Epoch:
-- Training time:
-- Samples per second:
-- Track 1 performance:
+- Train set size: 9678 * 2 = 19356
+- Learning rate: 0.001
+- Epoch: 2
+- Training time: 738 s
+- Samples per second: 52.5
+- Track 1 performance: Car drifts right. Car hits kerb.
+
+Experiment 28
+- Image: Center, flip, color, vertical crop, normalized, centered
+- Train set size: 9678 * 2 = 19356
+- Learning rate:
+- Epoch: 2
+- Training time: 556 s
+- Samples per second: 69.6
+- Track 1 performance: Goes straight, drifts right, hits kerb
 
 Experiment
 - Image:
 - Train set size:
+- Learning rate:
 - Epoch:
 - Training time:
 - Samples per second:
