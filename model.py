@@ -210,18 +210,14 @@ model.add(Dense(1))
 model.compile(optimizer = 'adam', loss = 'mse')
 history = model.fit_generator(
     train_generator,
-    samples_per_epoch = len(train_set) / EPOCH,
+    samples_per_epoch = len(train_set),
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
     validation_data = validation_generator,
-    nb_val_samples = len(validation_set) / EPOCH
+    nb_val_samples = len(validation_set)
 )
 
 # Save model
-# model_json = model.to_json()
-# json_file = open('model.json', 'w')
-# json_file.write(model_json)
-# model.save_weights('model.h5')
 model.save('model.h5')
 
 # Save chart
