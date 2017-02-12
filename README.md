@@ -56,5 +56,6 @@ Number|Image|Samples per epoch|Learning rate|Epoch|Training time|Samples per sec
 20|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|59466|0.000001|2|47 min 1 s|42.2|0.0017|Training loss is greater than validation loss. Car goes straight. Car drifts right. Car goes over the kerb.
 21|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|63900|0.000001|2|1 h 8 min 42 s|31.0|0.0010|Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
 22|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|38568|0.000001|2|41 min 56 s|30.7|0.0049|Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
+23|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|38568|0.001|2|42 min 13 s|30.5|0.0000480|Training loss is greater than validation loss. Car goes straight. Car drifts right. Car ges over kerb.
 
 # reflect
