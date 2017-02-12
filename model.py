@@ -201,11 +201,11 @@ adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 history = model.fit_generator(
     train_generator,
-    samples_per_epoch = int(len(train_set) / BATCH_SIZE) * BATCH_SIZE * 6,
+    samples_per_epoch = int(len(train_set) / BATCH_SIZE) * BATCH_SIZE,
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
     validation_data = validation_generator,
-    nb_val_samples = int(len(validation_set) / BATCH_SIZE) * BATCH_SIZE * 6
+    nb_val_samples = int(len(validation_set) / BATCH_SIZE) * BATCH_SIZE
 )
 
 # Save model
