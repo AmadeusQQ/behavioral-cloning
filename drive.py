@@ -24,13 +24,13 @@ model = None
 
 def transform_image(image):
     image_array = np.asarray(image)
-    image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
+    # image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
 
     return image_array.reshape(
         1,
         image_array.shape[0],
         image_array.shape[1],
-        1
+        image_array.shape[2]
     )
 
 @sio.on('telemetry')
