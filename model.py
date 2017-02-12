@@ -42,10 +42,11 @@ with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
         samples.append(line)
 
 train_set, validation_set = train_test_split(samples, test_size = 0.2)
+print('Train set size:', len(train_set))
+print('Validation set size:', len(validation_set))
 
 def generate_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
-    print('Samples:', sample_count)
 
     while True:
         shuffle(samples)
@@ -200,11 +201,11 @@ adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 history = model.fit_generator(
     train_generator,
-    samples_per_epoch = len(train_set),
+    samples_per_epoch = int(len(train_set) / BATCH_SIZE) * BATCH_SIZE * 6,
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
     validation_data = validation_generator,
-    nb_val_samples = len(validation_set)
+    nb_val_samples = int(len(validation_set) / BATCH_SIZE) * BATCH_SIZE * 6
 )
 
 # Save model
