@@ -13,6 +13,7 @@ import math
 import numpy as np
 import os
 import scipy
+import time
 
 # Set parameters
 DEBUG = False
@@ -230,6 +231,7 @@ model.add(Dense(1))
 # Train model
 adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
+start_time = time.time()
 history = model.fit_generator(
     train_generator,
     samples_per_epoch = len(train_set) / EPOCH,
@@ -238,6 +240,7 @@ history = model.fit_generator(
     validation_data = validation_generator,
     nb_val_samples = len(validation_set) / EPOCH
 )
+print('Training time:', time.time() - start_time)
 
 # Save model
 model.save('model.h5')
