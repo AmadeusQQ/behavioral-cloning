@@ -311,6 +311,15 @@ Experiment 43
 - Samples per second: 170
 - Track 1 performance: Go straight, drift right, drive on double yellow lines, drive on red and white rumble strips, go straight, go over kerb
 
+Experiment 44
+- Image: Center, left, right, flip, color, vertical crop, normalized, centered
+- Train set size: 11016 * 6 = 66096
+- Learning rate: 0.000001
+- Epoch: 16
+- Training time: 390 s
+- Samples per second: 169
+- Track 1 performance: Turn left, hit kerb
+
 Experiment
 - Image: 
 - Train set size: 

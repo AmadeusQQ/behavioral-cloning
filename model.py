@@ -240,7 +240,7 @@ history = model.fit_generator(
     validation_data = validation_generator,
     nb_val_samples = len(validation_set) / EPOCH
 )
-print('Training time:', time.time() - start_time)
+print('Training time:', time.time() - start_time, 's')
 
 # Save model
 model.save('model.h5')
