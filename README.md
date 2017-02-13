@@ -246,9 +246,9 @@ Experiment 38
 - Train set size: 12994 * 6 = 77964
 - Learning rate: 0.000001
 - Epoch: 8
-- Training time:  s
-- Samples per second: 
-- Track 1 performance: 
+- Training time: 444 s
+- Samples per second: 176
+- Track 1 performance: Drifts right, drives on double yellow line, stops on right side
 
 Experiment
 - Image: 
