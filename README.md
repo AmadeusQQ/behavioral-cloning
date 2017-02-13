@@ -35,6 +35,12 @@ Simulator
 - 2017_02_13_20_19 to 2017_02_13_20_42
     - Images = 1622 * 3 (center, left, right) = 4866
     - Track 1, anti-clockwise, right and left recovery
+- 2017_02_13_21_38 to 2017_02_13_21_41
+    - Images = 1908 * 3 (center, left, right) = 5724
+    - Track 1, anti-clockwise, center
+
+Total samples = 21807
+Total images = 65421
 
 # design-model
 Use the NVIDIA model as the base architecture.
