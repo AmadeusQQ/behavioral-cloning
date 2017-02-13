@@ -52,7 +52,7 @@ train_set, validation_set = train_test_split(samples, test_size = 0.2)
 print('Train set size:', len(train_set))
 print('Validation set size:', len(validation_set))
 
-def generate_sample(samples, batch_size = BATCH_SIZE):
+def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
 
     while True:
@@ -116,8 +116,39 @@ def generate_sample(samples, batch_size = BATCH_SIZE):
 
             yield shuffle(images, angles)
 
-train_generator = generate_sample(train_set)
-validation_generator = generate_sample(validation_set)
+def generate_validation_sample(samples, batch_size = BATCH_SIZE):
+    sample_count = len(samples)
+
+    while True:
+        shuffle(samples)
+
+        for offset in range(0, sample_count, batch_size):
+            batch_samples = samples[offset : offset + batch_size]
+
+            images = []
+            angles = []
+
+            for batch_sample in batch_samples:
+                path = os.path.join(PATH, batch_sample[0].strip())
+                center_image = cv2.imread(path)
+                center_image = transform_image(center_image)
+                images.extend([
+                    center_image
+                ])
+
+                center_angle = np.array(line[3], dtype = 'float32')
+                center_angle = transform_angle(center_angle)
+                angles.extend([
+                    center_angle
+                ])
+
+            images = np.array(images, dtype = 'float32')
+            angles = np.array(angles, dtype = 'float32')
+
+            yield shuffle(images, angles)
+
+train_generator = generate_train_sample(train_set)
+validation_generator = generate_validation_sample(validation_set)
 
 # Transform data
 def transform_image(image):
