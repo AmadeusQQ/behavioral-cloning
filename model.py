@@ -33,7 +33,7 @@ DROPOUT_PERCENTAGE = 0.4
 
 LEARNING_RATE = 0.000001
 
-EPOCH = 8
+EPOCH = 16
 VERBOSITY = 2
 
 # Get data
@@ -67,9 +67,9 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
             for batch_sample in batch_samples:
                 path = os.path.join(PATH, batch_sample[0].strip())
                 center_image = cv2.imread(path)
-                # flip_center_image = cv2.flip(center_image, 1)
+                flip_center_image = cv2.flip(center_image, 1)
                 center_image = transform_image(center_image)
-                # flip_center_image = transform_image(flip_center_image)
+                flip_center_image = transform_image(flip_center_image)
                 path = os.path.join(PATH, line[1].strip())
                 left_image = cv2.imread(path)
                 flip_left_image = cv2.flip(left_image, 1)

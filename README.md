@@ -4,6 +4,10 @@ Drive a car using deep learning
 # design-solution
 As an engineer, I want to train a deep learning model, so as to drive a car around track 1. Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments. Change 1 variable at a time to see whether the result confirms or rejects the hypothesis. Take into account hardware and time constraints.
 
+Software
+- Operating system: Ubuntu 16.04
+    - Memory leaks over time
+
 Hardware
 - Central processing unit: Intel Core 2 Duo 2.66 GHz
 - Random access memory: 4 GB
@@ -288,6 +292,15 @@ Experiment 41
 - Training time: 557 s
 - Samples per second: 143
 - Track 1 performance: Drift right, hit kerb
+
+Experiment 42
+- Image: Center, left, right, flip, color, vertical crop, normalized, centered
+- Train set size: 17445 * 6 = 104670
+- Learning rate: 0.000001
+- Epoch: 16
+- Training time: 617 s
+- Samples per second: 171
+- Track 1 performance: Go straight, drift right, drive on double yellow lines, drive on red and white rumble strips, go straight, go over kerb
 
 Experiment
 - Image: 
