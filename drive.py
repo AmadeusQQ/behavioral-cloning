@@ -34,9 +34,9 @@ def telemetry(sid, data):
         min_speed = 8
         max_speed = 10
         if float(speed) < min_speed:
-            throttle = 0.1
+            throttle = 0.2
         elif float(speed) > max_speed:
-            throttle = -0.1
+            throttle = 0.0
         else:
             throttle = 0.1
         
