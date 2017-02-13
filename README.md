@@ -26,6 +26,9 @@ Simulator
 - 2017_02_12_21_30 to 2017_02_12_21_33
     - Images = 2121 * 3 (center, left, right) = 6363
     - Track 1, anti-clockwise, center
+- 2017_02_13_08_00 to 2017_02_13_08_04
+    - Images = 2024 * 3 (center, left, right) = 6072
+    - Track 1, anti-clockwise, center
 
 # design-model
 Use the NVIDIA model as the base architecture.
