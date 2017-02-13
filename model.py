@@ -15,7 +15,7 @@ import os
 import scipy
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
