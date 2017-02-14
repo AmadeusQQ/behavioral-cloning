@@ -1,3 +1,4 @@
+# Import libraries
 from datetime import datetime
 from flask import Flask
 from io import BytesIO
@@ -14,10 +15,15 @@ import os
 import shutil
 import socketio
 
+# Set parameters
 sio = socketio.Server()
 app = Flask(__name__)
+
 model = None
 prev_image_array = None
+
+MIN_SPEED = 8
+MAX_SPEED = 10
 
 @sio.on('telemetry')
 def telemetry(sid, data):
@@ -31,11 +37,9 @@ def telemetry(sid, data):
         steering_angle = float(
             model.predict(image_array[None, :, :, :], batch_size = 1)
         )
-        min_speed = 8
-        max_speed = 10
-        if float(speed) < min_speed:
+        if float(speed) < MIN_SPEED:
             throttle = 0.2
-        elif float(speed) > max_speed:
+        elif float(speed) > MAX_SPEED:
             throttle = 0.0
         else:
             throttle = 0.1

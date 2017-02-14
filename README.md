@@ -99,55 +99,57 @@ Get all samples from the driving log. Split samples 80% / 20% into train and val
 # evaluate-model
 Rubric: https://review.udacity.com/#!/rubrics/432/view
 
+Values in **bold** denote change from previous experiment.
+
 Experiment 1
-Image: Center, normalized
-Set size: 256
-Learning rate: 1e-2
-Epoch: 4
-Training time: 67 s
-Samples per second: 15.3
-Loss: 0.0194
-Notes: Model may be overfitting as difference between training and validation loss increases per epoch. Loss becomes not a number when training model again.
+- Image: Center, normalized
+- Set size: 256
+- Learning rate: 1e-2
+- Epoch: 4
+- Training time: 67 s
+- Samples per second: 15.3
+- Loss: 0.0194
+- Notes: Model may be overfitting as difference between training and validation loss increases per epoch. Loss becomes not a number when training model again.
 
 Experiment 2
-Image: Center, normalized
-Set size: 3
-Learning rate: 1e-6
-Epoch: 4
-Training time: 1 s
-Samples per second: 12
-Loss: 0.9166
-Notes: Loss no longer becomes not a number due to reduced learning rate. Model predicts steering direction correctly.
+- Image: Center, normalized
+- Set size: **3**
+- Learning rate: **1e-6**
+- Epoch: 4
+- Training time: 1 s
+- Samples per second: 12
+- Loss: 0.9166
+- Notes: Loss no longer becomes not a number due to reduced learning rate. Model predicts steering direction correctly.
 
 Experiment 3
-Image: Center, normalized
-Set size: 256
-Learning rate: 1e-6
-Epoch: 4
-Training time: 66 s
-Samples per second: 15.5
-Loss: 0.0533
-Notes: Loss plateaus. Validation loss is greater than training loss. Car makes a hard left turn.
+- Image: Center, normalized
+- Set size: **256**
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 66 s
+- Samples per second: 15.5
+- Loss: 0.0533
+- Notes: Loss plateaus. Validation loss is greater than training loss. Car makes a hard left turn.
 
 Experiment 4
-Image: Center, normalized
-Set size: 512
-Learning rate: 0.000001
-Epoch: 4
-Training time: 134 s
-Samples per second: 15.3
-Loss: 0.0258
-Notes: Loss plateaus. Training loss is greater than validation loss. Car makes a hard right turn.
+- Image: Center, normalized
+- Set size: **512**
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 134 s
+- Samples per second: 15.3
+- Loss: 0.0258
+- Notes: Loss plateaus. Training loss is greater than validation loss. Car makes a hard right turn.
 
 Experiment 5
-Image: Center, normalized
-Set size: 512
-Learning rate: 0.000001
-Epoch: 4
-Training time: 142 s
-Samples per second: 14.4
-Loss: 0.0266
-Notes: Validation loss is greater than training loss. Car makes a hard right turn with brief hard left turns.
+- Image: Center, normalized
+- Set size: 512
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 142 s
+- Samples per second: 14.4
+- Loss: 0.0266
+- Notes: Validation loss is greater than training loss. Car makes a hard right turn with brief hard left turns.
 
 Switched to fit_generator after encountering out of memory error with 1024 set size.
 
