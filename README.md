@@ -541,11 +541,11 @@ Experiment 45
 Experiment 46
 - Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
 - Train set size: 17445 * 5 = 87225
-- Learning rate: 1e-7
-- Epoch: 16
-- Training time:  s
-- Samples per second: 
-- Track 1 performance: 
+- Learning rate: **1e-7**
+- Epoch: **16**
+- Training time: 661 s
+- Samples per second: 132
+- Track 1 performance: Turn left, hit kerb
 
 Experiment
 - Image: 
