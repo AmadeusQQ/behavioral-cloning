@@ -540,9 +540,12 @@ Experiment
 
 # reflect
 Inverse relationship between learning rate and training time
-- Low learning rate increases the probability of training a good model and increases training time
-- High learning rate reduces training time and decreases the probability of training a good model
+- Low learning rate increases the probability of finding the local minimum at the expense of training time
+- High learning rate reduces training time at the expense of not finding the local minimum
 
 Direct relationship between signal and noise
-- Grayscale images reduce both signal and noise in color images
-- Cropped images reduce signal needed for going up or down slopes and noise above the horizon
+- Grayscale images reduce noise in color images at the expense of color signals
+- Cropped images reduce noise above the horizon at the expense of signals for when going up or down slope
+
+Data should have normal distribution
+- Using left and right images help to reduce center bias
