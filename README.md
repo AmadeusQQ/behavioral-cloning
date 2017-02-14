@@ -259,7 +259,7 @@ Experiment 15
 - Loss: 0.0517
 - Notes: Validation loss is greater than training loss. Car drifts to the left. Car goes over the kerb.
 
-Experiment 16
+__Experiment 16__
 - Image: Center, left, right, **vertical crop**, grayscale, normalized
 - Samples per epoch: 9642
 - Learning rate: 1e-6
@@ -285,61 +285,64 @@ __Experiment 18__
 - Samples per epoch: 19284
 - Learning rate: 1e-6
 - Epoch: 2
-- Training time: 15 min 10 s
+- Training time: 910 s
 - Samples per second: 42.4
 - Loss: 0.0302
 - Notes: Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall in the middle of the bridge that goes over the water.
 
 Experiment 19
 - Image: Center, left, right, flipped, grayscale, vertical crop, normalized, centered
-- Samples per epoch: 9911
+- Samples per epoch: **9911**
 - Learning rate: 1e-6
 - Epoch: 2
-- Training time: 7 min 44 s
+- Training time: 464 s
 - Samples per second: 42.7
 - Loss: 0.0177
 - Notes: Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into right wall in the middle of the bridge that goes over the water.
 
 Experiment 20
 - Image: Center, left, right, flipped, grayscale, vertical crop, normalized, centered
-- Samples per epoch: 59466
+- Samples per epoch: **59466**
 - Learning rate: 1e-6
 - Epoch: 2
-- Training time: 47 min 1 s
+- Training time: 2821 s
 - Samples per second: 42.2
 - Loss: 0.0017
 - Notes: Training loss is greater than validation loss. Car goes straight. Car drifts right. Car goes over the kerb.
-21
-Center, left, right, flipped, grayscale, vertical crop, normalized, centered
-63900
-1e-6
-2
-1 h 8 min 42 s
-31.0
-0.0010
-Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
-22
-Center, left, right, flipped, grayscale, vertical crop, normalized, centered
-38568
-1e-6
-2
-41 min 56 s
-30.7
-0.0049
-Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
-23
-Center, left, right, flipped, grayscale, vertical crop, normalized, centered
-38568
-0.001
-2
-42 min 13 s
-30.5
-0.0000480
-Training loss is greater than validation loss. Car goes straight. Car drifts right. Car ges over kerb.
+
+Experiment 21
+- Image: Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+- Samples per epoch: **63900**
+- Learning rate: 1e-6
+- Epoch: 2
+- Training time: 4122 s
+- Samples per second: 31.0
+- Loss: 0.0010
+- Notes: Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
+
+Experiment 22
+- Image: Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+- Samples per epoch: **38568**
+- Learning rate: 1e-6
+- Epoch: 2
+- Training time: 2516 s
+- Samples per second: 30.7
+- Loss: 0.0049
+- Notes: Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
+
+Experiment 23
+- Image: Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+- Samples per epoch: 38568
+- Learning rate: **0.001**
+- Epoch: 2
+- Training time: 2533 s
+- Samples per second: 30.5
+- Loss: 0.0000480
+- Notes: Training loss is greater than validation loss. Car goes straight. Car drifts right. Car ges over kerb.
 
 Experiment 24
-- Image: Center, color, vertical crop, normalized, centered
-- Train set size: 6428
+- Image: Center, **color**, vertical crop, normalized, centered
+- Train set size: **6428**
 - Learning rate: 0.001
 - Epoch: 2
 - Training time: 471 s
@@ -347,8 +350,8 @@ Experiment 24
 - Track 1 performance: Car drifts right. Car hits kerb.
 
 Experiment 25
-- Image: Center, left, right, color, vertical crop, normalized, centered
-- Train set size: 19284
+- Image: Center, **left**, **right**, color, vertical crop, normalized, centered
+- Train set size: **19284**
 - Learning rate: 0.001
 - Epoch: 2
 - Training time: 1590 s
@@ -356,8 +359,8 @@ Experiment 25
 - Track 1 performance: Car drifts right. Car hits kerb.
 
 Experiment 26
-- Image: Center, flip, color, vertical crop, normalized, centered
-- Train set size: 9925 * 2 = 19850
+- Image: Center, **flip**, color, vertical crop, normalized, centered
+- Train set size: 9925 * 2 = **19850**
 - Learning rate: 0.001
 - Epoch: 2
 - Training time: 745 s
@@ -366,25 +369,25 @@ Experiment 26
 
 Experiment 27
 - Image: Center, flip, color, vertical crop, normalized, centered
-- Train set size: 9678 * 2 = 19356
+- Train set size: 9678 * 2 = **19356**
 - Learning rate: 0.001
 - Epoch: 2
 - Training time: 738 s
 - Samples per second: 52.5
 - Track 1 performance: Car drifts right. Car hits kerb.
 
-Experiment 28
+__Experiment 28__
 - Image: Center, flip, color, vertical crop, normalized, centered
 - Train set size: 9678 * 2 = 19356
-- Learning rate: 1e-6
+- Learning rate: **1e-6**
 - Epoch: 2
 - Training time: 556 s
 - Samples per second: 69.6
 - Track 1 performance: Goes straight, drifts right, hits kerb
 
 Experiment 29
-- Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 9678 * 6 = 58068
+- Image: Center, **left**, **right**, flip, color, vertical crop, normalized, centered
+- Train set size: 9678 * 6 = **58068**
 - Learning rate: 1e-6
 - Epoch: 2
 - Training time: 544 s
@@ -393,149 +396,122 @@ Experiment 29
 
 Experiment 30
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 9678 * 6 = 58068
-- Learning rate: 1e-6
-- Epoch: 2
-- Training time: 544 s
-- Samples per second: 213
-- Track 1 performance: Turns right, hits kerb
-
-Experiment 31
-- Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 11375 * 6 = 68250
+- Train set size: 11375 * 6 = **68250**
 - Learning rate: 1e-6
 - Epoch: 2
 - Training time: 626 s
 - Samples per second: 218
 - Track 1 performance: Turns right, hits kerb
 
-Experiment 32
+Experiment 31
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
-- Learning rate: 1e-6
-- Epoch: 2
-- Training time: 755 s
-- Samples per second: 181
-- Track 1 performance: Drifts right, drives on right double yellow line, drives on red and white rumble strips, hits kerb
-
-Experiment 33
-- Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 11375 * 6 = 68250
-- Learning rate: 0.00001
+- Learning rate: **1e-5**
 - Epoch: 2
 - Training time: 752 s
 - Samples per second: 182
 - Track 1 performance: Drifts right, hits kerb
 
-Experiment 34
+Experiment 32
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
-- Learning rate: 1e-6
-- Epoch: 8
+- Learning rate: **1e-6**
+- Epoch: **8**
 - Training time: 375 s
 - Samples per second: 182
 - Track 1 performance: Drifts right, drives on red and white rumble strips, hits kerb
 
-Experiment 35
+Experiment 33
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
 - Learning rate: 1e-6
-- Epoch: 16
+- Epoch: **16**
 - Training time: 377 s
 - Samples per second: 181
 - Track 1 performance: Drifts right, drives on right double yellow line, drives on red and white rumble strips, hits kerb
 
-Experiment 36
+Experiment 34
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
 - Learning rate: 1e-6
-- Epoch: 4
+- Epoch: **4**
 - Training time: 389 s
 - Samples per second: 175
 - Track 1 performance: Drifts right, drives on double yellow line, drives on red and white rumble strips, drives on to bridge, turns left, hits wall
 
-Experiment 37
+Experiment 35
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 12994 * 6 = 77964
+- Train set size: 12994 * 6 = **77964**
 - Learning rate: 1e-6
 - Epoch: 4
 - Training time: 444 s
 - Samples per second: 176
 - Track 1 performance: Turns right, hits kerb
 
-Experiment 38
+Experiment 36
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 12994 * 6 = 77964
 - Learning rate: 1e-6
-- Epoch: 8
+- Epoch: **8**
 - Training time: 444 s
 - Samples per second: 176
 - Track 1 performance: Drifts right, drives on double yellow line, stops on right side
 
-Experiment 39
+Experiment 37
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 14621 * 6 = 87726
+- Train set size: 14621 * 6 = **87726**
 - Learning rate: 1e-6
 - Epoch: 8
 - Training time: 507 s
 - Samples per second: 174
 - Track 1 performance: Goes straight, drifts right, drives on red and white rumble strips, turns right, hits kerb
 
-Experiment 40
+Experiment 38
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 15919 * 6 = 95514
+- Train set size: 15919 * 6 = **95514**
 - Learning rate: 1e-6
 - Epoch: 8
 - Training time: 555 s
 - Samples per second: 172
 - Track 1 performance: Goes straight, drifts right, turn right, hit kerb
 
-Experiment 41
-- Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
-- Train set size: 15919 * 5 = 79595
+Experiment 39
+- Image: Center, left, right, **flip left**, **flip right**, color, vertical crop, normalized, centered
+- Train set size: 15919 * 5 = **79595**
 - Learning rate: 1e-6
 - Epoch: 8
 - Training time: 557 s
 - Samples per second: 143
 - Track 1 performance: Drift right, hit kerb
 
-Experiment 42
-- Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 17445 * 6 = 104670
+Experiment 40
+- Image: Center, left, right, **flip**, color, vertical crop, normalized, centered
+- Train set size: 17445 * 6 = **104670**
 - Learning rate: 1e-6
-- Epoch: 16
+- Epoch: **16**
 - Training time: 617 s
 - Samples per second: 171
 - Track 1 performance: Go straight, drift right, drive on double yellow lines, drive on red and white rumble strips, go straight, go over kerb
 
-Experiment 43
+Experiment 41
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 17445 * 6 = 104670
-- Learning rate: 1e-6
-- Epoch: 16
-- Training time: 615 s
-- Samples per second: 170
-- Track 1 performance: Go straight, drift right, drive on double yellow lines, drive on red and white rumble strips, go straight, go over kerb
-
-Experiment 44
-- Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 11016 * 6 = 66096
+- Train set size: 11016 * 6 = **66096**
 - Learning rate: 1e-6
 - Epoch: 16
 - Training time: 390 s
 - Samples per second: 169
 - Track 1 performance: Turn left, hit kerb
 
-Experiment 45
-- Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
-- Train set size: 17445 * 5 = 87225
+Experiment 42
+- Image: Center, left, right, **flip left**, **flip right**, color, vertical crop, normalized, centered
+- Train set size: 17445 * 5 = **87225**
 - Learning rate: 1e-6
 - Epoch: 16
 - Training time: 1222 s
 - Samples per second: 71.4
 - Track 1 performance: Go straight, drift right, drive close to double yellow lines, go straight after red and white rumble strips, go over kerb
 
-Experiment 46
+Experiment 43
 - Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
 - Train set size: 17445 * 5 = 87225
 - Learning rate: 1e-6
@@ -543,6 +519,15 @@ Experiment 46
 - Training time: 692 s
 - Samples per second: 126
 - Track 1 performance: Go straight, drift left, drive close to double yellow lines, go straight after red and white rumble strips, go over kerb
+
+__Experiment 44__
+- Image: Center, left, right, **flip**, color, vertical crop, normalized, centered
+- Train set size: 17445 * 6 = **104670**
+- Learning rate: 1e-6
+- Epoch: 16
+- Training time: 713 s
+- Samples per second: 147
+- Track 1 performance: Drift right, go over kerb
 
 Experiment
 - Image: 

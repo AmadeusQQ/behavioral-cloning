@@ -83,7 +83,7 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 flip_right_image = transform_image(flip_right_image)
                 images.extend([
                     center_image,
-                    # flip_center_image,
+                    flip_center_image,
                     left_image,
                     flip_left_image,
                     right_image,
@@ -92,7 +92,7 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
 
                 center_angle = np.array(line[3], dtype = 'float32')
                 center_angle = transform_angle(center_angle)
-                # flip_center_angle = transform_angle(center_angle * -1.0)
+                flip_center_angle = transform_angle(center_angle * -1.0)
                 left_angle = transform_angle(
                     center_angle,
                     ANGLE_MODIFIER
@@ -105,7 +105,7 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 flip_right_angle = transform_angle(right_angle * -1.0)
                 angles.extend([
                     center_angle,
-                    # flip_center_angle,
+                    flip_center_angle,
                     left_angle,
                     flip_left_angle,
                     right_angle,

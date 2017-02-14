@@ -36,6 +36,7 @@ def telemetry(sid, data):
         steering_angle = float(
             model.predict(image_array[None, :, :, :], batch_size = 1)
         )
+        
         if float(speed) < MIN_SPEED:
             throttle = 0.2
         elif float(speed) > MAX_SPEED:
