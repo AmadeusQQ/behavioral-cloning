@@ -141,39 +141,196 @@ Experiment 4
 - Loss: 0.0258
 - Notes: Loss plateaus. Training loss is greater than validation loss. Car makes a hard right turn.
 
+Change experiment format.
+
+Switch to fit_generator after encountering out of memory error with 1024 set size.
+
 Experiment 5
-- Image: Center, normalized
-- Set size: 512
+- Image: Center
+- Samples per epoch: 2
 - Learning rate: 1e-6
 - Epoch: 4
-- Training time: 142 s
-- Samples per second: 14.4
-- Loss: 0.0266
+- Training time: 1 s
+- Samples per second: 16
+- Loss: 132.5945
+- Notes: Training loss is greater than validation loss. Car makes hard left turn. Car hits the kerb. Car makes hard right turn.
+
+Experiment 6
+- Image: Center
+- Samples per epoch: **512**
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 574 s
+- Samples per second: 4.28
+- Loss: 2692.1430
 - Notes: Validation loss is greater than training loss. Car makes a hard right turn with brief hard left turns.
 
-Switched to fit_generator after encountering out of memory error with 1024 set size.
+Experiment 7
+- Image: Center, **normalized**
+- Samples per epoch: **2**
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 1 s
+- Samples per second: 16
+- Loss: 0.0271
+- Notes: Training loss is greater than validation loss. Car drifts to the right. Car hits the kerb.
 
-Number|Image|Samples per epoch|Learning rate|Epoch|Training time|Samples per second|Loss|Notes
-------|-----|-----------------|-------------|-----|-------------|------------------|----|-----
-6|Center|2|0.000001|4|1 s|16|132.5945|Training loss is greater than validation loss. Car makes hard left turn. Car hits the kerb. Car makes hard right turn.
-7|Center|512|0.000001|4|9 min 34 s|4.28|2692.1430|Validation loss is greater than training loss. Car makes a hard right turn with brief hard left turns.
-8|Center, normalized|2|0.000001|4|1 s|16|0.0271|Training loss is greater than validation loss. Car drifts to the right. Car hits the kerb.
-9|Center, grayscale, normalized|2|0.000001|4|3 s|5|0.0062|Validation loss is greater than training loss. Car drifts to the right. Car hits the kerb.
-10|Center, crop, grayscale, normalized|2|0.000001|4|1 s|16|0.1328|Training loss is greater than validation loss. Car drifts to the right. Car hits the kerb.
-11|Center, crop, grayscale, normalized|512|0.000001|4|52 s|47.2|0.0114|Training loss is greater than validation loss. Car stays in lane with double yellow lines. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb. Car goes straight.
-12|Center, crop, grayscale, normalized|1024|0.000001|4|1 min 46 s|46.4|0.0310|Validation loss is greater than training loss. Car goes straight. Car drifts to the right. Car goes over the kerb.
-13|Center, left, right, crop, grayscale, normalized|1023|0.000001|4|1 min 9 s|59.3|0.0321|Training loss is greater than validation loss. Car drifts to the right. Car drives in between the right lane line and kerb. Car goes over the kerb.
-14|Center, left, right, crop, grayscale, normalized|3069|0.000001|4|3 min 25 s|59.9|0.0561|Validation loss is greater than training loss. Car goes straight. Car drifts to the left. Car drives in between the left kerb and lane line. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
-15|Center, left, right, crop, grayscale, normalized|3069|0.000001|2|1 min 43 s|59.6|0.0372|Validation loss is greater than training loss. Car goes straight. Car drifts to the right. Car drives in between the right lane line and kerb. Car goes over the kerb.
-15|Center, left, right, crop, grayscale, normalized|9642|0.000001|2|5 min 40 s|56.7|0.0517|Validation loss is greater than training loss. Car drifts to the left. Car goes over the kerb.
-16|Center, left, right, vertical crop, grayscale, normalized|9642|0.000001|2|8 min 45 s|36.7|0.0362|Training loss is greater than validation loss. Car goes straight. Car drifts to the left. Car turns left when lane markers change to red and white rumble strips. Car drifts left. Car goes over kerb.
-17|Center, left, right, flipped, vertical crop, grayscale, normalized|19284|0.000001|2|15 min 14 s|42.2|0.0304|Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall at the start of the bridge that goes over the water.
-18|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|19284|0.000001|2|15 min 10 s|42.4|0.0302|Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall in the middle of the bridge that goes over the water.
-19|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|9911|0.000001|2|7 min 44 s|42.7|0.0177|Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into right wall in the middle of the bridge that goes over the water.
-20|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|59466|0.000001|2|47 min 1 s|42.2|0.0017|Training loss is greater than validation loss. Car goes straight. Car drifts right. Car goes over the kerb.
-21|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|63900|0.000001|2|1 h 8 min 42 s|31.0|0.0010|Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
-22|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|38568|0.000001|2|41 min 56 s|30.7|0.0049|Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
-23|Center, left, right, flipped, grayscale, vertical crop, normalized, centered|38568|0.001|2|42 min 13 s|30.5|0.0000480|Training loss is greater than validation loss. Car goes straight. Car drifts right. Car ges over kerb.
+Experiment 8
+- Image: Center, **grayscale**, normalized
+- Samples per epoch: 2
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 3 s
+- Samples per second: 5
+- Loss: 0.0062
+- Notes: Validation loss is greater than training loss. Car drifts to the right. Car hits the kerb.
+
+Experiment 9
+- Image: Center, **crop**, grayscale, normalized
+- Samples per epoch: 2
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 1 s
+- Samples per second: 16
+- Loss: 0.1328
+- Notes: Training loss is greater than validation loss. Car drifts to the right. Car hits the kerb.
+
+Experiment 10
+- Image: Center, crop, grayscale, normalized
+- Samples per epoch: **512**
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 52 s
+- Samples per second: 47.2
+- Loss: 0.0114
+- Notes: Training loss is greater than validation loss. Car stays in lane with double yellow lines. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the 
+kerb. Car goes straight.
+
+Experiment 11
+- Image: Center, crop, grayscale, normalized
+- Samples per epoch: **1024**
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 106 s
+- Samples per second: 46.4
+- Loss: 0.0310
+- Notes: Validation loss is greater than training loss. Car goes straight. Car drifts to the right. Car goes over the kerb.
+
+Experiment 12
+- Image: Center, **left**, **right**, crop, grayscale, normalized
+- Samples per epoch: **1023**
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 69 s
+- Samples per second: 59.3
+- Loss: 0.0321
+- Notes: Training loss is greater than validation loss. Car drifts to the right. Car drives in between the right lane line and kerb. Car goes over the kerb.
+
+Experiment 13
+- Image: Center, left, right, crop, grayscale, normalized
+- Samples per epoch: **3069**
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 205 s
+- Samples per second: 59.9
+- Loss: 0.0561
+- Notes: Validation loss is greater than training loss. Car goes straight. Car drifts to the left. Car drives in between the left kerb and lane line. Car does not turn left when lane markers change to 
+red and white rumble strips. Car goes over the kerb.
+
+Experiment 14
+- Image: Center, left, right, crop, grayscale, normalized
+- Samples per epoch: 3069
+- Learning rate: 1e-6
+- Epoch: **2**
+- Training time: 103 s
+- Samples per second: 59.6
+- Loss: 0.0372
+- Notes: Validation loss is greater than training loss. Car goes straight. Car drifts to the right. Car drives in between the right lane line and kerb. Car goes over the kerb.
+
+Experiment 15
+- Image: Center, left, right, crop, grayscale, normalized
+- Samples per epoch: **9642**
+- Learning rate: 1e-6
+- Epoch: 2
+- Training time: 340 s
+- Samples per second: 56.7
+- Loss: 0.0517
+- Notes: Validation loss is greater than training loss. Car drifts to the left. Car goes over the kerb.
+
+Experiment 16
+- Image: Center, left, right, **vertical crop**, grayscale, normalized
+- Samples per epoch: 9642
+- Learning rate: 1e-6
+- Epoch: 2
+- Training time: 525 s
+- Samples per second: 36.7
+- Loss: 0.0362
+- Notes: Training loss is greater than validation loss. Car goes straight. Car drifts to the left. Car turns left when lane markers change to red and white rumble strips. Car drifts left. Car goes 
+over kerb.
+
+17
+Center, left, right, flipped, vertical crop, grayscale, normalized
+19284
+1e-6
+2
+15 min 14 s
+42.2
+0.0304
+Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall at the start of the bridge that goes over the water.
+18
+Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+19284
+1e-6
+2
+15 min 10 s
+42.4
+0.0302
+Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall in the middle of the bridge that goes over the water.
+19
+Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+9911
+1e-6
+2
+7 min 44 s
+42.7
+0.0177
+Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into right wall in the middle of the bridge that goes over the water.
+20
+Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+59466
+1e-6
+2
+47 min 1 s
+42.2
+0.0017
+Training loss is greater than validation loss. Car goes straight. Car drifts right. Car goes over the kerb.
+21
+Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+63900
+1e-6
+2
+1 h 8 min 42 s
+31.0
+0.0010
+Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
+22
+Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+38568
+1e-6
+2
+41 min 56 s
+30.7
+0.0049
+Training loss is greater than validation loss. Car does not turn left when lane markers change to red and white rumble strips. Car goes over the kerb.
+23
+Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+38568
+0.001
+2
+42 min 13 s
+30.5
+0.0000480
+Training loss is greater than validation loss. Car goes straight. Car drifts right. Car ges over kerb.
 
 Experiment 24
 - Image: Center, color, vertical crop, normalized, centered
@@ -214,7 +371,7 @@ Experiment 27
 Experiment 28
 - Image: Center, flip, color, vertical crop, normalized, centered
 - Train set size: 9678 * 2 = 19356
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 2
 - Training time: 556 s
 - Samples per second: 69.6
@@ -223,7 +380,7 @@ Experiment 28
 Experiment 29
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 9678 * 6 = 58068
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 2
 - Training time: 544 s
 - Samples per second: 213
@@ -232,7 +389,7 @@ Experiment 29
 Experiment 30
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 9678 * 6 = 58068
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 2
 - Training time: 544 s
 - Samples per second: 213
@@ -241,7 +398,7 @@ Experiment 30
 Experiment 31
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 2
 - Training time: 626 s
 - Samples per second: 218
@@ -250,7 +407,7 @@ Experiment 31
 Experiment 32
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 2
 - Training time: 755 s
 - Samples per second: 181
@@ -268,7 +425,7 @@ Experiment 33
 Experiment 34
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 8
 - Training time: 375 s
 - Samples per second: 182
@@ -277,7 +434,7 @@ Experiment 34
 Experiment 35
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 16
 - Training time: 377 s
 - Samples per second: 181
@@ -286,7 +443,7 @@ Experiment 35
 Experiment 36
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11375 * 6 = 68250
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 4
 - Training time: 389 s
 - Samples per second: 175
@@ -295,7 +452,7 @@ Experiment 36
 Experiment 37
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 12994 * 6 = 77964
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 4
 - Training time: 444 s
 - Samples per second: 176
@@ -304,7 +461,7 @@ Experiment 37
 Experiment 38
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 12994 * 6 = 77964
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 8
 - Training time: 444 s
 - Samples per second: 176
@@ -313,7 +470,7 @@ Experiment 38
 Experiment 39
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 14621 * 6 = 87726
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 8
 - Training time: 507 s
 - Samples per second: 174
@@ -322,7 +479,7 @@ Experiment 39
 Experiment 40
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 15919 * 6 = 95514
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 8
 - Training time: 555 s
 - Samples per second: 172
@@ -331,7 +488,7 @@ Experiment 40
 Experiment 41
 - Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
 - Train set size: 15919 * 5 = 79595
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 8
 - Training time: 557 s
 - Samples per second: 143
@@ -340,7 +497,7 @@ Experiment 41
 Experiment 42
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 17445 * 6 = 104670
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 16
 - Training time: 617 s
 - Samples per second: 171
@@ -349,7 +506,7 @@ Experiment 42
 Experiment 43
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 17445 * 6 = 104670
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 16
 - Training time: 615 s
 - Samples per second: 170
@@ -358,7 +515,7 @@ Experiment 43
 Experiment 44
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Train set size: 11016 * 6 = 66096
-- Learning rate: 0.000001
+- Learning rate: 1e-6
 - Epoch: 16
 - Training time: 390 s
 - Samples per second: 169
@@ -377,3 +534,7 @@ Experiment
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of training a good model and increases training time
 - High learning rate reduces training time and decreases the probability of training a good model
+
+Direct relationship between signal and noise
+- Grayscale images reduce both signal and noise in color images
+- Cropped images reduce signal needed for going up or down slopes and noise above the horizon

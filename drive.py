@@ -16,14 +16,13 @@ import shutil
 import socketio
 
 # Set parameters
-sio = socketio.Server()
-app = Flask(__name__)
-
-model = None
-prev_image_array = None
-
 MIN_SPEED = 8
 MAX_SPEED = 10
+
+model = None
+
+sio = socketio.Server()
+app = Flask(__name__)
 
 @sio.on('telemetry')
 def telemetry(sid, data):
