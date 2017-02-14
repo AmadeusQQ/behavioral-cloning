@@ -20,7 +20,7 @@ DEBUG = False
 
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
-BATCH_SIZE = 8
+BATCH_SIZE = 16
 
 IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320

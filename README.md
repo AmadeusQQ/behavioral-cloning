@@ -99,7 +99,9 @@ Get all samples from the driving log. Split samples 80% / 20% into train and val
 # evaluate-model
 Rubric: https://review.udacity.com/#!/rubrics/432/view
 
-Values in **bold** denote change from previous experiment.
+**Bold** values denote change from previous experiment.
+
+__Underlined__ experiments denote key discoveries.
 
 Experiment 1
 - Image: Center, normalized
@@ -111,7 +113,7 @@ Experiment 1
 - Loss: 0.0194
 - Notes: Model may be overfitting as difference between training and validation loss increases per epoch. Loss becomes not a number when training model again.
 
-Experiment 2
+__Experiment 2__
 - Image: Center, normalized
 - Set size: **3**
 - Learning rate: **1e-6**
@@ -268,42 +270,45 @@ Experiment 16
 - Notes: Training loss is greater than validation loss. Car goes straight. Car drifts to the left. Car turns left when lane markers change to red and white rumble strips. Car drifts left. Car goes 
 over kerb.
 
-17
-Center, left, right, flipped, vertical crop, grayscale, normalized
-19284
-1e-6
-2
-15 min 14 s
-42.2
-0.0304
-Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall at the start of the bridge that goes over the water.
-18
-Center, left, right, flipped, grayscale, vertical crop, normalized, centered
-19284
-1e-6
-2
-15 min 10 s
-42.4
-0.0302
-Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall in the middle of the bridge that goes over the water.
-19
-Center, left, right, flipped, grayscale, vertical crop, normalized, centered
-9911
-1e-6
-2
-7 min 44 s
-42.7
-0.0177
-Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into right wall in the middle of the bridge that goes over the water.
-20
-Center, left, right, flipped, grayscale, vertical crop, normalized, centered
-59466
-1e-6
-2
-47 min 1 s
-42.2
-0.0017
-Training loss is greater than validation loss. Car goes straight. Car drifts right. Car goes over the kerb.
+Experiment 17
+- Image: Center, left, right, flipped, vertical crop, grayscale, normalized
+- Samples per epoch: **19284**
+- Learning rate: 1e-6
+- Epoch: 2
+- Training time: 914 s
+- Samples per second: 42.2
+- Loss: 0.0304
+- Notes: Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall at the start of the bridge that goes over the water.
+
+__Experiment 18__
+- Image: Center, left, right, flipped, grayscale, vertical crop, normalized, **centered**
+- Samples per epoch: 19284
+- Learning rate: 1e-6
+- Epoch: 2
+- Training time: 15 min 10 s
+- Samples per second: 42.4
+- Loss: 0.0302
+- Notes: Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall in the middle of the bridge that goes over the water.
+
+Experiment 19
+- Image: Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+- Samples per epoch: 9911
+- Learning rate: 1e-6
+- Epoch: 2
+- Training time: 7 min 44 s
+- Samples per second: 42.7
+- Loss: 0.0177
+- Notes: Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into right wall in the middle of the bridge that goes over the water.
+
+Experiment 20
+- Image: Center, left, right, flipped, grayscale, vertical crop, normalized, centered
+- Samples per epoch: 59466
+- Learning rate: 1e-6
+- Epoch: 2
+- Training time: 47 min 1 s
+- Samples per second: 42.2
+- Loss: 0.0017
+- Notes: Training loss is greater than validation loss. Car goes straight. Car drifts right. Car goes over the kerb.
 21
 Center, left, right, flipped, grayscale, vertical crop, normalized, centered
 63900
@@ -522,13 +527,22 @@ Experiment 44
 - Track 1 performance: Turn left, hit kerb
 
 Experiment 45
-- Image: Center, left, right, flip, color, vertical crop, normalized, centered
-- Train set size: 17445 * 6 = 104670
+- Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
+- Train set size: 17445 * 5 = 87225
 - Learning rate: 1e-6
 - Epoch: 16
 - Training time: 1222 s
-- Samples per second: 171
+- Samples per second: 71.4
 - Track 1 performance: Go straight, drift right, drive close to double yellow lines, go straight after red and white rumble strips, go over kerb
+
+Experiment 46
+- Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
+- Train set size: 17445 * 5 = 87225
+- Learning rate: 1e-6
+- Epoch: 16
+- Training time: 692 s
+- Samples per second: 126
+- Track 1 performance: Go straight, drift left, drive close to double yellow lines, go straight after red and white rumble strips, go over kerb
 
 Experiment
 - Image: 
