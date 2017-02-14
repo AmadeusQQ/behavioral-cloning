@@ -2,7 +2,7 @@
 Drive a car using deep learning
 
 # design-solution
-As an engineer, I want to train a deep learning model, so as to drive a car around track 1. Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments. Change 1 variable at a time to see whether the result confirms or rejects the hypothesis. Take into account hardware and time constraints.
+As an engineer, I want to train a deep learning model, so as to drive a car around track 1. Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments. Change 1 variable at a time to see whether the result confirms or rejects the hypothesis. Take into account software, hardware, and time constraints.
 
 Software
 - Operating system: Ubuntu 16.04
@@ -15,36 +15,36 @@ Hardware
 # get-data
 Use data provided by Udacity to minimize data collection time. Collect data while driving anti-clockwise around track 1 to mitigate right turn bias. Collect data while recovering from hitting a kerb.
 
-Udacity
-- Source: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
-- Images = 8036 * 3 (center, left, right) = 24108
-- Size: 323 MB
-
-Simulator
+- 2016_12_01_13_30 to 2016_12_01_13_46
+    - Images: 8036 * 3 (center, left, right) = 24108
+    - Track 1, clockwise, center
+    - Source: Udacity
+    - Link: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
+    - Size: 323 MB
 - 2017_02_12_17_51 to 2017_02_12_18_08
-    - Images = 1994 * 3 (center, left, right) = 5982
+    - Images: 1994 * 3 (center, left, right) = 5982
     - Track 1, anti-clockwise, right side recovery
 - 2017_02_12_18_52 to 2017_02_12_18_55
-    - Images = 2068 * 3 (center, left, right) = 6204
+    - Images: 2068 * 3 (center, left, right) = 6204
     - Track 1, anti-clockwise, center
 - 2017_02_12_21_30 to 2017_02_12_21_33
-    - Images = 2121 * 3 (center, left, right) = 6363
+    - Images: 2121 * 3 (center, left, right) = 6363
     - Track 1, anti-clockwise, center
 - 2017_02_13_08_00 to 2017_02_13_08_04
-    - Images = 2024 * 3 (center, left, right) = 6072
+    - Images: 2024 * 3 (center, left, right) = 6072
     - Track 1, anti-clockwise, center
 - 2017_02_13_19_07 to 2017_02_13_19_10
-    - Images = 2034 * 3 (center, left, right) = 6102
+    - Images: 2034 * 3 (center, left, right) = 6102
     - Track 1, anti-clockwise, center
 - 2017_02_13_20_19 to 2017_02_13_20_42
-    - Images = 1622 * 3 (center, left, right) = 4866
+    - Images: 1622 * 3 (center, left, right) = 4866
     - Track 1, anti-clockwise, right and left recovery
 - 2017_02_13_21_38 to 2017_02_13_21_41
-    - Images = 1908 * 3 (center, left, right) = 5724
+    - Images: 1908 * 3 (center, left, right) = 5724
     - Track 1, anti-clockwise, center
 
-Total samples = 21807
-Total images = 65421
+Total samples: 21807
+Total images: 65421
 
 # design-model
 Use the NVIDIA model as the base architecture.
@@ -94,18 +94,60 @@ Layers
     - Connections: 1
 
 # train-model
-Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip image to generate more samples and reduce left and right turn bias. Initial batch size of 32 is too large as images are unable to fit in memory. Use batch size of 2 to increase samples per second and fit images in memory.
+Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip image to generate more samples and reduce left and right turn bias. Initial batch size of 32 is too large as images are unable to fit in memory. Use batch size of 1 based on hardware constraints and to increase images trained per second.
 
 # evaluate-model
 Rubric: https://review.udacity.com/#!/rubrics/432/view
 
-Number|Image|Set size|Learning rate|Epoch|Training time|Samples per second|Loss|Notes
-------|-----|--------|-------------|-----|-------------|------------------|----|-----
-1|Center, normalized|256|0.01|4|1 min 7 s|15.3|0.0194|Model may be overfitting as difference between training and validation loss increases per epoch. Loss becomes not a number when training model again.
-2|Center, normalized|3|0.000001|4|1 s|12|0.9166|Loss no longer becomes not a number due to reduced learning rate. Model predicts steering direction correctly.
-3|Center, normalized|256|0.000001|4|1 min 6 s|15.5|0.0533|Loss plateaus. Validation loss is greater than training loss. Car makes a hard left turn.
-4|Center, normalized|512|0.000001|4|2 min 14 s|15.3|0.0258|Loss plateaus. Training loss is greater than validation loss. Car makes a hard right turn.
-5|Center, normalized|512|0.000001|4|2 min 22 s|14.4|0.0266|Validation loss is greater than training loss. Car makes a hard right turn with brief hard left turns.
+Experiment 1
+Image: Center, normalized
+Set size: 256
+Learning rate: 1e-2
+Epoch: 4
+Training time: 67 s
+Samples per second: 15.3
+Loss: 0.0194
+Notes: Model may be overfitting as difference between training and validation loss increases per epoch. Loss becomes not a number when training model again.
+
+Experiment 2
+Image: Center, normalized
+Set size: 3
+Learning rate: 1e-6
+Epoch: 4
+Training time: 1 s
+Samples per second: 12
+Loss: 0.9166
+Notes: Loss no longer becomes not a number due to reduced learning rate. Model predicts steering direction correctly.
+
+Experiment 3
+Image: Center, normalized
+Set size: 256
+Learning rate: 1e-6
+Epoch: 4
+Training time: 66 s
+Samples per second: 15.5
+Loss: 0.0533
+Notes: Loss plateaus. Validation loss is greater than training loss. Car makes a hard left turn.
+
+Experiment 4
+Image: Center, normalized
+Set size: 512
+Learning rate: 0.000001
+Epoch: 4
+Training time: 134 s
+Samples per second: 15.3
+Loss: 0.0258
+Notes: Loss plateaus. Training loss is greater than validation loss. Car makes a hard right turn.
+
+Experiment 5
+Image: Center, normalized
+Set size: 512
+Learning rate: 0.000001
+Epoch: 4
+Training time: 142 s
+Samples per second: 14.4
+Loss: 0.0266
+Notes: Validation loss is greater than training loss. Car makes a hard right turn with brief hard left turns.
 
 Switched to fit_generator after encountering out of memory error with 1024 set size.
 
@@ -330,3 +372,6 @@ Experiment
 - Track 1 performance: 
 
 # reflect
+Inverse relationship between learning rate and training time
+- Low learning rate increases the probability of training a good model and increases training time
+- High learning rate reduces training time and decreases the probability of training a good model
