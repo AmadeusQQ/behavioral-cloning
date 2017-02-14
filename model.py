@@ -20,7 +20,7 @@ DEBUG = False
 
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
-BATCH_SIZE = 1
+BATCH_SIZE = 8
 
 IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320
@@ -234,11 +234,11 @@ model.compile(optimizer = adam, loss = 'mse')
 start_time = time.time()
 history = model.fit_generator(
     train_generator,
-    samples_per_epoch = len(train_set) / EPOCH,
+    samples_per_epoch = len(train_set) / BATCH_SIZE,
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
     validation_data = validation_generator,
-    nb_val_samples = len(validation_set) / EPOCH
+    nb_val_samples = len(validation_set) / BATCH_SIZE
 )
 print('Training time:', time.time() - start_time, 's')
 
