@@ -44,10 +44,11 @@ Use data provided by Udacity to minimize data collection time. Collect data whil
     - Track 1, anti-clockwise, center
 
 Total samples: 21807
+
 Total images: 65421
 
 # design-model
-Use the NVIDIA model as the base architecture.
+Implement the NVIDIA model as the base architecture. Take in a (160, 320, 3) color image as input and output the steering angle as a float.
 
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
@@ -59,29 +60,24 @@ Layers
     - Filter: 24
     - Kernel size: 5
     - Stride size: 2
-- Activation: Use rectified linear unit to introduce non-linearity
 - Dropout: Reduce over fitting
 - Convolution2D: Extract features from image
     - Filter: 36
     - Kernel size: 5
     - Stride size: 2
-- Activation: Use rectified linear unit to introduce non-linearity
 - Dropout: Reduce over fitting
 - Convolution2D: Extract features from image
     - Filter: 48
     - Kernel size: 5
     - Stride size: 2
-- Activation: Use rectified linear unit to introduce non-linearity
 - Dropout: Reduce over fitting
 - Convolution2D: Extract features from image
     - Filter: 64
     - Kernel size: 3
-- Activation: Use rectified linear unit to introduce non-linearity
 - Dropout: Reduce over fitting
 - Convolution2D: Extract features from image
     - Filter: 64
     - Kernel size: 3
-- Activation: Use rectified linear unit to introduce non-linearity
 - Dropout: Reduce over fitting
 - Flatten: Reduce dimensionality
 - Dense: Fully connect each node
@@ -94,14 +90,14 @@ Layers
     - Connections: 1
 
 # train-model
-Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip image to generate more samples and reduce left and right turn bias. Initial batch size of 32 is too large as images are unable to fit in memory. Use batch size of 1 based on hardware constraints and to increase images trained per second.
+Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip left and right images to generate more samples and reduce left and right turn bias. Initial batch size of 32 is too large as images are unable to fit in memory. Use batch size of 16 based on hardware constraints.
 
 # evaluate-model
 Rubric: https://review.udacity.com/#!/rubrics/432/view
 
 **Bold** values denote change from previous experiment.
 
-__Underlined__ experiments denote key discoveries.
+**Bold** experiments denote key discoveries.
 
 Experiment 1
 - Image: Center, normalized
@@ -113,7 +109,7 @@ Experiment 1
 - Loss: 0.0194
 - Notes: Model may be overfitting as difference between training and validation loss increases per epoch. Loss becomes not a number when training model again.
 
-__Experiment 2__
+**Experiment 2**
 - Image: Center, normalized
 - Set size: **3**
 - Learning rate: **1e-6**
@@ -259,7 +255,7 @@ Experiment 15
 - Loss: 0.0517
 - Notes: Validation loss is greater than training loss. Car drifts to the left. Car goes over the kerb.
 
-__Experiment 16__
+**Experiment 16**
 - Image: Center, left, right, **vertical crop**, grayscale, normalized
 - Samples per epoch: 9642
 - Learning rate: 1e-6
@@ -280,7 +276,7 @@ Experiment 17
 - Loss: 0.0304
 - Notes: Training loss is greater than validation loss. Car goes straight. Car turns left when lane markers change to red and white rumble strips. Car turns left when lane markers change to double yellow lines. Car crashes into left wall at the start of the bridge that goes over the water.
 
-__Experiment 18__
+**Experiment 18**
 - Image: Center, left, right, flipped, grayscale, vertical crop, normalized, **centered**
 - Samples per epoch: 19284
 - Learning rate: 1e-6
@@ -376,7 +372,7 @@ Experiment 27
 - Samples per second: 52.5
 - Track 1 performance: Car drifts right. Car hits kerb.
 
-__Experiment 28__
+**Experiment 28**
 - Image: Center, flip, color, vertical crop, normalized, centered
 - Train set size: 9678 * 2 = 19356
 - Learning rate: **1e-6**
@@ -520,7 +516,7 @@ Experiment 43
 - Samples per second: 126
 - Track 1 performance: Go straight, drift left, drive close to double yellow lines, go straight after red and white rumble strips, go over kerb
 
-__Experiment 44__
+**Experiment 44**
 - Image: Center, left, right, **flip**, color, vertical crop, normalized, centered
 - Train set size: 17445 * 6 = **104670**
 - Learning rate: 1e-6
@@ -574,5 +570,10 @@ Direct relationship between signal and noise
 - Grayscale images reduce noise in color images at the expense of color signals
 - Cropped images reduce noise above the horizon at the expense of signals for when going up or down slope
 
-Data should have normal distribution
-- Using left and right images help to reduce center bias
+Normal data distribution
+- Left and right images reduce straight bias
+
+Inverse relationship between batch size and memory usage
+- Large batch size improves gradient estimation accuracy at the expense of memory usage
+- Small batch size reduces memory usage at the expense of gradient estimation accuracy
+- Source: http://stats.stackexchange.com/questions/153531/what-is-batch-size-in-neural-network

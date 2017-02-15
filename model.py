@@ -16,7 +16,7 @@ import scipy
 import time
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -47,9 +47,12 @@ with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
 
 if DEBUG:
     shuffle(samples)
-    samples = samples[:320]
+    samples = samples[:160]
+    EPOCH = 2
 
 train_set, validation_set = train_test_split(samples, test_size = 0.2)
+samples_per_epoch = len(train_set) / BATCH_SIZE
+validation_samples = len(validation_set) / BATCH_SIZE
 
 def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
@@ -232,14 +235,14 @@ model.compile(optimizer = adam, loss = 'mse')
 start_time = time.time()
 history = model.fit_generator(
     train_generator,
-    samples_per_epoch = len(train_set) / BATCH_SIZE,
+    samples_per_epoch = samples_per_epoch,
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
     validation_data = validation_generator,
-    nb_val_samples = len(validation_set) / BATCH_SIZE
+    nb_val_samples = validation_samples
 )
 training_time = time.time() - start_time
-samples_per_second = len(train_set) / BATCH_SIZE * EPOCH / training_time
+samples_per_second = samples_per_epoch * EPOCH / training_time
 
 # Show metric
 print('Train set size:', len(train_set))
