@@ -34,7 +34,7 @@ DROPOUT_PERCENTAGE = 0.2
 
 LEARNING_RATE = 1e-7
 
-EPOCH = 16
+EPOCH = 32
 VERBOSITY = 2
 
 # Get data
@@ -50,8 +50,6 @@ if DEBUG:
     samples = samples[:320]
 
 train_set, validation_set = train_test_split(samples, test_size = 0.2)
-print('Train set size:', len(train_set))
-print('Validation set size:', len(validation_set))
 
 def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
@@ -240,7 +238,16 @@ history = model.fit_generator(
     validation_data = validation_generator,
     nb_val_samples = len(validation_set) / BATCH_SIZE
 )
-print('Training time:', time.time() - start_time, 's')
+training_time = time.time() - start_time
+samples_per_second = len(train_set) / BATCH_SIZE * EPOCH / training_time
+
+# Show metric
+print('Train set size:', len(train_set))
+print('Validation set size:', len(validation_set))
+print('Learning rate:', LEARNING_RATE)
+print('Epoch:', EPOCH)
+print('Training time:', training_time, 's')
+print('Samples per second:', samples_per_second)
 
 # Save model
 model.save('model.h5')

@@ -547,6 +547,15 @@ Experiment 46
 - Samples per second: 132
 - Track 1 performance: Turn left, hit kerb
 
+Experiment 47
+- Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
+- Train set size: 17445 * 5 = 87225
+- Learning rate: 1e-7
+- Epoch: **32**
+- Training time: 1368 s
+- Samples per second: 25.5
+- Track 1 performance: Go straight, turn left after red and white rumble strips, drift left, hit kerb
+
 Experiment
 - Image: 
 - Train set size: 
