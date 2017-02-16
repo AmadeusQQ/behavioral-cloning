@@ -567,7 +567,7 @@ __Experiment 48__
 
 Experiment 49
 - Image: Center, left, right, flip left, flip right, grayscale, vertical crop, normalized, centered
-- Train set size: 17445 * 5 = 87225
+- Train set size: 17445 * 5 = **87225**
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 1111 s
@@ -575,10 +575,10 @@ Experiment 49
 - Track 1 performance: Drift left, drive on double yellow lines, drive center in between red and white rumble strips, drift right after red and white rumble strips, hit kerb
 
 Experiment 50
-- Data: 2017-02-16-center-1
+- Data: **2017-02-16-center-1**
 - Image: Center, grayscale, vertical crop, normalized, centered
-- Train set size: 4518
-- Batch size: 32
+- Train set size: **4518**
+- Batch size: **32**
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 149.84 s
@@ -586,9 +586,9 @@ Experiment 50
 - Track 1 performance: Go straight, drift left, drive on double yellow lines, turn right at red and white rumble strips, hit kerb
 
 Experiment 51
-- Data: 2017-02-16-center-1, 2017-02-16-recovery-1
+- Data: 2017-02-16-center-1, **2017-02-16-recovery-1**
 - Image: Center, grayscale, vertical crop, normalized, centered
-- Train set size: 5383
+- Train set size: **5383**
 - Batch size: 32
 - Learning rate: 1e-8
 - Epoch: 32
@@ -597,9 +597,9 @@ Experiment 51
 - Track 1 performance: Go straight, drift right, drive on double yellow lines, hit kerb
 
 Experiment 52
-- Data: 2017-02-16-center-1, 2017-02-16-center-2
+- Data: 2017-02-16-center-1, **2017-02-16-center-2**
 - Image: Center, grayscale, vertical crop, normalized, centered
-- Train set size: 10144
+- Train set size: **10144**
 - Batch size: 32
 - Learning rate: 1e-8
 - Epoch: 32
@@ -608,9 +608,9 @@ Experiment 52
 - Track 1 performance: Go straight, drift right, drive on double yellow lines, drive on red and white rumble strips, drift left after red and white rumble strips, hit kerb
 
 Experiment 53
-- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-center-3
+- Data: 2017-02-16-center-1, 2017-02-16-center-2, **2017-02-16-center-3**
 - Image: Center, grayscale, vertical crop, normalized, centered
-- Train set size: 13660
+- Train set size: **13660**
 - Batch size: 32
 - Learning rate: 1e-8
 - Epoch: 32
@@ -618,21 +618,10 @@ Experiment 53
 - Samples per second: 34.59
 - Track 1 performance: Weave left and right, drift right, hit kerb
 
-Experiment 53
-- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-center-3
+Experiment 54
+- Data: 2017-02-16-center-1, 2017-02-16-center-2, **2017-02-16-recovery-1**, 2017-02-16-center-3
 - Image: Center, grayscale, vertical crop, normalized, centered
-- Train set size: 13660
-- Batch size: 32
-- Learning rate: 1e-8
-- Epoch: 32
-- Training time: 394.93 s
-- Samples per second: 34.59
-- Track 1 performance: Weave left and right, drift right, hit kerb
-
-Experiment 53
-- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
-- Image: Center, grayscale, vertical crop, normalized, centered
-- Train set size: 14525
+- Train set size: **14525**
 - Batch size: 32
 - Learning rate: 1e-8
 - Epoch: 32
