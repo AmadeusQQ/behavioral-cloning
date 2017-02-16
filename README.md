@@ -2,7 +2,9 @@
 Drive a car using deep learning
 
 # design-solution
-As an engineer, I want to train a deep learning model, so as to drive a car around track 1. Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments. Change 1 variable at a time to see whether the result confirms or rejects the hypothesis. Take into account software, hardware, and time constraints.
+As an engineer, I want to train a deep learning model, so as to drive a car around track 1.
+
+Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments and test whether the result confirms or rejects the hypothesis. Take into account software and hardware constraints.
 
 Software
 - Operating system: Ubuntu 16.04
@@ -90,7 +92,7 @@ Layers
     - Connections: 1
 
 # train-model
-Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip left and right images to generate more samples and reduce left and right turn bias. Initial batch size of 32 is too large as images are unable to fit in memory. Use batch size of 16 based on hardware constraints.
+Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip left and right images to generate more samples and reduce left and right turn bias. Batch size of 32 is too large as images are unable to fit in memory. Use batch size of 16 based on hardware constraints.
 
 # evaluate-model
 Rubric: https://review.udacity.com/#!/rubrics/432/view
@@ -139,9 +141,7 @@ Experiment 4
 - Loss: 0.0258
 - Notes: Loss plateaus. Training loss is greater than validation loss. Car makes a hard right turn.
 
-Change experiment format.
-
-Switch to fit_generator after encountering out of memory error with 1024 set size.
+**Change experiment format. Switch to fit_generator after encountering out of memory error with 1024 set size.**
 
 Experiment 5
 - Image: Center
@@ -366,7 +366,7 @@ Experiment 26
 Experiment 27
 - Image: Center, flip, color, vertical crop, normalized, centered
 - Train set size: 9678 * 2 = **19356**
-- Learning rate: 0.001
+- Learning rate: 1e-3
 - Epoch: 2
 - Training time: 738 s
 - Samples per second: 52.5
@@ -552,14 +552,14 @@ Experiment 47
 - Samples per second: 25.5
 - Track 1 performance: Go straight, turn left after red and white rumble strips, drift left, hit kerb
 
-Experiment
-- Image: 
-- Train set size: 
-- Learning rate: 
-- Epoch: 
-- Training time:  s
-- Samples per second: 
-- Track 1 performance: 
+Experiment 48
+- Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
+- Train set size: 17445 * 5 = 87225
+- Learning rate: **1e-8**
+- Epoch: 32
+- Training time: 1328 s
+- Samples per second: 26.3
+- Track 1 performance: Drift right, weave left and right, drove over bridge, drift right, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time
@@ -571,7 +571,7 @@ Direct relationship between signal and noise
 - Cropped images reduce noise above the horizon at the expense of signals for when going up or down slope
 
 Normal data distribution
-- Left and right images reduce straight bias
+- Left and right images reduce driving straight bias
 
 Inverse relationship between batch size and memory usage
 - Large batch size improves gradient estimation accuracy at the expense of memory usage

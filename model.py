@@ -16,7 +16,7 @@ import scipy
 import time
 
 # Set parameters
-DEBUG = True
+DEBUG = False
 
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -32,7 +32,7 @@ CROP_TOP = 64
 CROP_BOTTOM = 30
 DROPOUT_PERCENTAGE = 0.2
 
-LEARNING_RATE = 1e-7
+LEARNING_RATE = 1e-8
 
 EPOCH = 32
 VERBOSITY = 2
