@@ -16,30 +16,29 @@ import scipy
 import time
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
-PATH = './data'
+DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
-BATCH_SIZE = 16
 
 IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320
 IMAGE_DEPTH = 1
 
 ANGLE_MODIFIER = 0.2
-
 CROP_TOP = 64
 CROP_BOTTOM = 30
+
+BATCH_SIZE = 16
 DROPOUT_PERCENTAGE = 0.2
-
 LEARNING_RATE = 1e-8
-
 EPOCH = 32
 VERBOSITY = 2
+MODEL_FILE = 'model.h5'
 
 # Get data
 samples = []
-with open(os.path.join(PATH, DRIVING_LOG_FILE), 'r') as file:
+with open(os.path.join(DATA_PATH, DRIVING_LOG_FILE), 'r') as file:
     reader = csv.reader(file)
     reader.__next__()
     for line in reader:
@@ -67,17 +66,17 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
             angles = []
 
             for batch_sample in batch_samples:
-                path = os.path.join(PATH, batch_sample[0].strip())
+                path = os.path.join(DATA_PATH, batch_sample[0].strip())
                 center_image = cv2.imread(path)
                 flip_center_image = cv2.flip(center_image, 1)
                 center_image = transform_image(center_image)
                 flip_center_image = transform_image(flip_center_image)
-                path = os.path.join(PATH, line[1].strip())
+                path = os.path.join(DATA_PATH, line[1].strip())
                 left_image = cv2.imread(path)
                 flip_left_image = cv2.flip(left_image, 1)
                 left_image = transform_image(left_image)
                 flip_left_image = transform_image(flip_left_image)
-                path = os.path.join(PATH, line[2].strip())
+                path = os.path.join(DATA_PATH, line[2].strip())
                 right_image = cv2.imread(path)
                 flip_right_image = cv2.flip(right_image, 1)
                 right_image = transform_image(right_image)
@@ -131,7 +130,7 @@ def generate_validation_sample(samples, batch_size = BATCH_SIZE):
             angles = []
 
             for batch_sample in batch_samples:
-                path = os.path.join(PATH, batch_sample[0].strip())
+                path = os.path.join(DATA_PATH, batch_sample[0].strip())
                 center_image = cv2.imread(path)
                 center_image = transform_image(center_image)
                 images.extend([
@@ -249,11 +248,11 @@ print('Train set size:', len(train_set))
 print('Validation set size:', len(validation_set))
 print('Learning rate:', LEARNING_RATE)
 print('Epoch:', EPOCH)
-print('Training time:', training_time, 's')
-print('Samples per second:', samples_per_second)
+print('Training time: %.2f s' % training_time)
+print('Samples per second: %.2f' % samples_per_second)
 
 # Save model
-model.save('model.h5')
+model.save(MODEL_FILE)
 
 # Save chart
 chart = pyplot.gcf()
