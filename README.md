@@ -4,11 +4,10 @@ Drive a car using deep learning
 # design-solution
 As an engineer, I want to train a deep learning model, so as to drive a car around track 1.
 
-Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments and test whether the result confirms or rejects the hypothesis. Take into account software and hardware constraints.
+Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments and test whether the result confirms or rejects the hypothesis. Take into account hardware constraints.
 
 Software
 - Operating system: Ubuntu 16.04
-    - Memory leaks over time
 
 Hardware
 - Central processing unit: Intel Core 2 Duo 2.66 GHz
@@ -50,7 +49,7 @@ Collect data while driving clockwise and anti-clockwise to reduce turn bias. Col
 - Images = 13185
 
 # design-model
-Implement the NVIDIA model as the base architecture. Take in a (160, 320, 3) color image as input and output the steering angle as a float.
+Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
 
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
@@ -639,6 +638,17 @@ Experiment 55
 - Training time: 384.26 s
 - Samples per second: 37.8
 - Track 1 performance: Go straight, drift right, almost hit right kerb after red and white rumble strips, turn sharp left, drift left on bridge, hit left wall at middle of bridge
+
+__Experiment 56__
+- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
+- Image: Center, left, right, **flip**, grayscale, vertical crop, normalized, centered
+- Train set size: 14525 * 6 = **87150**
+- Batch size: 32
+- Learning rate: 1e-8
+- Epoch: 32
+- Training time: 442 s
+- Samples per second: 32.86
+- Track 1 performance: Go straight, drift right after bridge, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time

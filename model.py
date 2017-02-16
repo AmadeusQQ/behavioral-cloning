@@ -89,11 +89,11 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 flip_right_image = transform_image(flip_right_image)
                 images.extend([
                     center_image,
-                    # flip_center_image,
+                    flip_center_image,
                     left_image,
-                    # flip_left_image,
-                    right_image
-                    # flip_right_image
+                    flip_left_image,
+                    right_image,
+                    flip_right_image
                 ])
 
                 center_angle = np.array(batch_sample[3], dtype = 'float32')
@@ -111,11 +111,11 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 flip_right_angle = transform_angle(right_angle * -1.0)
                 angles.extend([
                     center_angle,
-                    # flip_center_angle,
+                    flip_center_angle,
                     left_angle,
-                    # flip_left_angle,
+                    flip_left_angle,
                     right_angle,
-                    # flip_right_angle
+                    flip_right_angle
                 ])
 
             images = np.array(images, dtype = 'float32')
@@ -252,8 +252,8 @@ print('Train set size:', len(train_set))
 print('Batch size:', BATCH_SIZE)
 print('Learning rate:', LEARNING_RATE)
 print('Epoch:', EPOCH)
-print('Training time: %.2f s' % training_time)
-print('Samples per second: %.2f' % samples_per_second)
+print('Training time: %i s' % training_time)
+print('Samples per second: %i' % samples_per_second)
 
 # Save model
 model.save(MODEL_FILE)
