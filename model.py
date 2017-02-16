@@ -24,7 +24,7 @@ BATCH_SIZE = 16
 
 IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320
-IMAGE_DEPTH = 3
+IMAGE_DEPTH = 1
 
 ANGLE_MODIFIER = 0.2
 
@@ -154,7 +154,7 @@ validation_generator = generate_validation_sample(validation_set)
 
 # Transform data
 def transform_image(image):
-    # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = np.array(image, dtype = 'float32')
 
     return image.reshape(

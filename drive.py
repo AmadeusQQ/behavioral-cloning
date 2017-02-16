@@ -7,6 +7,7 @@ from keras.models import load_model
 from PIL import Image
 import argparse
 import base64
+import cv2
 import eventlet
 import eventlet.wsgi
 import h5py
@@ -19,10 +20,24 @@ import socketio
 MIN_SPEED = 8
 MAX_SPEED = 10
 
+IMAGE_WIDTH = 160
+IMAGE_LENGTH = 320
+IMAGE_DEPTH = 1
+
 model = None
 
 sio = socketio.Server()
 app = Flask(__name__)
+
+def transform_image(image):
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = np.array(image, dtype = 'float32')
+
+    return image.reshape(
+        IMAGE_WIDTH,
+        IMAGE_LENGTH,
+        IMAGE_DEPTH
+    )
 
 @sio.on('telemetry')
 def telemetry(sid, data):
@@ -32,7 +47,8 @@ def telemetry(sid, data):
         speed = data["speed"]
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
-        image_array = np.asarray(image)
+        # image_array = np.asarray(image)
+        image_array = transform_image(image)
         steering_angle = float(
             model.predict(image_array[None, :, :, :], batch_size = 1)
         )
@@ -44,7 +60,7 @@ def telemetry(sid, data):
         else:
             throttle = 0.1
         
-        print(steering_angle, throttle)
+        print(steering_angle, throttle, image.shape)
         send_control(steering_angle, throttle)
 
         if args.image_folder != '':
