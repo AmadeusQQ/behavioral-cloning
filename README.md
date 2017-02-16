@@ -2,8 +2,6 @@
 Drive a car using deep learning
 
 # design-solution
-As an engineer, I want to train a deep learning model, so as to drive a car around track 1.
-
 Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments and test whether the result confirms or rejects the hypothesis. Take into account hardware constraints.
 
 Software
@@ -51,7 +49,7 @@ Collect data while driving clockwise and anti-clockwise to reduce turn bias. Col
 # design-model
 Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
 
-Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to prevent large values from skewing weights. Center data to aid distribution comparison. Dropout samples to reduce over fitting. Convolve image array to extract features. Flatten image to reduce dimensionality and create a vector. Fully connect each node with dense layers.
+Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to prevent large values from skewing weights. Center data to aid distribution comparison. Dropout samples to reduce over fitting. Convolve image array to extract features. Flatten image array to reduce dimensionality and create a vector. Fully connect each node with dense layers.
 
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
