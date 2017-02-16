@@ -618,6 +618,28 @@ Experiment 53
 - Samples per second: 34.59
 - Track 1 performance: Weave left and right, drift right, hit kerb
 
+Experiment 53
+- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-center-3
+- Image: Center, grayscale, vertical crop, normalized, centered
+- Train set size: 13660
+- Batch size: 32
+- Learning rate: 1e-8
+- Epoch: 32
+- Training time: 394.93 s
+- Samples per second: 34.59
+- Track 1 performance: Weave left and right, drift right, hit kerb
+
+Experiment 53
+- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
+- Image: Center, grayscale, vertical crop, normalized, centered
+- Train set size: 14525
+- Batch size: 32
+- Learning rate: 1e-8
+- Epoch: 32
+- Training time: 418.55 s
+- Samples per second: 48.7
+- Track 1 performance: Go straight, drift right, drive on red and white rumble strips, hit kerb
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time
