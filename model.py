@@ -16,7 +16,7 @@ import scipy
 import time
 
 # Set parameters
-DEBUG = True
+DEBUG = False
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -33,7 +33,7 @@ CROP_LEFT = 0
 CROP_RIGHT = 0
 
 BATCH_SIZE = 32
-DROPOUT_PERCENTAGE = 0.0
+DROPOUT = 0.4
 STRIDE_SIZE = 2
 LEARNING_RATE = 1e-8
 EPOCH = 32
@@ -190,7 +190,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (STRIDE_SIZE, STRIDE_SIZE)
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+model.add(Dropout(DROPOUT))
 convolution_filter = 36
 model.add(Convolution2D(
     convolution_filter,
@@ -199,7 +199,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (STRIDE_SIZE, STRIDE_SIZE)
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+model.add(Dropout(DROPOUT))
 convolution_filter = 48
 model.add(Convolution2D(
     convolution_filter,
@@ -208,7 +208,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (STRIDE_SIZE, STRIDE_SIZE)
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+model.add(Dropout(DROPOUT))
 convolution_filter = 64
 kernel_size = 3
 model.add(Convolution2D(
@@ -217,14 +217,14 @@ model.add(Convolution2D(
     kernel_size,
     border_mode = 'valid'
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+model.add(Dropout(DROPOUT))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
     border_mode = 'valid'
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+model.add(Dropout(DROPOUT))
 model.add(Flatten())
 model.add(Dense(100))
 model.add(Dense(50))

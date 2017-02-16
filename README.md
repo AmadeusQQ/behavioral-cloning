@@ -571,11 +571,14 @@ Experiment 49
 - Samples per second: 31.4
 - Track 1 performance: Drift left, drive on double yellow lines, drive center in between red and white rumble strips, drift right after red and white rumble strips, hit kerb
 
+**Delete collected data.**
+
 Experiment 50
 - Data: **2017-02-16-center-1**
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **4518**
 - Batch size: **32**
+- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 149.84 s
@@ -587,6 +590,7 @@ Experiment 51
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **5383**
 - Batch size: 32
+- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 173.37 s
@@ -598,6 +602,7 @@ Experiment 52
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **10144**
 - Batch size: 32
+- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 283.07 s
@@ -609,6 +614,7 @@ Experiment 53
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **13660**
 - Batch size: 32
+- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 394.93 s
@@ -620,6 +626,7 @@ Experiment 54
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **14525**
 - Batch size: 32
+- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 418.55 s
@@ -631,17 +638,19 @@ Experiment 55
 - Image: Center, **left**, **right**, grayscale, vertical crop, normalized, centered
 - Train set size: 14525 * 3 = **43575**
 - Batch size: 32
+- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 384.26 s
 - Samples per second: 37.8
 - Track 1 performance: Go straight, drift right, almost hit right kerb after red and white rumble strips, turn sharp left, drift left on bridge, hit left wall at middle of bridge
 
-__Experiment 56__
+**Experiment 56**
 - Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
 - Image: Center, left, right, **flip**, grayscale, vertical crop, normalized, centered
 - Train set size: 14525 * 6 = **87150**
 - Batch size: 32
+- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 442 s
