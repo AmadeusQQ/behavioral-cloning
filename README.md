@@ -565,13 +565,13 @@ Experiment 49
 Experiment 50
 - Data: 2017-02-16-center-1
 - Image: Center, grayscale, vertical crop, normalized, centered
-- Train set size:  * 1 = 
+- Train set size: 4518
 - Batch size: 32
 - Learning rate: 1e-8
-- Epoch: 2
-- Training time:  s
-- Samples per second: 
-- Track 1 performance: 
+- Epoch: 32
+- Training time: 149.84 s
+- Samples per second: 30.15
+- Track 1 performance: Go straight, drift left, drive on double yellow lines, turn right at red and white rumble strips, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time

@@ -16,7 +16,7 @@ import scipy
 import time
 
 # Set parameters
-DEBUG = True
+DEBUG = False
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -33,7 +33,7 @@ CROP_BOTTOM = 30
 BATCH_SIZE = 32
 DROPOUT_PERCENTAGE = 0.0
 LEARNING_RATE = 1e-8
-EPOCH = 2
+EPOCH = 32
 VERBOSITY = 2
 MODEL_FILE = 'model.h5'
 
@@ -136,18 +136,16 @@ def generate_validation_sample(samples, batch_size = BATCH_SIZE):
             angles = []
 
             for batch_sample in batch_samples:
-                path = os.path.join(DATA_PATH, batch_sample[0].strip())
-                center_image = cv2.imread(path)
+                center_image = cv2.imread(batch_sample[0].strip())
                 center_image = transform_image(center_image)
-                images.extend([
-                    center_image
-                ])
+                images.extend([center_image])
 
-                center_angle = np.array(line[3], dtype = 'float32')
+                center_angle = np.array(
+                    batch_sample[3],
+                    dtype = 'float32'
+                )
                 center_angle = transform_angle(center_angle)
-                angles.extend([
-                    center_angle
-                ])
+                angles.extend([center_angle])
 
             images = np.array(images, dtype = 'float32')
             angles = np.array(angles, dtype = 'float32')
@@ -251,7 +249,7 @@ samples_per_second = samples_per_epoch * EPOCH / training_time
 
 # Show metric
 print('Train set size:', len(train_set))
-print('Validation set size:', len(validation_set))
+print('Batch size:', BATCH_SIZE)
 print('Learning rate:', LEARNING_RATE)
 print('Epoch:', EPOCH)
 print('Training time: %.2f s' % training_time)
