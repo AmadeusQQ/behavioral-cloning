@@ -561,6 +561,15 @@ __Experiment 48__
 - Samples per second: 26.3
 - Track 1 performance: Drift right, weave left and right, drove over bridge, drift right, hit kerb
 
+Experiment 48
+- Image: Center, left, right, flip left, flip right, grayscale, vertical crop, normalized, centered
+- Train set size: 17445 * 5 = 87225
+- Learning rate: 1e-8
+- Epoch: 32
+- Training time: 1111 s
+- Samples per second: 31.4
+- Track 1 performance: Drift left, drive on double yellow lines, drive center in between red and white rumble strips, drift right after red and white rumble strips, hit kerb
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time

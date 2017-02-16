@@ -47,8 +47,8 @@ def telemetry(sid, data):
         speed = data["speed"]
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
-        # image_array = np.asarray(image)
-        image_array = transform_image(image)
+        image_array = np.asarray(image)
+        image_array = transform_image(image_array)
         steering_angle = float(
             model.predict(image_array[None, :, :, :], batch_size = 1)
         )
@@ -60,7 +60,7 @@ def telemetry(sid, data):
         else:
             throttle = 0.1
         
-        print(steering_angle, throttle, image.shape)
+        print(steering_angle, throttle)
         send_control(steering_angle, throttle)
 
         if args.image_folder != '':
