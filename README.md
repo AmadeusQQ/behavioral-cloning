@@ -561,7 +561,7 @@ __Experiment 48__
 - Samples per second: 26.3
 - Track 1 performance: Drift right, weave left and right, drove over bridge, drift right, hit kerb
 
-Experiment 48
+Experiment 49
 - Image: Center, left, right, flip left, flip right, grayscale, vertical crop, normalized, centered
 - Train set size: 17445 * 5 = 87225
 - Learning rate: 1e-8
