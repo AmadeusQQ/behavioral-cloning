@@ -54,7 +54,14 @@ Total images: 65421
 - Direction: Counter-clockwise
 - Laps: 2
 - Frames: 5648
-- Images = 5648 * 3 = 16944
+- Images = 5647 * 3 = 16941
+
+2017-02-16-12-45
+- Type: Center
+- Direction: Clockwise
+- Laps: 2
+- Frames: 7032
+- Images = 7032 * 3 = 21096
 
 # design-model
 Implement the NVIDIA model as the base architecture. Take in a (160, 320, 3) color image as input and output the steering angle as a float.
