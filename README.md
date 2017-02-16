@@ -552,7 +552,7 @@ Experiment 47
 - Samples per second: 25.5
 - Track 1 performance: Go straight, turn left after red and white rumble strips, drift left, hit kerb
 
-Experiment 48
+__Experiment 48__
 - Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
 - Train set size: 17445 * 5 = 87225
 - Learning rate: **1e-8**

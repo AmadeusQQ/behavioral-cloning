@@ -1,4 +1,5 @@
 # Import libraries
+from keras.callbacks import EarlyStopping
 from keras.layers.convolutional import Convolution2D, Cropping2D
 from keras.layers.core import Activation, Dense, Dropout, Flatten, Lambda
 from keras.models import model_from_json, Sequential
@@ -16,7 +17,7 @@ import scipy
 import time
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -36,6 +37,7 @@ LEARNING_RATE = 1e-8
 
 EPOCH = 32
 VERBOSITY = 2
+PATIENCE = 2
 
 # Get data
 samples = []
@@ -232,12 +234,16 @@ model.add(Dense(1))
 # Train model
 adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
+callbacks = [
+    EarlyStopping(monitor = 'val_loss', patience = PATIENCE)
+]
 start_time = time.time()
 history = model.fit_generator(
     train_generator,
     samples_per_epoch = samples_per_epoch,
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
+    callbacks = callbacks,
     validation_data = validation_generator,
     nb_val_samples = validation_samples
 )
