@@ -51,44 +51,37 @@ Collect data while driving clockwise and anti-clockwise to reduce turn bias. Col
 # design-model
 Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
 
+Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to prevent large values from skewing weights. Center data to aid distribution comparison. Dropout samples to reduce over fitting. Convolve image array to extract features. Flatten image to reduce dimensionality and create a vector. Fully connect each node with dense layers.
+
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
 
 Layers
-- Cropping2D: Crop sky and car
-- Lambda: Normalize and center data
-- Convolution2D: Extract features from image
+- Cropping2D: Crop 64 pixels from the top and 30 pixels from the bottom
+- Lambda: Divide by 255.0 and subtract 0.5
+- Convolution2D
     - Filter: 24
     - Kernel size: 5
     - Stride size: 2
-- Dropout: Reduce over fitting
-- Convolution2D: Extract features from image
+- Convolution2D
     - Filter: 36
     - Kernel size: 5
     - Stride size: 2
-- Dropout: Reduce over fitting
-- Convolution2D: Extract features from image
+- Convolution2D
     - Filter: 48
     - Kernel size: 5
     - Stride size: 2
-- Dropout: Reduce over fitting
-- Convolution2D: Extract features from image
+- Convolution2D
     - Filter: 64
     - Kernel size: 3
-- Dropout: Reduce over fitting
-- Convolution2D: Extract features from image
+- Convolution2D
     - Filter: 64
     - Kernel size: 3
-- Dropout: Reduce over fitting
-- Flatten: Reduce dimensionality
-- Dense: Fully connect each node
-    - Connections: 100
-- Dense
-    - Connections: 50
-- Dense
-    - Connections: 10
-- Dense
-    - Connections: 1
+- Flatten
+- Dense: 100 connections
+- Dense: 50 connections
+- Dense: 10 connections
+- Dense: 1 connections
 
 # train-model
 Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip left and right images to generate more samples and reduce left and right turn bias. Batch size of 32 is too large as images are unable to fit in memory. Use batch size of 16 based on hardware constraints.
