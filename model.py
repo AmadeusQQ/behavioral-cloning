@@ -33,7 +33,7 @@ CROP_BOTTOM = 30
 BATCH_SIZE = 32
 DROPOUT_PERCENTAGE = 0.0
 LEARNING_RATE = 1e-8
-EPOCH = 4
+EPOCH = 32
 VERBOSITY = 2
 MODEL_FILE = 'model.h5'
 
@@ -88,11 +88,11 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 right_image = transform_image(right_image)
                 flip_right_image = transform_image(flip_right_image)
                 images.extend([
-                    center_image
+                    center_image,
                     # flip_center_image,
-                    # left_image,
+                    left_image,
                     # flip_left_image,
-                    # right_image,
+                    right_image
                     # flip_right_image
                 ])
 
@@ -110,11 +110,11 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 )
                 flip_right_angle = transform_angle(right_angle * -1.0)
                 angles.extend([
-                    center_angle
+                    center_angle,
                     # flip_center_angle,
-                    # left_angle,
+                    left_angle,
                     # flip_left_angle,
-                    # right_angle,
+                    right_angle,
                     # flip_right_angle
                 ])
 
