@@ -1,5 +1,5 @@
 # Import libraries
-from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers.convolutional import Convolution2D, Cropping2D
 from keras.layers.core import Activation, Dense, Dropout, Flatten, Lambda
 from keras.models import model_from_json, Sequential
@@ -235,7 +235,8 @@ model.add(Dense(1))
 adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 callbacks = [
-    EarlyStopping(monitor = 'val_loss', patience = PATIENCE)
+    # EarlyStopping(monitor = 'val_loss', patience = PATIENCE),
+    ModelCheckpoint('model.h5', save_best_only = True)
 ]
 start_time = time.time()
 history = model.fit_generator(
@@ -259,7 +260,7 @@ print('Training time:', training_time, 's')
 print('Samples per second:', samples_per_second)
 
 # Save model
-model.save('model.h5')
+# model.save('model.h5')
 
 # Save chart
 chart = pyplot.gcf()
