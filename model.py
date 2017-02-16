@@ -16,7 +16,7 @@ import scipy
 import time
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -29,9 +29,12 @@ IMAGE_DEPTH = 1
 ANGLE_MODIFIER = 0.2
 CROP_TOP = 64
 CROP_BOTTOM = 30
+CROP_LEFT = 0
+CROP_RIGHT = 0
 
 BATCH_SIZE = 32
 DROPOUT_PERCENTAGE = 0.0
+STRIDE_SIZE = 2
 LEARNING_RATE = 1e-8
 EPOCH = 32
 VERBOSITY = 2
@@ -39,9 +42,6 @@ MODEL_FILE = 'model.h5'
 
 # Get data
 samples = []
-# for path in ['2017-02-16-center-1']:
-# for path in ['2017-02-16-center-1', '2017-02-16-recovery-1']:
-# for path in ['2017-02-16-center-1', '2017-02-16-center-2', '2017-02-16-center-3']:
 for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
@@ -175,11 +175,10 @@ def transform_angle(steering_angle, modifier = 0.0):
 # Design model
 convolution_filter = 24
 kernel_size = 5
-stride_size = 2
 model = Sequential()
 model.add(
     Cropping2D(
-        cropping = ((CROP_TOP, CROP_BOTTOM), (0, 0)),
+        cropping = ((CROP_TOP, CROP_BOTTOM), (CROP_LEFT, CROP_RIGHT)),
         input_shape = (IMAGE_WIDTH, IMAGE_LENGTH, IMAGE_DEPTH)
     )
 )
@@ -189,7 +188,7 @@ model.add(Convolution2D(
     kernel_size,
     kernel_size,
     border_mode = 'valid',
-    subsample = (stride_size, stride_size)
+    subsample = (STRIDE_SIZE, STRIDE_SIZE)
 ))
 model.add(Dropout(DROPOUT_PERCENTAGE))
 convolution_filter = 36
@@ -198,7 +197,7 @@ model.add(Convolution2D(
     kernel_size,
     kernel_size,
     border_mode = 'valid',
-    subsample = (stride_size, stride_size)
+    subsample = (STRIDE_SIZE, STRIDE_SIZE)
 ))
 model.add(Dropout(DROPOUT_PERCENTAGE))
 convolution_filter = 48
@@ -207,7 +206,7 @@ model.add(Convolution2D(
     kernel_size,
     kernel_size,
     border_mode = 'valid',
-    subsample = (stride_size, stride_size)
+    subsample = (STRIDE_SIZE, STRIDE_SIZE)
 ))
 model.add(Dropout(DROPOUT_PERCENTAGE))
 convolution_filter = 64
