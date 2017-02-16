@@ -23,7 +23,7 @@ Collect data while driving clockwise and anti-clockwise to reduce turn bias. Col
 - Direction: Counter-clockwise
 - Laps: 2
 - Frames: 5648
-- Images = 5647 * 3 = 16941
+- Images = 16941
 
 2017-02-16-12-45
 - Track: 1
@@ -31,15 +31,15 @@ Collect data while driving clockwise and anti-clockwise to reduce turn bias. Col
 - Direction: Clockwise
 - Laps: 2
 - Frames: 7032
-- Images = 7032 * 3 = 21096
+- Images = 21096
 
-2017-02-16-13-
+2017-02-16-13-57
 - Track: 1
 - Type: Recovery
 - Direction: Counter-clockwise
 - Laps: 1
-- Frames: 
-- Images =  * 3 = 
+- Frames: 1080
+- Images = 3240
 
 # design-model
 Implement the NVIDIA model as the base architecture. Take in a (160, 320, 3) color image as input and output the steering angle as a float.
