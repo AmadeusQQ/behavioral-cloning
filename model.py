@@ -38,6 +38,9 @@ MODEL_FILE = 'model.h5'
 
 # Get data
 samples = []
+print(os.listdir(DATA_PATH))
+exit()
+
 with open(os.path.join(DATA_PATH, DRIVING_LOG_FILE), 'r') as file:
     reader = csv.reader(file)
     reader.__next__()
@@ -51,7 +54,7 @@ if DEBUG:
 
 train_set, validation_set = train_test_split(samples, test_size = 0.2)
 samples_per_epoch = len(train_set) / BATCH_SIZE
-validation_samples = len(validation_set) / BATCH_SIZE
+Evalidation_samples = len(validation_set) / BATCH_SIZE
 
 def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)

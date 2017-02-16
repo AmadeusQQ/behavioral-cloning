@@ -15,41 +15,10 @@ Hardware
 - Random access memory: 4 GB
 
 # get-data
-Use data provided by Udacity to minimize data collection time. Collect data while driving anti-clockwise around track 1 to mitigate right turn bias. Collect data while recovering from hitting a kerb.
-
-- 2016_12_01_13_30 to 2016_12_01_13_46
-    - Images: 8036 * 3 (center, left, right) = 24108
-    - Track 1, clockwise, center
-    - Source: Udacity
-    - Link: https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
-    - Size: 323 MB
-- 2017_02_12_17_51 to 2017_02_12_18_08
-    - Images: 1994 * 3 (center, left, right) = 5982
-    - Track 1, anti-clockwise, right side recovery
-- 2017_02_12_18_52 to 2017_02_12_18_55
-    - Images: 2068 * 3 (center, left, right) = 6204
-    - Track 1, anti-clockwise, center
-- 2017_02_12_21_30 to 2017_02_12_21_33
-    - Images: 2121 * 3 (center, left, right) = 6363
-    - Track 1, anti-clockwise, center
-- 2017_02_13_08_00 to 2017_02_13_08_04
-    - Images: 2024 * 3 (center, left, right) = 6072
-    - Track 1, anti-clockwise, center
-- 2017_02_13_19_07 to 2017_02_13_19_10
-    - Images: 2034 * 3 (center, left, right) = 6102
-    - Track 1, anti-clockwise, center
-- 2017_02_13_20_19 to 2017_02_13_20_42
-    - Images: 1622 * 3 (center, left, right) = 4866
-    - Track 1, anti-clockwise, right and left recovery
-- 2017_02_13_21_38 to 2017_02_13_21_41
-    - Images: 1908 * 3 (center, left, right) = 5724
-    - Track 1, anti-clockwise, center
-
-Total samples: 21807
-
-Total images: 65421
+Collect data while driving clockwise and anti-clockwise to reduce turn bias. Collect data while recovering from hitting a kerb and drifting to the side.
 
 2017-02-16-12-09
+- Track: 1
 - Type: Center
 - Direction: Counter-clockwise
 - Laps: 2
@@ -57,6 +26,7 @@ Total images: 65421
 - Images = 5647 * 3 = 16941
 
 2017-02-16-12-45
+- Track: 1
 - Type: Center
 - Direction: Clockwise
 - Laps: 2
