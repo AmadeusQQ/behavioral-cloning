@@ -40,8 +40,8 @@ MODEL_FILE = 'model.h5'
 # Get data
 samples = []
 # for path in ['2017-02-16-center-1']:
-for path in ['2017-02-16-center-1', '2017-02-16-recovery-1']:
-# for path in ['2017-02-16-center-1', '2017-02-16-recovery-1', '2017-02-16-center-2']:
+# for path in ['2017-02-16-center-1', '2017-02-16-recovery-1']:
+for path in ['2017-02-16-center-1', '2017-02-16-center-2', '2017-02-16-center-3']:
 # for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)

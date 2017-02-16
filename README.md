@@ -41,6 +41,14 @@ Collect data while driving clockwise and anti-clockwise to reduce turn bias. Col
 - Frames: 1081
 - Images = 3243
 
+2017-02-16-center-3
+- Track: 1
+- Type: Center
+- Direction: Counter-clockwise
+- Laps: 1
+- Frames: 4395
+- Images = 13185
+
 # design-model
 Implement the NVIDIA model as the base architecture. Take in a (160, 320, 3) color image as input and output the steering angle as a float.
 
@@ -587,6 +595,28 @@ Experiment 51
 - Training time: 173.37 s
 - Samples per second: 31.05
 - Track 1 performance: Go straight, drift right, drive on double yellow lines, hit kerb
+
+Experiment 52
+- Data: 2017-02-16-center-1, 2017-02-16-center-2
+- Image: Center, grayscale, vertical crop, normalized, centered
+- Train set size: 10144
+- Batch size: 32
+- Learning rate: 1e-8
+- Epoch: 32
+- Training time: 283.07 s
+- Samples per second: 35.84
+- Track 1 performance: Go straight, drift right, drive on double yellow lines, drive on red and white rumble strips, drift left after red and white rumble strips, hit kerb
+
+Experiment 53
+- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-center-3
+- Image: Center, grayscale, vertical crop, normalized, centered
+- Train set size: 13660
+- Batch size: 32
+- Learning rate: 1e-8
+- Epoch: 32
+- Training time: 394.93 s
+- Samples per second: 34.59
+- Track 1 performance: Weave left and right, drift right, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time
