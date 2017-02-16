@@ -657,6 +657,18 @@ Experiment 55
 - Samples per second: 32.86
 - Track 1 performance: Go straight, drift right after bridge, hit kerb
 
+Experiment 57
+- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
+- Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
+- Train set size: 14525 * 6 = 87150
+- Batch size: 32
+- Samples per epoch = Train set size / batch size
+- Learning rate: **1e-10**
+- Epoch: 32
+- Training time: 599 s
+- Samples per second: 24
+- Track 1 performance: Go straight, drift right at red and white rumble strips, hit kerb
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time
