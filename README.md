@@ -51,42 +51,44 @@ Collect data while driving clockwise and anti-clockwise to reduce turn bias. Col
 # design-model
 Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
 
-Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to prevent large values from skewing weights. Center data to aid distribution comparison. Dropout samples to reduce over fitting. Convolve image array to extract features. Flatten image to reduce dimensionality and create a vector. Fully connect each node with dense layers.
-
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
 
 Layers
-- Cropping2D: Crop 64 pixels from the top and 30 pixels from the bottom
-- Lambda: Divide by 255.0 and subtract 0.5
-- Convolution2D
+- Cropping2D: Crop sky and car
+- Lambda: Normalize and center data
+- Convolution2D: Extract features from image
     - Filter: 24
     - Kernel size: 5
     - Stride size: 2
-- Dropout: Exclude 0% of samples from next layer
-- Convolution2D
+- Dropout: Reduce over fitting
+- Convolution2D: Extract features from image
     - Filter: 36
     - Kernel size: 5
     - Stride size: 2
-- Dropout: Exclude 0% of samples from next layer
-- Convolution2D
+- Dropout: Reduce over fitting
+- Convolution2D: Extract features from image
     - Filter: 48
     - Kernel size: 5
     - Stride size: 2
-- Dropout: Exclude 0% of samples from next layer
-- Convolution2D
+- Dropout: Reduce over fitting
+- Convolution2D: Extract features from image
     - Filter: 64
     - Kernel size: 3
-- Dropout: Exclude 0% of samples from next layer
-- Convolution2D
+- Dropout: Reduce over fitting
+- Convolution2D: Extract features from image
     - Filter: 64
     - Kernel size: 3
-- Dropout: Exclude 0% of samples from next layer
-- Flatten
-- Dense: 100 connections
-- Dense: 50 connections
-- Dense: 10 connections
-- Dense: 1 connections
+- Dropout: Reduce over fitting
+- Flatten: Reduce dimensionality
+- Dense: Fully connect each node
+    - Connections: 100
+- Dense
+    - Connections: 50
+- Dense
+    - Connections: 10
+- Dense
+    - Connections: 1
 
 # train-model
 Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip left and right images to generate more samples and reduce left and right turn bias. Batch size of 32 is too large as images are unable to fit in memory. Use batch size of 16 based on hardware constraints.
@@ -571,14 +573,11 @@ Experiment 49
 - Samples per second: 31.4
 - Track 1 performance: Drift left, drive on double yellow lines, drive center in between red and white rumble strips, drift right after red and white rumble strips, hit kerb
 
-**Delete collected data.**
-
 Experiment 50
 - Data: **2017-02-16-center-1**
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **4518**
 - Batch size: **32**
-- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 149.84 s
@@ -590,7 +589,6 @@ Experiment 51
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **5383**
 - Batch size: 32
-- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 173.37 s
@@ -602,7 +600,6 @@ Experiment 52
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **10144**
 - Batch size: 32
-- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 283.07 s
@@ -614,7 +611,6 @@ Experiment 53
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **13660**
 - Batch size: 32
-- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 394.93 s
@@ -626,7 +622,6 @@ Experiment 54
 - Image: Center, grayscale, vertical crop, normalized, centered
 - Train set size: **14525**
 - Batch size: 32
-- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 418.55 s
@@ -638,36 +633,22 @@ Experiment 55
 - Image: Center, **left**, **right**, grayscale, vertical crop, normalized, centered
 - Train set size: 14525 * 3 = **43575**
 - Batch size: 32
-- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 384.26 s
 - Samples per second: 37.8
 - Track 1 performance: Go straight, drift right, almost hit right kerb after red and white rumble strips, turn sharp left, drift left on bridge, hit left wall at middle of bridge
 
-**Experiment 56**
+__Experiment 56__
 - Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
 - Image: Center, left, right, **flip**, grayscale, vertical crop, normalized, centered
 - Train set size: 14525 * 6 = **87150**
 - Batch size: 32
-- Samples per epoch = Train set size / batch size
 - Learning rate: 1e-8
 - Epoch: 32
 - Training time: 442 s
 - Samples per second: 32.86
 - Track 1 performance: Go straight, drift right after bridge, hit kerb
-
-Experiment 57
-- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
-- Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
-- Train set size: 14525 * 6 = 87150
-- Batch size: 32
-- Samples per epoch = Train set size / batch size
-- Learning rate: **1e-10**
-- Epoch: 32
-- Training time: 599 s
-- Samples per second: 24
-- Track 1 performance: Go straight, drift right at red and white rumble strips, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time
@@ -685,7 +666,3 @@ Inverse relationship between batch size and memory usage
 - Large batch size improves gradient estimation accuracy at the expense of memory usage
 - Small batch size reduces memory usage at the expense of gradient estimation accuracy
 - Source: http://stats.stackexchange.com/questions/153531/what-is-batch-size-in-neural-network
-
-Direct relationship between sample size and driving ability
-- Large sample size improves driving ability at the expense of training time
-- Small sample size improves training time at the expense of driving ability
