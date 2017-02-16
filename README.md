@@ -87,6 +87,10 @@ Layers
 Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip left and right images to generate more samples and reduce left and right turn bias. Batch size of 32 is too large as images are unable to fit in memory. Use batch size of 16 based on hardware constraints.
 
 # evaluate-model
+Pass criteria: Car drives 1 lap around track 1
+
+Fail criteria: Car hits kerb
+
 Rubric: https://review.udacity.com/#!/rubrics/432/view
 
 **Bold** values denote change from previous experiment.
@@ -572,6 +576,17 @@ Experiment 50
 - Training time: 149.84 s
 - Samples per second: 30.15
 - Track 1 performance: Go straight, drift left, drive on double yellow lines, turn right at red and white rumble strips, hit kerb
+
+Experiment 51
+- Data: 2017-02-16-center-1, 2017-02-16-recovery-1
+- Image: Center, grayscale, vertical crop, normalized, centered
+- Train set size: 5383
+- Batch size: 32
+- Learning rate: 1e-8
+- Epoch: 32
+- Training time: 173.37 s
+- Samples per second: 31.05
+- Track 1 performance: Go straight, drift right, drive on double yellow lines, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time
