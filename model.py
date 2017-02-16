@@ -39,9 +39,6 @@ MODEL_FILE = 'model.h5'
 
 # Get data
 samples = []
-# for path in ['2017-02-16-center-1']:
-# for path in ['2017-02-16-center-1', '2017-02-16-recovery-1']:
-# for path in ['2017-02-16-center-1', '2017-02-16-center-2', '2017-02-16-center-3']:
 for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
@@ -191,7 +188,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+# model.add(Dropout(DROPOUT_PERCENTAGE))
 convolution_filter = 36
 model.add(Convolution2D(
     convolution_filter,
@@ -200,7 +197,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+# model.add(Dropout(DROPOUT_PERCENTAGE))
 convolution_filter = 48
 model.add(Convolution2D(
     convolution_filter,
@@ -209,7 +206,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+# model.add(Dropout(DROPOUT_PERCENTAGE))
 convolution_filter = 64
 kernel_size = 3
 model.add(Convolution2D(
@@ -218,14 +215,14 @@ model.add(Convolution2D(
     kernel_size,
     border_mode = 'valid'
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+# model.add(Dropout(DROPOUT_PERCENTAGE))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
     border_mode = 'valid'
 ))
-model.add(Dropout(DROPOUT_PERCENTAGE))
+# model.add(Dropout(DROPOUT_PERCENTAGE))
 model.add(Flatten())
 model.add(Dense(100))
 model.add(Dense(50))

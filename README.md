@@ -639,7 +639,7 @@ Experiment 55
 - Samples per second: 37.8
 - Track 1 performance: Go straight, drift right, almost hit right kerb after red and white rumble strips, turn sharp left, drift left on bridge, hit left wall at middle of bridge
 
-__Experiment 56__
+**Experiment 56**
 - Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
 - Image: Center, left, right, **flip**, grayscale, vertical crop, normalized, centered
 - Train set size: 14525 * 6 = **87150**
