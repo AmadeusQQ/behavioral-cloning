@@ -38,14 +38,12 @@ MODEL_FILE = 'model.h5'
 
 # Get data
 samples = []
-print(os.listdir(DATA_PATH))
-exit()
-
-with open(os.path.join(DATA_PATH, DRIVING_LOG_FILE), 'r') as file:
-    reader = csv.reader(file)
-    reader.__next__()
-    for line in reader:
-        samples.append(line)
+for path in os.listdir(DATA_PATH):
+    with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
+        reader = csv.reader(file)
+        reader.__next__()
+        for line in reader:
+            samples.append(line)
 
 if DEBUG:
     shuffle(samples)
