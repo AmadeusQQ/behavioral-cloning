@@ -175,7 +175,7 @@ def transform_angle(steering_angle, modifier = 0.0):
 # Design model
 convolution_filter = 24
 kernel_size = 5
-stride_size = 2
+stride_size = 1
 model = Sequential()
 model.add(
     Cropping2D(
@@ -231,6 +231,8 @@ model.add(Dense(100))
 model.add(Dense(50))
 model.add(Dense(10))
 model.add(Dense(1))
+# model.summary()
+# exit()
 
 # Train model
 adam = Adam(lr = LEARNING_RATE)
