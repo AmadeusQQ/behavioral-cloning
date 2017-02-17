@@ -16,24 +16,24 @@ import scipy
 import time
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 VALIDATION_SET_SIZE = 0.2
 
-IMAGE_WIDTH = 160
-IMAGE_LENGTH = 320
+IMAGE_WIDTH = 80#160
+IMAGE_LENGTH = 160#320
 IMAGE_DEPTH = 1
 
 ANGLE_MODIFIER = 0.2
-CROP_TOP = 64
-CROP_BOTTOM = 30
+CROP_TOP = 32#64
+CROP_BOTTOM = 15#30
 
 BATCH_SIZE = 32
 # DROPOUT = 0.0
 LEARNING_RATE = 1e-8
-EPOCH = 32
+EPOCH = 4
 VERBOSITY = 2
 MODEL_FILE = 'model.h5'
 
@@ -54,8 +54,8 @@ train_set, validation_set = train_test_split(
     samples,
     test_size = VALIDATION_SET_SIZE
 )
-samples_per_epoch = len(train_set) / BATCH_SIZE
-validation_samples = len(validation_set) / BATCH_SIZE
+samples_per_epoch = len(train_set)
+validation_samples = len(validation_set)
 
 def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
@@ -117,6 +117,8 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
 
             images = np.array(images, dtype = 'float32')
             angles = np.array(angles, dtype = 'float32')
+            print(images.shape)
+            exit()
 
             yield shuffle(images, angles)
 
@@ -155,6 +157,7 @@ validation_generator = generate_validation_sample(validation_set)
 # Transform data
 def transform_image(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = cv2.resize(image, (0, 0), fx = 0.5, fy = 0.5)
     image = np.array(image, dtype = 'float32')
 
     return image.reshape(

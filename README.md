@@ -633,6 +633,8 @@ Experiment 55
 **Experiment 56**
 - Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
 - Image: Center, left, right, **flip**, grayscale, vertical crop, normalized, centered
+- Samples per epoch = Train set size / batch size
+- Validation samples = Validation set size / batch size
 - Train set size: 14525 * 6 = **87150**
 - Batch size: 32
 - Learning rate: 1e-8
@@ -640,6 +642,19 @@ Experiment 55
 - Training time: 442 s
 - Samples per second: 32.86
 - Track 1 performance: Go straight, drift right after bridge, hit kerb
+
+Experiment 57
+- Data: 2017-02-16-center-1, 2017-02-16-center-2, 2017-02-16-recovery-1, 2017-02-16-center-3
+- Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
+- Samples per epoch = Train set size
+- Validation samples = Validation set size
+- Train set size: 14525 * 6 = 87150
+- Batch size: 32
+- Learning rate: 1e-8
+- Epoch: 4
+- Training time: 1429 s
+- Samples per second: 40
+- Track 1 performance: Center, drift left, center at red and white rumble strips, center at start of bridge, hit right wall at middle of bridge
 
 # reflect
 Inverse relationship between learning rate and training time
