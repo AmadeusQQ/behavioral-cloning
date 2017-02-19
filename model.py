@@ -1,18 +1,15 @@
 # Import libraries
 from keras.layers.convolutional import Convolution2D, Cropping2D
 from keras.layers.core import Activation, Dense, Dropout, Flatten, Lambda
-from keras.models import model_from_json, Sequential
+from keras.models import Sequential
 from keras.optimizers import Adam
 from matplotlib import pyplot
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 import csv
 import cv2
-import fnmatch
-import math
 import numpy as np
 import os
-import scipy
 import time
 
 # Set parameters
