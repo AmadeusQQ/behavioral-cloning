@@ -12,39 +12,25 @@ Hardware
 - Random access memory: 4 GB
 
 # get-data
-Collect data while driving clockwise and anti-clockwise to reduce turn bias. Collect data while recovering from hitting a kerb and drifting to the side.
+Record data that results in a uniform distribution of angles. Drive clockwise and anti-clockwise to reduce turn bias. Record data when about to hit a kerb, so that the car can recover when it drifts from the center.
 
-2017-02-16-center-1
+Simulator
+- Frames per second: 10
+- Input: Mouse
+
+Method
+- Drive at 5 miles per hour
+- Record for 10 seconds
+- Plot angle chart
+
+Data 1
 - Track: 1
 - Type: Center
+- Angle in degrees: -1 to 1
 - Direction: Counter-clockwise
-- Laps: 2
-- Frames: 5648
-- Images = 16944
-
-2017-02-16-center-2
-- Track: 1
-- Type: Center
-- Direction: Clockwise
-- Laps: 2
-- Frames: 7033
-- Images = 21096
-
-2017-02-16-recovery-1
-- Track: 1
-- Type: Recovery
-- Direction: Counter-clockwise
-- Laps: 1
-- Frames: 1081
-- Images = 3243
-
-2017-02-16-center-3
-- Track: 1
-- Type: Center
-- Direction: Counter-clockwise
-- Laps: 1
-- Frames: 4395
-- Images = 13185
+- Laps: 5
+- Frames: 4751
+- Images: 14254
 
 # design-model
 Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
@@ -564,7 +550,7 @@ Experiment 49
 - Samples per second: 31.4
 - Track 1 performance: Drift left, drive on double yellow lines, drive center in between red and white rumble strips, drift right after red and white rumble strips, hit kerb
 
-**Delete data. Capture fresh data.**
+**Delete data. Record fresh data.**
 
 Experiment 50
 - Data: **2017-02-16-center-1**

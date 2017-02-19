@@ -43,25 +43,29 @@ MODEL_FILE = 'model.h5'
 samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
-for path in os.listdir(DATA_PATH):
-    with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
-        reader = csv.reader(file)
-        for line in reader:
-            samples.append(line)
-shuffle(samples)
+# for path in os.listdir(DATA_PATH):
+#     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
+#         reader = csv.reader(file)
+#         for line in reader:
+#             samples.append(line)
+# shuffle(samples)
 
 if DEBUG:
     # Plot angles
     angles = []
-    for sample in samples:
-        angle = float(sample[3])
-        angles.append(angle)
+    for path in os.listdir(DATA_PATH):
+        with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
+            reader = csv.reader(file)
+            for line in reader:
+                angle = float(line[3])
+                angles.append(angle)
 
     angle_chart = pyplot.figure()
     pyplot.hist(angles)
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
+    exit()
 
     samples = samples[:320]
 
