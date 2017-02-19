@@ -19,13 +19,18 @@ DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
 VALIDATION_SET_SIZE = 0.2
 
-IMAGE_WIDTH = 80#160
-IMAGE_LENGTH = 160#320
+IMAGE_WIDTH = 160
+IMAGE_LENGTH = 320
 IMAGE_DEPTH = 1
+# IMAGE_WIDTH = 80
+# IMAGE_LENGTH = 160
+# IMAGE_DEPTH = 3
 
 ANGLE_MODIFIER = 0.2
-CROP_TOP = 32#64
-CROP_BOTTOM = 15#30
+CROP_TOP = 64
+CROP_BOTTOM = 30
+# CROP_TOP = 32
+# CROP_BOTTOM = 15
 
 BATCH_SIZE = 32
 # DROPOUT = 0.0
@@ -36,14 +41,16 @@ MODEL_FILE = 'model.h5'
 
 # Get data
 samples = []
+# print(os.listdir(DATA_PATH))
+# exit()
 for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
         for line in reader:
             samples.append(line)
+shuffle(samples)
 
 if DEBUG:
-    shuffle(samples)
     samples = samples[:320]
     EPOCH = 2
 
@@ -114,8 +121,8 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
 
             images = np.array(images, dtype = 'float32')
             angles = np.array(angles, dtype = 'float32')
-            print(images.shape)
-            exit()
+            # print(images.shape, angles.shape)
+            # exit()
 
             yield shuffle(images, angles)
 
@@ -258,10 +265,10 @@ print('Samples per second: %i' % samples_per_second)
 model.save(MODEL_FILE)
 
 # Save chart
-chart = pyplot.gcf()
+loss_chart = pyplot.figure()
 pyplot.plot(history.history['loss'])
 pyplot.plot(history.history['val_loss'])
 pyplot.legend(['Training', 'Validation'])
 pyplot.ylabel('Loss')
 pyplot.xlabel('Epoch')
-chart.savefig('loss.png')
+loss_chart.savefig('loss.png')
