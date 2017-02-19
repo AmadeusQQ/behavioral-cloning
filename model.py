@@ -13,7 +13,7 @@ import os
 import time
 
 # Set parameters
-DEBUG = True
+DEBUG = False
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -34,7 +34,7 @@ CROP_BOTTOM = 30
 
 BATCH_SIZE = 32
 # DROPOUT = 0.0
-LEARNING_RATE = 1e-8
+LEARNING_RATE = 1e-6
 EPOCH = 4
 VERBOSITY = 2
 MODEL_FILE = 'model.h5'
@@ -43,12 +43,15 @@ MODEL_FILE = 'model.h5'
 samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
-# for path in os.listdir(DATA_PATH):
-#     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
-#         reader = csv.reader(file)
-#         for line in reader:
-#             samples.append(line)
-# shuffle(samples)
+for path in os.listdir(DATA_PATH):
+    with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
+        reader = csv.reader(file)
+        for line in reader:
+            samples.append(line)
+
+shuffle(samples)
+# print(len(samples))
+# exit()
 
 if DEBUG:
     # Plot angles
@@ -65,18 +68,18 @@ if DEBUG:
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
-    exit()
+    # exit()
 
     samples = samples[:320]
 
-    EPOCH = 2
+    EPOCH = 1
 
 train_set, validation_set = train_test_split(
     samples,
     test_size = VALIDATION_SET_SIZE
 )
-samples_per_epoch = len(train_set)
-validation_samples = len(validation_set)
+samples_per_epoch = len(train_set) / BATCH_SIZE
+validation_samples = len(validation_set) / BATCH_SIZE
 
 def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
@@ -85,55 +88,55 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
         shuffle(samples)
 
         for offset in range(0, sample_count, batch_size):
-            batch_samples = samples[offset : offset + batch_size]
-
             images = []
             angles = []
 
+            batch_samples = samples[offset : offset + batch_size]
+
             for batch_sample in batch_samples:
                 center_image = cv2.imread(batch_sample[0].strip())
-                flip_center_image = cv2.flip(center_image, 1)
+                # flip_center_image = cv2.flip(center_image, 1)
                 center_image = transform_image(center_image)
-                flip_center_image = transform_image(flip_center_image)
+                # flip_center_image = transform_image(flip_center_image)
                 path = os.path.join(batch_sample[1].strip())
                 left_image = cv2.imread(path)
-                flip_left_image = cv2.flip(left_image, 1)
+                # flip_left_image = cv2.flip(left_image, 1)
                 left_image = transform_image(left_image)
-                flip_left_image = transform_image(flip_left_image)
+                # flip_left_image = transform_image(flip_left_image)
                 path = os.path.join(batch_sample[2].strip())
                 right_image = cv2.imread(path)
-                flip_right_image = cv2.flip(right_image, 1)
+                # flip_right_image = cv2.flip(right_image, 1)
                 right_image = transform_image(right_image)
-                flip_right_image = transform_image(flip_right_image)
+                # flip_right_image = transform_image(flip_right_image)
                 images.extend([
                     center_image,
-                    flip_center_image,
+                    # flip_center_image,
                     left_image,
-                    flip_left_image,
-                    right_image,
-                    flip_right_image
+                    # flip_left_image,
+                    right_image
+                    # flip_right_image
                 ])
 
                 center_angle = np.array(batch_sample[3], dtype = 'float32')
                 center_angle = transform_angle(center_angle)
-                flip_center_angle = transform_angle(center_angle * -1.0)
+                # flip_center_angle = transform_angle(center_angle * -1.0)
                 left_angle = transform_angle(
                     center_angle,
                     ANGLE_MODIFIER
                 )
-                flip_left_angle = transform_angle(left_angle * -1.0)
+                # flip_left_angle = transform_angle(left_angle * -1.0)
                 right_angle = transform_angle(
                     center_angle,
                     -ANGLE_MODIFIER
                 )
-                flip_right_angle = transform_angle(right_angle * -1.0)
+                # flip_right_angle = transform_angle(right_angle * -1.0)
                 angles.extend([
                     center_angle,
-                    flip_center_angle,
+                    # flip_center_angle,
                     left_angle,
-                    flip_left_angle,
-                    right_angle,
-                    flip_right_angle
+                    # flip_left_angle,
+                    right_angle
+                    # flip_right_angle
                 ])
 
             images = np.array(images, dtype = 'float32')
@@ -178,7 +181,7 @@ validation_generator = generate_validation_sample(validation_set)
 # Transform data
 def transform_image(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = cv2.resize(image, (0, 0), fx = 0.5, fy = 0.5)
+    # image = cv2.resize(image, (0, 0), fx = 0.5, fy = 0.5)
     image = np.array(image, dtype = 'float32')
 
     return image.reshape(
@@ -196,7 +199,8 @@ def transform_angle(steering_angle, modifier = 0.0):
 # Design model
 convolution_filter = 24
 kernel_size = 5
-stride_size = 1
+stride_size = 2
+# stride_size = 1
 model = Sequential()
 model.add(
     Cropping2D(
@@ -271,6 +275,7 @@ training_time = time.time() - start_time
 samples_per_second = samples_per_epoch * EPOCH / training_time
 
 # Show metric
+model.summary()
 print('Train set size:', len(train_set))
 print('Batch size:', BATCH_SIZE)
 print('Learning rate:', LEARNING_RATE)

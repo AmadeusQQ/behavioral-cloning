@@ -23,6 +23,9 @@ MAX_SPEED = 10
 IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320
 IMAGE_DEPTH = 1
+# IMAGE_WIDTH = 80
+# IMAGE_LENGTH = 160
+# IMAGE_DEPTH = 3
 
 model = None
 
@@ -31,6 +34,7 @@ app = Flask(__name__)
 
 def transform_image(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # image = cv2.resize(image, (0, 0), fx = 0.5, fy = 0.5)
     image = np.array(image, dtype = 'float32')
 
     return image.reshape(
