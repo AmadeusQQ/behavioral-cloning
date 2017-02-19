@@ -546,7 +546,7 @@ Experiment 47
 - Samples per second: 25.5
 - Track 1 performance: Go straight, turn left after red and white rumble strips, drift left, hit kerb
 
-__Experiment 48__
+**Experiment 48**
 - Image: Center, left, right, flip left, flip right, color, vertical crop, normalized, centered
 - Train set size: 17445 * 5 = 87225
 - Learning rate: **1e-8**
@@ -563,6 +563,8 @@ Experiment 49
 - Training time: 1111 s
 - Samples per second: 31.4
 - Track 1 performance: Drift left, drive on double yellow lines, drive center in between red and white rumble strips, drift right after red and white rumble strips, hit kerb
+
+**Delete data. Capture fresh data.**
 
 Experiment 50
 - Data: **2017-02-16-center-1**
@@ -671,4 +673,3 @@ Normal data distribution
 Inverse relationship between batch size and memory usage
 - Large batch size improves gradient estimation accuracy at the expense of memory usage
 - Small batch size reduces memory usage at the expense of gradient estimation accuracy
-- Source: http://stats.stackexchange.com/questions/153531/what-is-batch-size-in-neural-network

@@ -51,7 +51,20 @@ for path in os.listdir(DATA_PATH):
 shuffle(samples)
 
 if DEBUG:
+    # Plot angles
+    angles = []
+    for sample in samples:
+        angle = float(sample[3])
+        angles.append(angle)
+
+    angle_chart = pyplot.figure()
+    pyplot.hist(angles)
+    pyplot.ylabel('Frequency')
+    pyplot.xlabel('Angle')
+    angle_chart.savefig('angle.png')
+
     samples = samples[:320]
+
     EPOCH = 2
 
 train_set, validation_set = train_test_split(
@@ -264,7 +277,7 @@ print('Samples per second: %i' % samples_per_second)
 # Save model
 model.save(MODEL_FILE)
 
-# Save chart
+# Plot loss
 loss_chart = pyplot.figure()
 pyplot.plot(history.history['loss'])
 pyplot.plot(history.history['val_loss'])
