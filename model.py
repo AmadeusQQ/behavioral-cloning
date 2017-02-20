@@ -13,7 +13,7 @@ import os
 import time
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -68,7 +68,7 @@ if DEBUG:
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
-    # exit()
+    exit()
 
     samples = samples[:320]
 

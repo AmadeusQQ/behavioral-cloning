@@ -41,6 +41,15 @@ Data 2
 - Frames: 10798
 - Images: 32394
 
+Data 3
+- Track: 1
+- Type: Center
+- Angle in degrees: Less than -1, more than 1
+- Direction: Clockwise
+- Laps: 5
+- Frames: 
+- Images: 
+
 # design-model
 Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
 
