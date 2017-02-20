@@ -55,9 +55,18 @@ Data-4
 - Type: Recovery
 - Angle in degrees: -25, 25
 - Direction: Counter-clockwise
-- Laps: 
+- Laps: 1
 - Frames: 1079
 - Images: 3237
+
+Data-5
+- Track: 1
+- Type: Sharp turn
+- Angle in degrees: Less than -3, more than 3
+- Direction: Counter-clockwise
+- Laps: 3
+- Frames: 3882
+- Images: 11646
 
 # design-model
 Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
