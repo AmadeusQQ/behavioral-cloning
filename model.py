@@ -13,7 +13,7 @@ import os
 import time
 
 # Set parameters
-DEBUG = True
+DEBUG = False
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -44,8 +44,10 @@ MODEL_FILE = 'model.h5'
 samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
-# for path in ['data-1', 'data-2', 'data-3', 'data-4']:
-for path in os.listdir(DATA_PATH):
+# for path in ['data-1', 'data-2', 'data-3', 'data-4', 'data-5']:
+# for path in ['data-1', 'data-2', 'data-3', 'data-5']:
+for path in ['data-1', 'data-2', 'data-3']:
+# for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
         for line in reader:
@@ -100,9 +102,9 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
 
             for batch_sample in batch_samples:
                 center_image = cv2.imread(batch_sample[0].strip())
-                # flip_center_image = cv2.flip(center_image, 1)
+                flip_center_image = cv2.flip(center_image, 1)
                 center_image = transform_image(center_image)
-                # flip_center_image = transform_image(flip_center_image)
+                flip_center_image = transform_image(flip_center_image)
                 path = os.path.join(batch_sample[1].strip())
                 left_image = cv2.imread(path)
                 flip_left_image = cv2.flip(left_image, 1)
@@ -115,7 +117,7 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 flip_right_image = transform_image(flip_right_image)
                 images.extend([
                     center_image,
-                    # flip_center_image,
+                    flip_center_image,
                     left_image,
                     flip_left_image,
                     right_image,
@@ -124,7 +126,7 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
 
                 center_angle = np.array(batch_sample[3], dtype = 'float32')
                 center_angle = transform_angle(center_angle)
-                # flip_center_angle = transform_angle(center_angle * -1.0)
+                flip_center_angle = transform_angle(center_angle * -1.0)
                 left_angle = transform_angle(
                     center_angle,
                     ANGLE_MODIFIER
@@ -137,7 +139,7 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 flip_right_angle = transform_angle(right_angle * -1.0)
                 angles.extend([
                     center_angle,
-                    # flip_center_angle,
+                    flip_center_angle,
                     left_angle,
                     flip_left_angle,
                     right_angle,
