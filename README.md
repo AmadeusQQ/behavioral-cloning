@@ -743,7 +743,7 @@ Experiment 60
 - Samples per second: 38
 - Track 1 performance: Center, weave left and right, turn right at start of bridge, hit wall
 
-Experiment 63
+**Experiment 63**
 - Data: **Data-1**, Data-2, Data-3
 - Image: Center, left, right, flip left flip right, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
@@ -755,7 +755,7 @@ Experiment 63
 - Epoch: 4
 - Training time: 2142 s
 - Samples per second: 39
-- Track 1 performance: Center, weave left and right, turn left at middle of bridge, hit wall
+- Track 1 performance: Center, weave left and right, turn left at middle of bridge, hit wall, drive to end of bridge manually, go straight into dirt path, hit tires, drive past dirt parth manually, drives autonomously until bridge, turn left at middle of bridge, hit wall
 
 # reflect
 Inverse relationship between learning rate and training time
