@@ -64,9 +64,9 @@ Data-5
 - Type: Sharp turn
 - Angle in degrees: Less than -3, more than 3
 - Direction: Counter-clockwise
-- Laps: 3
-- Frames: 3882
-- Images: 11646
+- Laps: 5
+- Frames: 6685
+- Images: 20055
 
 # design-model
 Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
