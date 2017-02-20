@@ -743,6 +743,20 @@ Experiment 60
 - Samples per second: 38
 - Track 1 performance: Center, weave left and right, turn right at start of bridge, hit wall
 
+Experiment 63
+- Data: **Data-1**, Data-2, Data-3
+- Image: Center, left, right, flip left flip right, grayscale, vertical crop, normalized, centered
+- Samples per epoch = Train set size / batch size
+- Validation samples = Train set size / batch size
+- Trainable parameters: 347019
+- Train set size: 20952 * 5 = **104760**
+- Batch size: 1
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 2142 s
+- Samples per second: 39
+- Track 1 performance: Center, weave left and right, turn left at middle of bridge, hit wall
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time
@@ -752,9 +766,13 @@ Direct relationship between signal and noise
 - Grayscale images reduce noise in color images at the expense of color signals
 - Cropped images reduce noise above the horizon at the expense of signals for when going up or down slope
 
-Normal data distribution
-- Left and right images reduce driving straight bias
+Normal distribution of angles
+- Images with angles smaller than -1 or greater than 1 help reduce driving straight bias
 
 Inverse relationship between batch size and memory usage
 - Large batch size improves gradient estimation accuracy at the expense of memory usage
 - Small batch size reduces memory usage at the expense of gradient estimation accuracy
+
+Inverse relationship between samples per epoch and loss fluctuation
+- Small samples per epoch increases loss fluctuation for each epoch
+- Large samples per epoch decreases loss fluctuation for each epoch

@@ -45,8 +45,8 @@ samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
 # for path in ['data-1', 'data-2', 'data-3']:
-for path in ['data-2', 'data-3']:
-# for path in os.listdir(DATA_PATH):
+# for path in ['data-2', 'data-3']:
+for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
         for line in reader:
@@ -83,6 +83,8 @@ train_set, validation_set = train_test_split(
 )
 samples_per_epoch = len(train_set) / BATCH_SIZE
 validation_samples = len(validation_set) / BATCH_SIZE
+# samples_per_epoch = len(train_set)
+# validation_samples = len(validation_set)
 
 def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
