@@ -717,7 +717,7 @@ Experiment 60
 
 **Experiment 61**
 - Data: Data-2, Data-3
-- Image: Center, left, right, flip left flip right, grayscale, vertical crop, normalized, centered
+- Image: Center, left, right, flip left, flip right, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
 - Validation samples = Validation set size / batch size
 - Trainable parameters: 347019
@@ -731,7 +731,7 @@ Experiment 60
 
 **Experiment 62**
 - Data: Data-2, Data-3
-- Image: Center, left, right, flip left flip right, grayscale, vertical crop, normalized, centered
+- Image: Center, left, right, flip left, flip right, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
 - Validation samples = Train set size / batch size
 - Trainable parameters: 347019
@@ -745,7 +745,7 @@ Experiment 60
 
 **Experiment 63**
 - Data: **Data-1**, Data-2, Data-3
-- Image: Center, left, right, flip left flip right, grayscale, vertical crop, normalized, centered
+- Image: Center, left, right, flip left, flip right, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
 - Validation samples = Train set size / batch size
 - Trainable parameters: 347019
@@ -768,6 +768,7 @@ Direct relationship between signal and noise
 
 Normal distribution of angles
 - Images with angles smaller than -1 or greater than 1 help reduce driving straight bias
+- Images with angles -25 and 25 help the car recover when about to hit a kerb or go off the road
 
 Inverse relationship between batch size and memory usage
 - Large batch size improves gradient estimation accuracy at the expense of memory usage
