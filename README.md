@@ -47,6 +47,15 @@ Data 3
 - Angle in degrees: Less than -1, more than 1
 - Direction: Clockwise
 - Laps: 5
+- Frames: 10642
+- Images: 31926
+
+Data 4
+- Track: 1
+- Type: Recovery
+- Angle in degrees: -25, 25
+- Direction: Counter-clockwise
+- Laps: 
 - Frames: 
 - Images: 
 

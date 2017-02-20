@@ -68,7 +68,7 @@ if DEBUG:
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
-    exit()
+    # exit()
 
     samples = samples[:320]
 
