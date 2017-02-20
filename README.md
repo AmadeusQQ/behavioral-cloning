@@ -23,7 +23,7 @@ Method
 - Record for 10 seconds
 - Plot angle chart
 
-Data 1
+Data-1
 - Track: 1
 - Type: Center
 - Angle in degrees: -1 to 1
@@ -32,7 +32,7 @@ Data 1
 - Frames: 4751
 - Images: 14254
 
-Data 2
+Data-2
 - Track: 1
 - Type: Center
 - Angle in degrees: Less than -1, more than 1
@@ -41,7 +41,7 @@ Data 2
 - Frames: 10798
 - Images: 32394
 
-Data 3
+Data-3
 - Track: 1
 - Type: Center
 - Angle in degrees: Less than -1, more than 1
@@ -50,7 +50,7 @@ Data 3
 - Frames: 10642
 - Images: 31926
 
-Data 4
+Data-4
 - Track: 1
 - Type: Recovery
 - Angle in degrees: -25, 25
@@ -674,17 +674,32 @@ Experiment 57
 **Delete data. Record fresh data.**
 
 Experiment 58
-- Data: Data-1, Data-2
-- Image: Center, left, right, vertical crop, normalized, centered
+- Data: **Data-1**, **Data-2**
+- Image: Center, left, right, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / **batch size**
 - Validation samples = Validation set size / **batch size**
-- Train set size: 12439 * 3 = 37317
+- Trainable parameters: **347019**
+- Train set size: 12439 * 3 = **37317**
 - Batch size: 32
 - Learning rate: **1e-6**
 - Epoch: 4
 - Training time: 50 s
 - Samples per second: 31
 - Track 1 performance: Center, drift right, go straight after red and white rumble strips, hit kerb
+
+Experiment 59
+- Data: Data-1, Data-2, **Data-3**
+- Image: Center, left, right, grayscale, vertical crop, normalized, centered
+- Samples per epoch = Train set size / batch size
+- Validation samples = Validation set size / batch size
+- Trainable parameters: 347019
+- Train set size: 20952 * 3 = **62856**
+- Batch size: 32
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 69 s
+- Samples per second: 37
+- Track 1 performance: Center, weave left and right, drift right after red and white rumble strips, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time
