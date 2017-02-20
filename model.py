@@ -100,21 +100,21 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                 # flip_center_image = transform_image(flip_center_image)
                 path = os.path.join(batch_sample[1].strip())
                 left_image = cv2.imread(path)
-                # flip_left_image = cv2.flip(left_image, 1)
+                flip_left_image = cv2.flip(left_image, 1)
                 left_image = transform_image(left_image)
-                # flip_left_image = transform_image(flip_left_image)
+                flip_left_image = transform_image(flip_left_image)
                 path = os.path.join(batch_sample[2].strip())
                 right_image = cv2.imread(path)
-                # flip_right_image = cv2.flip(right_image, 1)
+                flip_right_image = cv2.flip(right_image, 1)
                 right_image = transform_image(right_image)
-                # flip_right_image = transform_image(flip_right_image)
+                flip_right_image = transform_image(flip_right_image)
                 images.extend([
                     center_image,
                     # flip_center_image,
                     left_image,
-                    # flip_left_image,
-                    right_image
-                    # flip_right_image
+                    flip_left_image,
+                    right_image,
+                    flip_right_image
                 ])
 
                 center_angle = np.array(batch_sample[3], dtype = 'float32')
@@ -124,19 +124,19 @@ def generate_train_sample(samples, batch_size = BATCH_SIZE):
                     center_angle,
                     ANGLE_MODIFIER
                 )
-                # flip_left_angle = transform_angle(left_angle * -1.0)
+                flip_left_angle = transform_angle(left_angle * -1.0)
                 right_angle = transform_angle(
                     center_angle,
                     -ANGLE_MODIFIER
                 )
-                # flip_right_angle = transform_angle(right_angle * -1.0)
+                flip_right_angle = transform_angle(right_angle * -1.0)
                 angles.extend([
                     center_angle,
                     # flip_center_angle,
                     left_angle,
-                    # flip_left_angle,
-                    right_angle
-                    # flip_right_angle
+                    flip_left_angle,
+                    right_angle,
+                    flip_right_angle
                 ])
 
             images = np.array(images, dtype = 'float32')
