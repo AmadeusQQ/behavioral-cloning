@@ -2,19 +2,22 @@
 Drive a car using deep learning
 
 # design-solution
-Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments and test whether the result confirms or rejects the hypothesis. Take into account hardware constraints.
+Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments. Confirm or reject hypotheses based on measured results. Take into account hardware constraints.
 
 Software
 - Operating system: Ubuntu 16.04
 
 Hardware
+- Laptop purchase year: 2010
 - Central processing unit: Intel Core 2 Duo 2.66 GHz
 - Random access memory: 4 GB
 
 # get-data
-Record data that results in a uniform distribution of angles. Drive clockwise and anti-clockwise to reduce turn bias. Record data when about to hit a kerb, so that the car can recover when it drifts from the center.
+Record data to get a uniform distribution of angles. Drive clockwise and anti-clockwise to reduce turn bias. Record data when about to go off road, so that the car knows how to drive back to the center.
 
 Simulator
+- Screen resolution: 640 x 480
+- Graphics quality: Fastest
 - Frames per second: 10
 - Input: Mouse
 
@@ -69,9 +72,7 @@ Data-5
 - Images: 20055
 
 # design-model
-Implement the NVIDIA model as the base architecture. Input an image array of 0 to 255 as integers and output the steering angle as a float.
-
-Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to prevent large values from skewing weights. Center data to aid distribution comparison. Dropout samples to reduce over fitting. Convolve image array to extract features. Flatten image array to reduce dimensionality and create a vector. Fully connect each node with dense layers.
+Implement the NVIDIA model as the base architecture. Input a 3 dimensional image array containing integers that range from 0 to 255. Convert image to grayscale. Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to unit length, so as to prevent large values from skewing weights. Center data to aid comparison. Convolve image array to extract features. Flatten image array to reduce dimensionality. Fully connect each node with dense layers. Output the steering angle as a float.
 
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
@@ -104,18 +105,16 @@ Layers
 - Dense: 1 connections
 
 # train-model
-Get all samples from the driving log. Split samples 80% / 20% into train and validation set to test if model is over fitting. Shuffle samples to reduce order bias. Flip left and right images to generate more samples and reduce left and right turn bias. Batch size of 32 is too large as images are unable to fit in memory. Use batch size of 16 based on hardware constraints.
+Get samples from driving logs. Shuffle samples to reduce order bias. Split samples 80% / 20% into train and validation set. Use Adaptive Moment Estimation (Adam) optimizer to minimize mean squared error. Use a generator to get center, left, and right images. Flip images to generate more samples and reduce direction bias. Modify angles for left and right images. Fit images to angles.
 
 # evaluate-model
-Pass criteria: Car drives 1 lap around track 1
-
-Fail criteria: Car hits kerb
+Criteria
+- Pass: Car drives 1 lap around track 1
+- Fail: Car hits kerb
 
 Rubric: https://review.udacity.com/#!/rubrics/432/view
 
-**Bold** values denote change from previous experiment.
-
-**Bold** experiments denote key discoveries.
+Modified parameters and key experiments are in **bold**.
 
 Experiment 1
 - Image: Center, normalized
@@ -794,6 +793,21 @@ Experiment 65
 - Samples per second: 39
 - Track 1 performance: Center, turn right at start of bridge, hit wall, drive manually to middle of bridge, go straight into dirt path, drive past dirt path manually, drive autonomously until bridge, turn left at middle of bridge, hit wall
 
+Experiment 66
+- Data: Data-1, Data-2, Data-3, Data-5
+- Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
+- Samples per epoch = Train set size / batch size
+- Validation samples = Train set size / batch size
+- Dropout: **0.2**
+- Trainable parameters: 347019
+- Train set size: 26300 * 6 = **157800**
+- Batch size: 1
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 3709 s
+- Samples per second: 28
+- Track 1 performance: Center, turn right at start of bridge, hit wall, drive manually to middle of bridge, go straight into dirt path, drive past dirt path manually, hit kerb at sharp right turn
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time
@@ -804,8 +818,9 @@ Direct relationship between signal and noise
 - Cropped images reduce noise above the horizon at the expense of signals for when going up or down slope
 
 Normal distribution of angles
-- Images with angles smaller than -1 or greater than 1 help reduce driving straight bias
-- Images with angles -25 and 25 help the car recover when about to hit a kerb or go off the road
+- Angles between -1 and 1 reduce turn bias
+- Angles smaller than -1 or greater than 1 reduce driving straight bias
+- Angles -25 and 25 help the car recover to center if it veers off
 
 Inverse relationship between batch size and memory usage
 - Large batch size improves gradient estimation accuracy at the expense of memory usage
