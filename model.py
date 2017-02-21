@@ -75,7 +75,7 @@ if DEBUG:
 
     samples = samples[:320]
 
-    EPOCH = 4
+    EPOCH = 8
 
 train_set, validation_set = train_test_split(
     samples,
