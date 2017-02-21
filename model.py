@@ -14,7 +14,7 @@ import os
 import time
 
 # Set parameters
-DEBUG = True
+DEBUG = False
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -33,10 +33,11 @@ CROP_BOTTOM = 30
 # CROP_TOP = 32
 # CROP_BOTTOM = 15
 
-# BATCH_SIZE = 32
-BATCH_SIZE = 1
+BATCH_SIZE = 32
+# BATCH_SIZE = 1
 LEARNING_RATE = 1e-6
-EPOCH = 4
+EPOCH = 8
+# EPOCH = 4
 VERBOSITY = 2
 MODEL_FILE = 'model.h5'
 
@@ -71,7 +72,7 @@ if DEBUG:
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
-    exit()
+    # exit()
 
     samples = samples[:160]
 
@@ -81,10 +82,10 @@ train_set, validation_set = train_test_split(
     samples,
     test_size = VALIDATION_SET_SIZE
 )
-samples_per_epoch = len(train_set) / BATCH_SIZE
-validation_samples = len(validation_set) / BATCH_SIZE
-# samples_per_epoch = len(train_set)
-# validation_samples = len(validation_set)
+# samples_per_epoch = len(train_set) / BATCH_SIZE
+# validation_samples = len(validation_set) / BATCH_SIZE
+samples_per_epoch = len(train_set)
+validation_samples = len(validation_set)
 
 def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)

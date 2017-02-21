@@ -759,7 +759,7 @@ Experiment 60
 - Data: Data-2, Data-3
 - Image: Center, left, right, flip left, flip right, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
-- Validation samples = Train set size / batch size
+- Validation samples = Validation set size / batch size
 - Trainable parameters: 347019
 - Train set size: 17152 * 5 = 85760
 - Batch size: **1**
@@ -773,7 +773,7 @@ Experiment 60
 - Data: **Data-1**, Data-2, Data-3
 - Image: Center, left, right, flip left, flip right, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
-- Validation samples = Train set size / batch size
+- Validation samples = Validation set size / batch size
 - Trainable parameters: 347019
 - Train set size: 20952 * 5 = **104760**
 - Batch size: 1
@@ -787,7 +787,7 @@ Experiment 64
 - Data: Data-1, Data-2, Data-3
 - Image: Center, left, right, **flip**, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
-- Validation samples = Train set size / batch size
+- Validation samples = Validation set size / batch size
 - Trainable parameters: 347019
 - Train set size: 20952 * 6 = **125712**
 - Batch size: 1
@@ -801,7 +801,7 @@ Experiment 65
 - Data: Data-1, Data-2, Data-3, **Data-5**
 - Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
-- Validation samples = Train set size / batch size
+- Validation samples = Validation set size / batch size
 - Trainable parameters: 347019
 - Train set size: 26300 * 6 = **157800**
 - Batch size: 1
@@ -815,7 +815,7 @@ Experiment 66
 - Data: Data-1, Data-2, Data-3, Data-5
 - Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
-- Validation samples = Train set size / batch size
+- Validation samples = Validation set size / batch size
 - Dropout: **0.2**
 - Trainable parameters: 347019
 - Train set size: 26300 * 6 = **157800**
@@ -830,7 +830,7 @@ Experiment 67
 - Data: Data-1, Data-2, Data-3, Data-5,**Data-6**
 - Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
-- Validation samples = Train set size / batch size
+- Validation samples = Validation set size / batch size
 - Trainable parameters: 347019
 - Train set size: 27720 * 6 = **166320**
 - Batch size: 1
@@ -844,7 +844,7 @@ Experiment 68
 - Data: Data-1, Data-2, Data-3, Data-5, Data-6, **Data-7**
 - Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
-- Validation samples = Train set size / batch size
+- Validation samples = Validation set size / batch size
 - Trainable parameters: 347019
 - Train set size: 32348 * 6 = **194088**
 - Batch size: 1
@@ -853,6 +853,20 @@ Experiment 68
 - Training time: 2335 s
 - Samples per second: 55
 - Track 1 performance: Center, turn right at start of bridge, hit wall, drive manually to middle of bridge, go straight into dirt path, drive past dirt path manually, does not turn left after red and white rumble strips, hit kerb, center manually, drive autonomously until bridge, turn right at start of bridge, hit wall
+
+Experiment 69
+- Data: Data-1, Data-2, Data-3, **Data-4**
+- Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
+- Samples per epoch = **Train set size**
+- Validation samples = **Validation set size**
+- Trainable parameters: 347019
+- Train set size: 25682 * 6 = **154092**
+- Batch size: **32**
+- Learning rate: 1e-6
+- Epoch: **8**
+- Training time: 3031 s
+- Samples per second: 67
+- Track 1 performance: Center, go straight after red and white rumble strips, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time
