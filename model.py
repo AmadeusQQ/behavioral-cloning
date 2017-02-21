@@ -73,9 +73,9 @@ if DEBUG:
     angle_chart.savefig('angle.png')
     # exit()
 
-    samples = samples[:320]
+    samples = samples[:160]
 
-    EPOCH = 8
+    EPOCH = 2
 
 train_set, validation_set = train_test_split(
     samples,
