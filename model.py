@@ -34,7 +34,7 @@ CROP_BOTTOM = 30
 
 # BATCH_SIZE = 32
 BATCH_SIZE = 1
-# DROPOUT = 0.0
+DROPOUT = 0.2
 LEARNING_RATE = 1e-6
 EPOCH = 4
 VERBOSITY = 2
@@ -223,7 +223,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-# model.add(Dropout(DROPOUT))
+model.add(Dropout(DROPOUT))
 convolution_filter = 36
 model.add(Convolution2D(
     convolution_filter,
@@ -232,7 +232,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-# model.add(Dropout(DROPOUT))
+model.add(Dropout(DROPOUT))
 convolution_filter = 48
 model.add(Convolution2D(
     convolution_filter,
@@ -241,7 +241,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
-# model.add(Dropout(DROPOUT))
+model.add(Dropout(DROPOUT))
 convolution_filter = 64
 kernel_size = 3
 model.add(Convolution2D(
@@ -250,14 +250,14 @@ model.add(Convolution2D(
     kernel_size,
     border_mode = 'valid'
 ))
-# model.add(Dropout(DROPOUT))
+model.add(Dropout(DROPOUT))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
     border_mode = 'valid'
 ))
-# model.add(Dropout(DROPOUT))
+model.add(Dropout(DROPOUT))
 model.add(Flatten())
 model.add(Dense(100))
 model.add(Dense(50))
