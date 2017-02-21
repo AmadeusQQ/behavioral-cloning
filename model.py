@@ -70,11 +70,11 @@ if DEBUG:
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
-    exit()
+    # exit()
 
     samples = samples[:320]
 
-    EPOCH = 1
+    EPOCH = 4
 
 train_set, validation_set = train_test_split(
     samples,
@@ -261,12 +261,16 @@ model.add(Dense(1))
 # Train model
 adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
+callbacks = [
+    ModelCheckpoint(MODEL_FILE, save_best_only = True)
+]
 start_time = time.time()
 history = model.fit_generator(
     train_generator,
     samples_per_epoch = samples_per_epoch,
     nb_epoch = EPOCH,
     verbose = VERBOSITY,
+    callbacks = callbacks,
     validation_data = validation_generator,
     nb_val_samples = validation_samples
 )
