@@ -1,4 +1,5 @@
 # Import libraries
+from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers.convolutional import Convolution2D, Cropping2D
 from keras.layers.core import Dense, Flatten, Lambda
 from keras.models import Sequential
