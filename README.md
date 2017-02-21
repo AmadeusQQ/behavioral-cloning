@@ -71,6 +71,15 @@ Data-5
 - Frames: 6685
 - Images: 20055
 
+Data-6
+- Track: 1
+- Type: Center
+- Angle in degrees: -1 to 1
+- Direction: Clockwise
+- Laps: 3
+- Frames: 5507
+- Images: 16521
+
 # design-model
 Implement the NVIDIA model as the base architecture. Input a 3 dimensional image array containing integers that range from 0 to 255. Convert image to grayscale. Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to unit length, so as to prevent large values from skewing weights. Center data to aid comparison. Convolve image array to extract features. Flatten image array to reduce dimensionality. Fully connect each node with dense layers. Output the steering angle as a float.
 
