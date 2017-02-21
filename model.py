@@ -262,7 +262,8 @@ model.add(Dense(1))
 adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 callbacks = [
-    ModelCheckpoint(MODEL_FILE, save_best_only = True)
+    ModelCheckpoint(MODEL_FILE, save_best_only = True),
+    EarlyStopping()
 ]
 start_time = time.time()
 history = model.fit_generator(
