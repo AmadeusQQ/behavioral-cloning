@@ -13,7 +13,7 @@ import os
 import time
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -57,8 +57,8 @@ shuffle(samples)
 if DEBUG:
     # Plot angles
     angles = []
-    for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6']:
-    # for path in os.listdir(DATA_PATH):
+    # for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6']:
+    for path in os.listdir(DATA_PATH):
         with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
             reader = csv.reader(file)
             for line in reader:

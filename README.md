@@ -59,8 +59,8 @@ Data-4
 - Angle in degrees: -25, 25
 - Direction: Counter-clockwise
 - Laps: 1
-- Frames: 1079
-- Images: 3237
+- Frames: 2919
+- Images: 8757
 
 Data-5
 - Track: 1
