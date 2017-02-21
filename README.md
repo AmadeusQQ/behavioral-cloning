@@ -841,18 +841,18 @@ Experiment 67
 - Track 1 performance: Center, turn right at start of bridge, hit wall, drive manually to middle of bridge, go straight into dirt path, drive past dirt path manually, does not turn left after red and white rumble strips, hit kerb, center manually, drive autonomously until bridge, turn right at start of bridge, hit wall
 
 Experiment 68
-- Data: Data-1, Data-2, Data-3, Data-5, Data-6, Data-7
+- Data: Data-1, Data-2, Data-3, Data-5, Data-6, **Data-7**
 - Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
 - Validation samples = Train set size / batch size
 - Trainable parameters: 347019
-- Train set size:  * 6 = ****
+- Train set size: 32348 * 6 = **194088**
 - Batch size: 1
 - Learning rate: 1e-6
 - Epoch: 4
-- Training time:  s
-- Samples per second: 
-- Track 1 performance: 
+- Training time: 2335 s
+- Samples per second: 55
+- Track 1 performance: Center, turn right at start of bridge, hit wall, drive manually to middle of bridge, go straight into dirt path, drive past dirt path manually, does not turn left after red and white rumble strips, hit kerb, center manually, drive autonomously until bridge, turn right at start of bridge, hit wall
 
 # reflect
 Inverse relationship between learning rate and training time
