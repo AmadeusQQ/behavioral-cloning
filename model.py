@@ -14,7 +14,7 @@ import os
 import time
 
 # Set parameters
-DEBUG = False
+DEBUG = True
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -44,7 +44,7 @@ MODEL_FILE = 'model.h5'
 samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
-for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6', 'data-7']:
+for path in ['data-1', 'data-2', 'data-3', 'data-4']:
 # for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
@@ -58,7 +58,7 @@ shuffle(samples)
 if DEBUG:
     # Plot angles
     angles = []
-    for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6', 'data-7']:
+    for path in ['data-1', 'data-2', 'data-3', 'data-4']:
     # for path in os.listdir(DATA_PATH):
         with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
             reader = csv.reader(file)
@@ -71,7 +71,7 @@ if DEBUG:
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
-    # exit()
+    exit()
 
     samples = samples[:160]
 

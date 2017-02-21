@@ -57,8 +57,8 @@ Data-4
 - Track: 1
 - Type: Recovery
 - Angle in degrees: -25, 25
-- Direction: Counter-clockwise
-- Laps: 1
+- Direction: Not applicable
+- Laps: Not applicable
 - Frames: 2919
 - Images: 8757
 
