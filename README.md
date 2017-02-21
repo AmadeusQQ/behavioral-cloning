@@ -81,7 +81,7 @@ Data-6
 - Images: 5322
 
 # design-model
-Implement the NVIDIA model as the base architecture. Input a 3 dimensional image array containing integers that range from 0 to 255. Convert image to grayscale. Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to unit length, so as to prevent large values from skewing weights. Center data to aid comparison. Convolve image array to extract features. Flatten image array to reduce dimensionality. Fully connect each node with dense layers. Output the steering angle as a float.
+Implement the NVIDIA model as the base architecture. Input a 3 dimensional image array containing integers that range from 0 to 255. Convert image to grayscale. Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to unit length, so as to prevent large values from skewing weights. Center data to aid comparison. Convolve image array to extract features. Flatten image array to reduce dimensionality. Fully connect each node with dense layers. Output steering angle as a float.
 
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
@@ -816,6 +816,20 @@ Experiment 66
 - Training time: 3709 s
 - Samples per second: 28
 - Track 1 performance: Center, turn right at start of bridge, hit wall, drive manually to middle of bridge, go straight into dirt path, drive past dirt path manually, hit kerb at sharp right turn
+
+Experiment 67
+- Data: Data-1, Data-2, Data-3, Data-5,**Data-6**
+- Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
+- Samples per epoch = Train set size / batch size
+- Validation samples = Train set size / batch size
+- Trainable parameters: 347019
+- Train set size: 27720 * 6 = **166320**
+- Batch size: 1
+- Learning rate: 1e-6
+- Epoch: 4
+- Training time: 3368 s
+- Samples per second: 32
+- Track 1 performance: Center, turn right at start of bridge, hit wall, drive manually to middle of bridge, go straight into dirt path, drive past dirt path manually, does not turn left after red and white rumble strips, hit kerb, center manually, drive autonomously until bridge, turn right at start of bridge, hit wall
 
 # reflect
 Inverse relationship between learning rate and training time

@@ -1,6 +1,6 @@
 # Import libraries
 from keras.layers.convolutional import Convolution2D, Cropping2D
-from keras.layers.core import Activation, Dense, Flatten, Lambda
+from keras.layers.core import Dense, Flatten, Lambda
 from keras.models import Sequential
 from keras.optimizers import Adam
 from matplotlib import pyplot
@@ -13,7 +13,7 @@ import os
 import time
 
 # Set parameters
-DEBUG = True
+DEBUG = False
 
 DATA_PATH = './data'
 DRIVING_LOG_FILE = 'driving_log.csv'
@@ -43,9 +43,7 @@ MODEL_FILE = 'model.h5'
 samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
-# for path in ['data-1', 'data-2', 'data-3', 'data-4', 'data-5']:
-for path in ['data-1', 'data-2', 'data-3', 'data-5']:
-# for path in ['data-1', 'data-2', 'data-3']:
+for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6']:
 # for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
