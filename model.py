@@ -34,6 +34,10 @@ CROP_BOTTOM = 30
 
 # BATCH_SIZE = 32
 BATCH_SIZE = 1
+<<<<<<< HEAD
+=======
+# DROPOUT = 0.2
+>>>>>>> de6af529f849958a3467e5829b6b7bdd3c144bc0
 LEARNING_RATE = 1e-6
 EPOCH = 4
 VERBOSITY = 2
@@ -220,6 +224,10 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
+<<<<<<< HEAD
+=======
+# model.add(Dropout(DROPOUT))
+>>>>>>> de6af529f849958a3467e5829b6b7bdd3c144bc0
 convolution_filter = 36
 model.add(Convolution2D(
     convolution_filter,
@@ -228,6 +236,10 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
+<<<<<<< HEAD
+=======
+# model.add(Dropout(DROPOUT))
+>>>>>>> de6af529f849958a3467e5829b6b7bdd3c144bc0
 convolution_filter = 48
 model.add(Convolution2D(
     convolution_filter,
@@ -236,6 +248,10 @@ model.add(Convolution2D(
     border_mode = 'valid',
     subsample = (stride_size, stride_size)
 ))
+<<<<<<< HEAD
+=======
+# model.add(Dropout(DROPOUT))
+>>>>>>> de6af529f849958a3467e5829b6b7bdd3c144bc0
 convolution_filter = 64
 kernel_size = 3
 model.add(Convolution2D(
@@ -244,12 +260,20 @@ model.add(Convolution2D(
     kernel_size,
     border_mode = 'valid'
 ))
+<<<<<<< HEAD
+=======
+# model.add(Dropout(DROPOUT))
+>>>>>>> de6af529f849958a3467e5829b6b7bdd3c144bc0
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
     border_mode = 'valid'
 ))
+<<<<<<< HEAD
+=======
+# model.add(Dropout(DROPOUT))
+>>>>>>> de6af529f849958a3467e5829b6b7bdd3c144bc0
 model.add(Flatten())
 model.add(Dense(100))
 model.add(Dense(50))
