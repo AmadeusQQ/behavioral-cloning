@@ -36,8 +36,8 @@ CROP_BOTTOM = 30
 BATCH_SIZE = 32
 # BATCH_SIZE = 1
 LEARNING_RATE = 1e-6
-EPOCH = 8
-# EPOCH = 4
+# EPOCH = 8
+EPOCH = 4
 VERBOSITY = 2
 MODEL_FILE = 'model.h5'
 
@@ -45,7 +45,7 @@ MODEL_FILE = 'model.h5'
 samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
-for path in ['data-1', 'data-2', 'data-3', 'data-4']:
+for path in ['data-1', 'data-2', 'data-3']:
 # for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
@@ -59,7 +59,7 @@ shuffle(samples)
 if DEBUG:
     # Plot angles
     angles = []
-    for path in ['data-1', 'data-2', 'data-3', 'data-4']:
+    for path in ['data-1', 'data-2', 'data-3']:
     # for path in os.listdir(DATA_PATH):
         with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
             reader = csv.reader(file)
@@ -82,10 +82,10 @@ train_set, validation_set = train_test_split(
     samples,
     test_size = VALIDATION_SET_SIZE
 )
-# samples_per_epoch = len(train_set) / BATCH_SIZE
-# validation_samples = len(validation_set) / BATCH_SIZE
-samples_per_epoch = len(train_set)
-validation_samples = len(validation_set)
+samples_per_epoch = len(train_set) / BATCH_SIZE
+validation_samples = len(validation_set) / BATCH_SIZE
+# samples_per_epoch = len(train_set)
+# validation_samples = len(validation_set)
 
 def generate_train_sample(samples, batch_size = BATCH_SIZE):
     sample_count = len(samples)
@@ -264,8 +264,15 @@ model.add(Dense(1))
 adam = Adam(lr = LEARNING_RATE)
 model.compile(optimizer = adam, loss = 'mse')
 callbacks = [
-    ModelCheckpoint(MODEL_FILE, save_best_only = True),
-    EarlyStopping()
+    ModelCheckpoint(
+        MODEL_FILE,
+        verbose = VERBOSITY,
+        save_best_only = True
+    ),
+    EarlyStopping(
+        patience = 2,
+        verbose = VERBOSITY
+    )
 ]
 start_time = time.time()
 history = model.fit_generator(
