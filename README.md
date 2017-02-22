@@ -896,6 +896,21 @@ Experiment 71
 - Samples per second: 36
 - Track 1 performance: Drift left, drift right, hit kerb
 
+Experiment 72
+- Data: Data-1, Data-2, Data-3, Data-5, Data-6, Data-7
+- Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
+- Samples per epoch = **Train set size**
+- Validation samples = **Validation set size**
+- Trainable parameters: 347019
+- Train set size: 32348 * 6 = 194088
+- Batch size: **64**
+- Learning rate: 1e-6
+- Epoch: **16**
+- Training time:  s
+- Samples per second: 
+- Track: 1
+- Notes: Out of memory after 1 epoch. Center. Drift right at red and white rumble strips. Hit kerb.
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time
