@@ -36,8 +36,8 @@ CROP_BOTTOM = 30
 BATCH_SIZE = 32
 # BATCH_SIZE = 1
 LEARNING_RATE = 1e-6
-# EPOCH = 8
-EPOCH = 4
+EPOCH = 8
+# EPOCH = 4
 VERBOSITY = 2
 MODEL_FILE = 'model.h5'
 
@@ -72,7 +72,7 @@ if DEBUG:
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
-    # exit()
+    exit()
 
     samples = samples[:160]
 
