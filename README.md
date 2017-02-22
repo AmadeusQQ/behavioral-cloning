@@ -906,8 +906,8 @@ Experiment 72
 - Batch size: **64**
 - Learning rate: 1e-6
 - Epoch: **16**
-- Training time:  s
-- Samples per second: 
+- Training time: 766 s
+- Samples per second: 253
 - Track: 1
 - Notes: Out of memory after 1 epoch. Center. Drift right at red and white rumble strips. Hit kerb.
 
