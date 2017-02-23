@@ -941,7 +941,7 @@ Experiment 74
 - Track: 1
 - Notes: Center, turn left at middle of bridge, hit wall
 
-Experiment 76
+Experiment 75
 - Data: Data-1, Data-2, Data-3, Data-5, Data-6, Data-7
 - Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
 - Samples per epoch = Train set size / batch size
@@ -955,6 +955,21 @@ Experiment 76
 - Samples per second: 92
 - Track: 1
 - Notes: Center, turn right at bridge, hit wall
+
+Experiment 76
+- Data: Data-1, Data-2, Data-3, Data-5, Data-6, Data-7
+- Image: Center, left, right, flip, **color**, vertical crop, normalized, centered
+- Samples per epoch = **Train set size**
+- Validation samples = **Validation set size**
+- Trainable parameters: **348219**
+- Train set size: 32348 * 6 = 194088
+- Batch size: 16
+- Learning rate: 1e-6
+- Epoch: 32
+- Training time: 30197 s
+- Samples per second: 34
+- Track: 1
+- Notes: Turn right, hit kerb, drive manually to bridge, drive center on bridge
 
 # reflect
 Inverse relationship between learning rate and training time
