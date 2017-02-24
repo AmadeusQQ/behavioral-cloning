@@ -971,6 +971,21 @@ Experiment 76
 - Track: 1
 - Notes: Turn right, hit kerb, drive manually to bridge, drive center on bridge
 
+Experiment 77
+- Data: Data-1, Data-2, Data-3, Data-5, Data-6, Data-7
+- Image: Center, left, right, flip, **grayscale**, vertical crop, normalized, centered
+- Samples per epoch = Train set size
+- Validation samples = Validation set size
+- Trainable parameters: **347019**
+- Train set size: 32348 * 6 = 194088
+- Batch size: *32**
+- Learning rate: 1e-6
+- Epoch: 19
+- Training time: 1500 s
+- Samples per second: 69
+- Track: 1
+- Notes: Center, turn right at start of bridge, hit wall, reset center, go straight into dirt path, reset center, turn right after dirth path, hit kerb, reset center
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time
