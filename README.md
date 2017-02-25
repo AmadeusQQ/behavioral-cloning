@@ -89,6 +89,15 @@ Data-7
 - Frames: 5786
 - Images: 17358
 
+Data-Udacity
+- Track: 1
+- Type: Drive entire track
+- Angle in degrees: 
+- Direction: Clockwise
+- Laps: 5
+- Frames: 5786
+- Images: 17358
+
 # design-model
 Implement the NVIDIA model as the base architecture. Input a 3 dimensional image array containing integers that range from 0 to 255. Convert image to grayscale. Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to unit length, so as to prevent large values from skewing weights. Center data to aid comparison. Convolve image array to extract features. Flatten image array to reduce dimensionality. Fully connect each node with dense layers. Output steering angle as a float.
 
@@ -980,11 +989,26 @@ Experiment 77
 - Train set size: 32348 * 6 = 194088
 - Batch size: *32**
 - Learning rate: 1e-6
-- Epoch: 19
-- Training time: 1500 s
+- Epoch: **19**
+- Training time: 15000 s
 - Samples per second: 69
 - Track: 1
-- Notes: Center, turn right at start of bridge, hit wall, reset center, go straight into dirt path, reset center, turn right after dirth path, hit kerb, reset center
+- Notes: Center, turn right at start of bridge, hit wall, reset center, go straight into dirt path, reset center, turn right after dirth path, hit kerb
+
+Experiment 78
+- Data: Data-1, Data-2, Data-3, Data-5, Data-6, Data-7, **Data-Udacity**
+- Image: Center, left, right, flip, grayscale, vertical crop, normalized, centered
+- Samples per epoch = Train set size
+- Validation samples = Validation set size
+- Trainable parameters: 347019
+- Train set size: 38777 * 6 = **232662**
+- Batch size: 32
+- Learning rate: 1e-6
+- Epoch: **15**
+- Training time: 14345 s
+- Samples per second: 86
+- Track: 1
+- Notes: Center, turn right at start of bridge, hit wall, reset center, go straight into dirt path, reset center, turn right after dirth path, hit kerb
 
 # reflect
 Inverse relationship between learning rate and training time

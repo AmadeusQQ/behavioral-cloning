@@ -43,7 +43,7 @@ MODEL_FILE = 'model.h5'
 samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
-for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6', 'data-7']:
+for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6', 'data-7', 'data-udacity']:
 # for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
@@ -57,7 +57,7 @@ shuffle(samples)
 if DEBUG:
     # Plot angles
     angles = []
-    for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6', 'data-7']:
+    for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6', 'data-7', 'data-udacity']:
     # for path in os.listdir(DATA_PATH):
         with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
             reader = csv.reader(file)
