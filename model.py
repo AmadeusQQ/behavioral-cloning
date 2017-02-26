@@ -27,9 +27,12 @@ IMAGE_DEPTH = 1
 # IMAGE_LENGTH = 160
 # IMAGE_DEPTH = 3
 
-ANGLE_MODIFIER = 0.2
-CROP_TOP = 64
-CROP_BOTTOM = 30
+ANGLE_MODIFIER = 0.25
+CROP_TOP = 70
+CROP_BOTTOM = 25
+# ANGLE_MODIFIER = 0.2
+# CROP_TOP = 64
+# CROP_BOTTOM = 30
 # CROP_TOP = 32
 # CROP_BOTTOM = 15
 
@@ -43,7 +46,8 @@ MODEL_FILE = 'model.h5'
 samples = []
 # print(os.listdir(DATA_PATH))
 # exit()
-for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6', 'data-7', 'data-udacity']:
+for path in ['data-udacity']:
+# for path in ['data-1', 'data-2', 'data-3', 'data-5', 'data-6', 'data-7', 'data-udacity']:
 # for path in os.listdir(DATA_PATH):
     with open(os.path.join(DATA_PATH, path, DRIVING_LOG_FILE), 'r') as file:
         reader = csv.reader(file)
@@ -206,19 +210,18 @@ kernel_size = 5
 stride_size = 2
 # stride_size = 1
 model = Sequential()
-model.add(
-    Cropping2D(
-        cropping = ((CROP_TOP, CROP_BOTTOM), (0, 0)),
-        input_shape = (IMAGE_WIDTH, IMAGE_LENGTH, IMAGE_DEPTH)
-    )
-)
-model.add(Lambda(lambda x: x / 255.0 - 0.5))
+model.add(Lambda(
+    lambda x: x / 255.0 - 0.5,
+    input_shape = (IMAGE_WIDTH, IMAGE_LENGTH, IMAGE_DEPTH)
+))
+model.add(Cropping2D(cropping = ((CROP_TOP, CROP_BOTTOM), (0, 0))))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
     border_mode = 'valid',
-    subsample = (stride_size, stride_size)
+    subsample = (stride_size, stride_size),
+    activation = 'relu'
 ))
 convolution_filter = 36
 model.add(Convolution2D(
@@ -226,7 +229,8 @@ model.add(Convolution2D(
     kernel_size,
     kernel_size,
     border_mode = 'valid',
-    subsample = (stride_size, stride_size)
+    subsample = (stride_size, stride_size),
+    activation = 'relu'
 ))
 convolution_filter = 48
 model.add(Convolution2D(
@@ -234,7 +238,8 @@ model.add(Convolution2D(
     kernel_size,
     kernel_size,
     border_mode = 'valid',
-    subsample = (stride_size, stride_size)
+    subsample = (stride_size, stride_size),
+    activation = 'relu'
 ))
 convolution_filter = 64
 kernel_size = 3
@@ -242,13 +247,15 @@ model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
-    border_mode = 'valid'
+    border_mode = 'valid',
+    activation = 'relu'
 ))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
     kernel_size,
-    border_mode = 'valid'
+    border_mode = 'valid',
+    activation = 'relu'
 ))
 model.add(Flatten())
 model.add(Dense(100))
