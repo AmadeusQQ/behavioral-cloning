@@ -1030,7 +1030,7 @@ Experiment 80
 - Image: Center, left, right, flip, **color**, vertical crop, normalized, centered
 - Samples per epoch = Train set size
 - Validation samples = Validation set size
-- Trainable parameters: 347019
+- Trainable parameters: **348219**
 - Train set size: 6428 * 6 = 38568
 - Batch size: **16**
 - Learning rate: 1e-6
@@ -1039,6 +1039,21 @@ Experiment 80
 - Samples per second: 78
 - Track: 1
 - Notes: Center, drift right at start of bridge, drift left at end of bridge, straight into dirt path, drive past manually, does not turn sharp enough at red and white rumble strips, hit kerb
+
+Experiment 81
+- Data: Data-1, Data-2, Data-3
+- Image: Center, left, right, flip, **color**, vertical crop, normalized, centered
+- Samples per epoch = Train set size
+- Validation samples = Validation set size
+- Trainable parameters: 348219
+- Train set size: 20952 * 6 = 125712
+- Batch size: 16
+- Learning rate: 1e-6
+- Epoch: **26**
+- Training time:  s
+- Samples per second: 
+- Track: 1
+- Notes: Center, drift left after bridge, roll on kerb, straight into dirt path, reset manually, did not turn hard right at red and white rumble strips
 
 # reflect
 Inverse relationship between learning rate and training time
