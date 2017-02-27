@@ -1025,6 +1025,21 @@ Experiment 79
 - Track: 1
 - Notes: Center, drift left at end of bridge, hit wall
 
+Experiment 80
+- Data: Data-Udacity
+- Image: Center, left, right, flip, **color**, vertical crop, normalized, centered
+- Samples per epoch = Train set size
+- Validation samples = Validation set size
+- Trainable parameters: 347019
+- Train set size: 6428 * 6 = 38568
+- Batch size: **16**
+- Learning rate: 1e-6
+- Epoch: **13**
+- Training time: 2608 s
+- Samples per second: 78
+- Track: 1
+- Notes: Center, drift right at start of bridge, drift left at end of bridge, straight into dirt path, drive past manually, does not turn sharp enough at red and white rumble strips, hit kerb
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time

@@ -22,10 +22,10 @@ VALIDATION_SET_SIZE = 0.2
 
 IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320
-IMAGE_DEPTH = 1
+# IMAGE_DEPTH = 1
 # IMAGE_WIDTH = 80
 # IMAGE_LENGTH = 160
-# IMAGE_DEPTH = 3
+IMAGE_DEPTH = 3
 
 ANGLE_MODIFIER = 0.25
 CROP_TOP = 70
@@ -36,7 +36,7 @@ CROP_BOTTOM = 25
 # CROP_TOP = 32
 # CROP_BOTTOM = 15
 
-BATCH_SIZE = 32
+BATCH_SIZE = 16
 LEARNING_RATE = 1e-6
 EPOCH = 32
 VERBOSITY = 2
@@ -188,7 +188,7 @@ validation_generator = generate_validation_sample(validation_set)
 
 # Transform data
 def transform_image(image):
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # image = cv2.resize(image, (0, 0), fx = 0.5, fy = 0.5)
     image = np.array(image, dtype = 'float32')
 
