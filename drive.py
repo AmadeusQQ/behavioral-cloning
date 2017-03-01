@@ -17,8 +17,10 @@ import shutil
 import socketio
 
 # Set parameters
-MIN_SPEED = 8
-MAX_SPEED = 10
+# MIN_SPEED = 8
+# MAX_SPEED = 10
+MIN_SPEED = 4
+MAX_SPEED = 5
 
 IMAGE_WIDTH = 160
 IMAGE_LENGTH = 320

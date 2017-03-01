@@ -1055,6 +1055,21 @@ Experiment 81
 - Track: 1
 - Notes: Center, drift left after bridge, roll on kerb, straight into dirt path, reset manually, did not turn hard right at red and white rumble strips
 
+Experiment 82
+- Data: Data-1, Data-2, Data-3, **Data-4**, **Data-5**, **Data-6**, **Data-7**
+- Image: Center, left, right, flip, **color**, vertical crop, normalized, centered
+- Samples per epoch = Train set size
+- Validation samples = Validation set size
+- Trainable parameters: 348219
+- Train set size: 37078 * 6 = **222468**
+- Batch size: 16
+- Learning rate: 1e-6
+- Epoch: **32**
+- Training time: 36228 s
+- Samples per second: 32
+- Track: 1
+- Notes: Drives autonomously around track at 5 miles per hour
+
 # reflect
 Inverse relationship between learning rate and training time
 - Low learning rate increases the probability of finding the local minimum at the expense of training time
