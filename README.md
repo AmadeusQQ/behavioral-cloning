@@ -1057,7 +1057,7 @@ Experiment 81
 
 Experiment 82
 - Data: Data-1, Data-2, Data-3, **Data-4**, **Data-5**, **Data-6**, **Data-7**
-- Image: Center, left, right, flip, **color**, vertical crop, normalized, centered
+- Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Samples per epoch = Train set size
 - Validation samples = Validation set size
 - Trainable parameters: 348219
@@ -1069,6 +1069,22 @@ Experiment 82
 - Samples per second: 32
 - Track: 1
 - Notes: Drives autonomously around track at 5 miles per hour
+
+Experiment 83
+- Data: Data-1, Data-2, Data-3, Data-4, Data-5, Data-6, Data-7
+- Image: Center, left, right, flip, color, vertical crop, normalized, centered
+- Samples per epoch = Train set size
+- Validation samples = Validation set size
+- Trainable parameters: 348219
+- Train set size: 37078 * 6 = 222468
+- Dropout: 0.2
+- Batch size: 16
+- Learning rate: 1e-6
+- Epoch: 32
+- Training time: 46286 s
+- Samples per second: 25
+- Track: 1
+- Notes: Drives autonomously around track at 10 miles per hour
 
 # reflect
 Inverse relationship between learning rate and training time

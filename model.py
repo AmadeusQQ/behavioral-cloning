@@ -1,7 +1,7 @@
 # Import libraries
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers.convolutional import Convolution2D, Cropping2D
-from keras.layers.core import Dense, Flatten, Lambda
+from keras.layers.core import Dense, Dropout, Flatten, Lambda
 from keras.models import Sequential
 from keras.optimizers import Adam
 from matplotlib import pyplot
@@ -30,6 +30,7 @@ IMAGE_DEPTH = 3
 ANGLE_MODIFIER = 0.25
 CROP_TOP = 70
 CROP_BOTTOM = 25
+DROPOUT = 0.2
 # ANGLE_MODIFIER = 0.2
 # CROP_TOP = 64
 # CROP_BOTTOM = 30
@@ -77,7 +78,7 @@ if DEBUG:
     pyplot.ylabel('Frequency')
     pyplot.xlabel('Angle')
     angle_chart.savefig('angle.png')
-    exit()
+    # exit()
 
     samples = samples[:160]
 
@@ -226,6 +227,7 @@ model.add(Convolution2D(
     subsample = (stride_size, stride_size),
     activation = 'relu'
 ))
+model.add(Dropout(DROPOUT))
 convolution_filter = 36
 model.add(Convolution2D(
     convolution_filter,
@@ -235,6 +237,7 @@ model.add(Convolution2D(
     subsample = (stride_size, stride_size),
     activation = 'relu'
 ))
+model.add(Dropout(DROPOUT))
 convolution_filter = 48
 model.add(Convolution2D(
     convolution_filter,
@@ -244,6 +247,7 @@ model.add(Convolution2D(
     subsample = (stride_size, stride_size),
     activation = 'relu'
 ))
+model.add(Dropout(DROPOUT))
 convolution_filter = 64
 kernel_size = 3
 model.add(Convolution2D(
@@ -253,6 +257,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     activation = 'relu'
 ))
+model.add(Dropout(DROPOUT))
 model.add(Convolution2D(
     convolution_filter,
     kernel_size,
@@ -260,6 +265,7 @@ model.add(Convolution2D(
     border_mode = 'valid',
     activation = 'relu'
 ))
+model.add(Dropout(DROPOUT))
 model.add(Flatten())
 model.add(Dense(100))
 model.add(Dense(50))
