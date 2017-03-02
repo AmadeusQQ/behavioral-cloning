@@ -99,7 +99,7 @@ Data-Udacity
 - Images: 17358
 
 # design-model
-Implement the NVIDIA model as the base architecture. Input a 3 dimensional image array containing integers that range from 0 to 255. Convert image to grayscale. Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to unit length, so as to prevent large values from skewing weights. Center data to aid comparison. Convolve image array to extract features. Flatten image array to reduce dimensionality. Fully connect each node with dense layers. Output steering angle as a float.
+Implement the NVIDIA model as the base architecture. Input a 3 dimensional image array containing integers that range from 0 to 255. Convert image to grayscale. Crop pixels above the horizon and below the front of the car to reduce noise. Normalize data to unit length, so as to prevent large values from skewing weights. Center data to aid comparison. Convolve image array to extract features. Dropout records to reduce overfitting. Flatten image array to reduce dimensionality. Fully connect each node with dense layers. Output steering angle as a float.
 
 NVIDIA model
 - Source: https://arxiv.org/pdf/1604.07316v1.pdf
@@ -111,20 +111,25 @@ Layers
     - Filter: 24
     - Kernel size: 5
     - Stride size: 2
+- Dropout: 0.2
 - Convolution2D
     - Filter: 36
     - Kernel size: 5
     - Stride size: 2
+- Dropout: 0.2
 - Convolution2D
     - Filter: 48
     - Kernel size: 5
     - Stride size: 2
+- Dropout: 0.2
 - Convolution2D
     - Filter: 64
     - Kernel size: 3
+- Dropout: 0.2
 - Convolution2D
     - Filter: 64
     - Kernel size: 3
+- Dropout: 0.2
 - Flatten
 - Dense: 100 connections
 - Dense: 50 connections
@@ -1055,7 +1060,7 @@ Experiment 81
 - Track: 1
 - Notes: Center, drift left after bridge, roll on kerb, straight into dirt path, reset manually, did not turn hard right at red and white rumble strips
 
-Experiment 82
+**Experiment 82**
 - Data: Data-1, Data-2, Data-3, **Data-4**, **Data-5**, **Data-6**, **Data-7**
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Samples per epoch = Train set size
@@ -1070,7 +1075,7 @@ Experiment 82
 - Track: 1
 - Notes: Drives autonomously around track at 5 miles per hour
 
-Experiment 83
+**Experiment 83**
 - Data: Data-1, Data-2, Data-3, Data-4, Data-5, Data-6, Data-7
 - Image: Center, left, right, flip, color, vertical crop, normalized, centered
 - Samples per epoch = Train set size
