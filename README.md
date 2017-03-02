@@ -1,6 +1,9 @@
 # behavioral-cloning
 Drive a car using deep learning
 
+# video
+See video.mp4 of car driving around track.
+
 # design-solution
 Design a solution that minimizes data used and model complexity. Use the scientific method to conduct experiments. Confirm or reject hypotheses based on measured results. Take into account hardware constraints.
 
