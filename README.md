@@ -19,6 +19,7 @@ Hardware
 Record data to get a uniform distribution of angles. Drive clockwise and anti-clockwise to reduce turn bias. Record data when about to go off road, so that the car knows how to drive back to the center.
 
 Simulator
+- Source: https://github.com/udacity/self-driving-car-sim
 - Screen resolution: 640 x 480
 - Graphics quality: Fastest
 - Frames per second: 10
